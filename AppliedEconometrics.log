@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  8 SEP 2021 11:57
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  8 SEP 2021 21:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2613,8 +2613,8 @@ Overfull \hbox (16.98842pt too wide) in paragraph at lines 2488--2489
 [64]
 File: commontrend.jpg Graphic file (type bmp)
 <commontrend.jpg>
- [65]
-Overfull \hbox (12.93321pt too wide) in paragraph at lines 2543--2544
+ [65] [66]
+Overfull \hbox (12.93321pt too wide) in paragraph at lines 2571--2572
 []\TU/SongtiSCLight(0)/m/n/10 在 一 定 条 件 下，|  可 通 过 引 入 两 个 控 制 组，|  进 行 三 次 差 分
 ，|  称 为  |“三 重 差 分 法” （\T1/ntxtlf/m/n/10 difference-in-differences-in-differenc
 es\TU/SongtiSCLight(0)/m/n/10 ，|
@@ -2622,65 +2622,65 @@ es\TU/SongtiSCLight(0)/m/n/10 ，|
 
 File: var.jpg Graphic file (type bmp)
 <var.jpg>
-[66] [67]
+[67]
 File: DIDresults.jpg Graphic file (type bmp)
 <DIDresults.jpg>
 File: DIDcov.jpg Graphic file (type bmp)
 <DIDcov.jpg>
- [68]
+ [68] [69]
 File: rdgraph.png Graphic file (type bmp)
 <rdgraph.png>
- [69] [70]
+ [70] [71] [72]
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
- [71]
+ [73]
 File: findit.jpg Graphic file (type bmp)
 <findit.jpg>
- [72]
 File: rdgraph.png Graphic file (type bmp)
 <rdgraph.png>
 File: rdbw.jpg Graphic file (type bmp)
 <rdbw.jpg>
 File: rdresults.jpg Graphic file (type bmp)
 <rdresults.jpg>
- [73] [74] [75] [76] [77]
+ [74] [75] [76] [77] [78]
 File: teffects.jpg Graphic file (type bmp)
 <teffects.jpg>
- [78] [79] [80]
+ [79] [80] [81]
 File: weight.jpg Graphic file (type bmp)
 <weight.jpg>
 
 
-LaTeX Warning: Float too large for page by 133.06052pt on input line 3067.
+LaTeX Warning: Float too large for page by 133.06052pt on input line 3105.
 
 File: sys.jpg Graphic file (type bmp)
 <sys.jpg>
 File: synth.png Graphic file (type bmp)
 <synth.png>
+[82] [83] [84]
 File: line2.png Graphic file (type bmp)
 <line2.png>
-[81] [82] [83] [84] [85]
+ [85] [86] [87]
 第 9{} 章 9.
-[86
+[88
 
 ]
 第 10{} 章 10.
-[87
+[89
 
 ]
 第 11{} 章 11.
-[88
+[90
 
-] [89] [90] [91] [92]
+] [91] [92] [93] [94]
 第 12{} 章 12.
 
-LaTeX Warning: Empty bibliography on input line 3470.
+LaTeX Warning: Empty bibliography on input line 3508.
 
-[93
+[95
 
 ]
 附录 A.
-[94
+[96
 
 ] (./AppliedEconometrics.aux)
 
@@ -2690,7 +2690,7 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `AppliedEconometrics.out' has not changed.
-(rerunfilecheck)             Checksum: B3630E8A19755F13E01F7B5E2C14A2BD;18632.
+(rerunfilecheck)             Checksum: 06A1B1DCDC5E1FCB17BA61069E3BAF6F;18901.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                AppliedEconometrics
@@ -2703,10 +2703,10 @@ Package logreq Info: Writing requests to 'AppliedEconometrics.run.xml'.
 Here is how much of TeX's memory you used:
  47965 strings out of 476476
  1022478 string characters out of 5814302
- 2019371 words of memory out of 5000000
+ 2019659 words of memory out of 5000000
  67503 multiletter control sequences out of 15000+600000
  473944 words of font info for 137 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  107i,13n,136p,752b,873s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on AppliedEconometrics.pdf (100 pages).
+Output written on AppliedEconometrics.pdf (102 pages).

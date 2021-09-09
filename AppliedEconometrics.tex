@@ -1,11 +1,11 @@
-\documentclass[cn,10pt,math=newtx,citestyle=gb7714-2015,bibstyle=gb7714-2015]{elegantbook}
+\documentclass[cn,12pt,math=newtx,citestyle=gb7714-2015,bibstyle=gb7714-2015]{elegantbook}
 
 \title{应用计量经济学讲稿}
 %\subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{许文立}
 \institute{安徽大学经济学院、东北财经大学国民经济工程实验室(北京)\\~~~~~~~~~~~~西蒙弗雷泽大学(温哥华)、宏观经济研学会}
-\date{Sept 2, 2021}
+\date{\today}
 \version{2.1}
 \bioinfo{Email}{xuweny87@hotmail.com}
 
@@ -2577,20 +2577,20 @@
 	\subsection{DID在Stata中的实现}
 	
 	要估计自然实验中的平均处理效应，如果直接在stata中run（9）式，那么，直接使用普通的面板数据命令$xtreg$即可。而DID则有专门的命令估计。厦门大学赵西亮老师的书里介绍了一种DID的命令，$diff$，其语法和基本选项为：
-	\begin{flushleft}
-		diff~outcome-var~[if]~[in]~[weight],\underline{p}eriod(varname)~\\
-		\underline{t}reated(varname)~[\underline{c}ov(varlist)~\\
+	\begin{lstlisting}
+		diff outcome var [if] [in] [weight], period(varname)
+		\underline{t}reated(varname)~[\underline{c}ov(varlist)
 		\underline{k}ernel~id(varname)~bw(\#)~\underline{kt}ype(kernel)~rcs~\\
 		\underline{qd}id(quantile)~\underline{ps}core(varname)~\underline{lo}git~\\
 		\underline{su}pport~\underline{add}cov(varlist)~\underline{c}luster(varname)\\
 		~robust~bs~\underline{r}eps(int)~test \underline{rep}ort~\underline{nos}tar~export(filename)]
-	\end{flushleft}
+	\end{lstlisting}
 	
 	outcome-var是结果变量，$\underline{p}eriod(varname)$告诉软件时期变量，\underline{t}reated(varname)告诉软件处理变量。其他命令（也就是中括号里的命令）都是可选择的。参见赵西亮（2017）第177页。
 	
 	\textbf{操作实例：}
 	下面，我们利用Card and Krueger（1994，AER）的数据为例，估计新泽西州最低工资调整对新泽西州快餐业就业的影响，数据为两期面板数据，主要变量有：id为快餐；t为时间，最低工资调整前为0，调整后为1；treated为分组变量，1为新泽西，0为宾夕法尼亚；fte为全职就业人数，协变量有bk、kfc、roys、wendys。如下图2所示：
-	\begin{figure}[htbp]
+	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=1\textwidth]{var.jpg}
 		\caption{变量}\label{fig:digit}
@@ -2603,7 +2603,7 @@
 	不控制任何协变量时的结果：
 	
 	diff~fte,~period(t)~treated(treated)~robust
-	\begin{figure}[htbp]
+	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=0.4\textwidth]{DIDresults.jpg}
 		\caption{DID结果}\label{fig:digit}
@@ -2612,17 +2612,76 @@
 	控制协变量时的结果：
 	
 	diff~fte,~period(t)~treated(treated)~robust~cov(bk kfc roys)
-	\begin{figure}[htbp]
+	\begin{figure}[htbp!]
 		\centering
 		\includegraphics[width=0.4\textwidth]{DIDcov.jpg}
 		\caption{控制协变量的DID结果}\label{fig:digit}
 	\end{figure}
 	
 	
-	\subsection{长期效应}
+	\subsection{动态处理效应}
+	
+	在上文中，我们所讨论的DID都是两组和两期（$2 \times 2$），尤其是两期——处理前和处理后。但我们在现实中遇到的情形肯定不止两期，那么，DID设计可以使用吗？答案是当然，但是附带条件。（8.9）式的双向固定效应（TWFE）模型可以用于多期处理的情形：将多期划分为两个大类——前和后，然后估计单一效应——整个处理后时期的效应。
+	
+	但是这样以来，我们也忽略了很多有趣的事。例如，处理效应会随着时间的推移慢慢发生变化吗？变大还是变小？处理后的时期有多长，一天，一月，一年，还是5年？肯定有人为会说，好吧，那我们为什么不把每一期的效应都估计出来呢？这个可行吗？
+	
+	当然可行！
+	
+	我们仅仅只需要将上述DID模型进行一点点修正就可以得到每个时期的效应。换言之，我们可以估计\textbf{动态处理效应}。此时，我们可以将处理前一期设置为$t=0$，处理前的倒数第二期设置为$t=-1$，实施处理的时期为$t=1$，处理后的第二期设置为$t=2$，以此类推。然后，将处理变量与每一期的时间虚拟变量进行交互，动态处理效应的DID模型就修正完毕！模型设定如下：
+	
+	\begin{equation}
+		Y_{i,t} = \alpha_i + \gamma_t + \sum_{m = -G}^{M} \beta_m D_{i,t-m} + \phi X_{i,t} + C_{i,t} + \epsilon_{i,t}
+	\end{equation}
+	
+	其中，$\alpha_i$表示个体固定效应，$\gamma_t$表示时间固定效应，$X_{i,t}$表示控制变量，$C_{i,t}$表示潜在不可观测的、与处理（政策）相关的混淆变量。$ \sum_{m = -G}^{M} \beta_m D_{i,t-m} $ 意味着处理有动态效应。t期的结果最多受到t之前的$M \le 0 $期处理变量的影响，也最多受到t之后的$G \le 0$期的影响。而系数$\{\beta_m\}_{m=-G}^{M}$就表示这些动态效应的程度。通常，G和M的值是由我们自己确定的。
+	
+	（8.10）式为我们提供了许多信息：
+	
+	1、处理前的系数$\beta_{-M},...,\beta_{-2},\beta_{-1}$应该接近于0，或者置信水平不显著。也就是说，处理前应该不存在处理效应。这可以看做是一种安慰剂检验的形式——处理前，DID回归会发现处理效应吗？希望各位不会得到显著的处理效应！
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=0.7\linewidth]{dynamicDID}
+		\caption{动态处理效应图，来源于Freyaldenhoven et al.(2021)。}
+		\label{fig:dynamicdid}
+	\end{figure}
+	
+	如图8.5所示，圆点表示估计系数，上下限表示置信区间，在处理前，DID估计系数都在0附近。
 	
 	
-	\subsection{交叠DID设计}
+	2、处理后的系数$\beta_{1},\beta_{2},...,\beta_{G}$在处理后每一期的DID估计效应。
+	
+	在Stata中，我们仅仅只需要增加相应的交互项，$i.time \#\# i.treat$。
+	
+	当我们做出了动态处理效应后，我们就可以将结果展示出来了。
+	
+	此时的你还在为展示结果而发愁吗？你还在为自己的动态处理效应结果表格太多太长而苦恼吗？你还在为结果的清晰易懂而掉头发吗？你还在为没有充分展示自己刻苦跑回归而遗憾吗？
+	
+	好消息！好消息！Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021）给出了许多可视化动态处理效应的建议，让我们清晰地、尽可能多地展示这些回归结果和有用的信息。他们建议，我们可以做两个方面的工作，再来展示动态处理效应的图。第一，展示不同时期k的累积处理效应，即k期前的所有估计系数之和$\sum{m=-G}^{k}\beta_m$。为了简化估计积累效应，可以采用处理变量的变化项来修正动态处理效应DID（8.10）。第二，为了可视化过度识别信息，我们可以画出政策影响时期外的累积处理效应，这个时候，我们就需要修正模型（8.10）来包含t期的处理会导致$t-G$前的$L_G$期和$t+M$后的$L_M$期结果都会发生变化。
+	
+	因此，我们将（8.10）修正为：
+	
+		\begin{equation}
+		Y_{i,t} = \alpha_i + \gamma_t + \sum_{k= -G-L_G}^{M+L_M-1} \delta_k \Delta D_{i,t-k} + \delta_{M+L_M}D_{i,t-M-L_M} + \delta_{-G-L_G-1}(-D_{i,t+G+L_G}) + \phi X_{i,t} + C_{i,t} + \epsilon_{i,t}
+	\end{equation}
+	
+	其中，$\Delta$表示一阶差分算子。
+	
+	在DID时，如果组群之间的动态处理效应都是一样的，那么，这会对DID造成什么问题吗？
+	
+	TBA
+	
+	此外，我们还需要特别注意几件事。
+	
+	TBA
+	
+	
+	\subsection{交叠DID}
+	
+	迄今为止，我们讨论的处理期都是同一时点，也就是说，对于所有的个体来说，都在同一期发生处理。但是，现实社会中，很多事件发生在不同的时点，也就是说，不同个体受到处理的时间可能不同。这个时候，我们还可以按照上面的双向固定效应（TWFE）估计量那样来理解DID估计系数吗？
+	
+	TBA
 	
 	
 	

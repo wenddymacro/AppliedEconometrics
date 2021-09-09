@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  8 SEP 2021 21:00
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  9 SEP 2021 17:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -26,8 +26,8 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 )
 (/usr/local/texlive/2021/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2021/02/12 v1.4n Standard LaTeX document class
-(/usr/local/texlive/2021/texmf-dist/tex/latex/base/bk10.clo
-File: bk10.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/base/bk12.clo
+File: bk12.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count179
 \c@chapter=\count180
@@ -473,7 +473,7 @@ LaTeX Font Info:    Trying to load font information for T1+ntxtlf on input line
 File: t1ntxtlf.fd 2021/05/24 v1.1 font definition file for T1/ntx/tlf
 )
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 112.
+(Font)              scaled to size 12.0pt on input line 112.
 )
 (/usr/local/texlive/2021/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
@@ -1954,10 +1954,10 @@ LaTeX Warning: Label `fig:digit' multiply defined.
 LaTeX Warning: Label `fig:digit' multiply defined.
 
 
-LaTeX Warning: Label `fig:digit' multiply defined.
-
-
 LaTeX Warning: Label `tab:digit' multiply defined.
+
+
+LaTeX Warning: Label `fig:digit' multiply defined.
 
 
 LaTeX Warning: Label `fig:digit' multiply defined.
@@ -2191,12 +2191,12 @@ LaTeX Info: Redefining \nameref on input line 27.
 * \topmargin=-73.12352pt
 * \headheight=61.74242pt
 * \headsep=11.38109pt
-* \topskip=10.0pt
+* \topskip=12.0pt
 * \footskip=34.1433pt
-* \marginparwidth=61.0pt
+* \marginparwidth=38.0pt
 * \marginparsep=7.0pt
 * \columnsep=10.0pt
-* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -2271,12 +2271,12 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 29.
 * \topmargin=-145.3935pt
 * \headheight=61.74242pt
 * \headsep=11.38109pt
-* \topskip=10.0pt
+* \topskip=12.0pt
 * \footskip=34.1433pt
-* \marginparwidth=61.0pt
+* \marginparwidth=38.0pt
 * \marginparsep=7.0pt
 * \columnsep=10.0pt
-* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -2289,7 +2289,7 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 29.
 File: ./figure//cover1.png Graphic file (type bmp)
 <./figure//cover1.png>
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.0pt on input line 29.
+(Font)              scaled to size 12.0pt on input line 29.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 (Font)              scaled to size 24.88pt on input line 29.
 LaTeX Font Info:    Trying to load font information for OT1+ntxtlf on input lin
@@ -2298,11 +2298,11 @@ e 29.
 File: ot1ntxtlf.fd 2021/05/24 v1.0 font definition file for OT1/ntx/tlf
 )
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 29.
+(Font)              scaled to size 12.0pt on input line 29.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 7.3pt on input line 29.
+(Font)              scaled to size 8.8pt on input line 29.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 29.
+(Font)              scaled to size 6.6pt on input line 29.
 LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 
 29.
 
@@ -2346,7 +2346,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 29.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 29.
+(Font)              scaled to size 17.28pt on input line 29.
 
 
 Package fontspec Warning: Font "Kaiti SC" does not contain requested Script
@@ -2386,7 +2386,7 @@ File: ./figure//cimers_logo.jpg Graphic file (type bmp)
 
 ]
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 17.28pt on input line 32.
+(Font)              scaled to size 20.74pt on input line 32.
  [1
 
 
@@ -2395,7 +2395,7 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 
 ]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 7.0pt on input line 169.
+(Font)              scaled to size 8.0pt on input line 139.
  [3] [4])
 \tf@toc=\write8
 \openout8 = `AppliedEconometrics.toc'.
@@ -2408,26 +2408,25 @@ e 67.
 File: t1ntxsups.fd 2015/01/17 v1.0
 )
 LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 10.0pt on input line 67.
+(Font)              scaled to size 12.0pt on input line 67.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 67.
+(Font)              scaled to size 10.0pt on input line 67.
 LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 8.0pt on input line 67.
+(Font)              scaled to size 10.0pt on input line 67.
  [1
 
 
-]
+] [2]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 7.3pt on input line 138.
+(Font)              scaled to size 8.8pt on input line 138.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 138.
- [2]
+(Font)              scaled to size 6.6pt on input line 138.
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 173.
+(Font)              scaled to size 14.4pt on input line 173.
 
-[3] [4]
+[3] [4] [5]
 第 2{} 章 2.
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
@@ -2435,62 +2434,93 @@ File: BF.jpg Graphic file (type bmp)
 <BF.jpg>
 File: pdf.jpg Graphic file (type bmp)
 <pdf.jpg>
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 10.0pt on input line 272.
-[5
+[6
 
-] [6] [7] [8]
+]
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
+(Font)              scaled to size 12.0pt on input line 272.
+ [7]
+Overfull \hbox (13.73578pt too wide) detected at line 296
+\OML/ntxmi/m/it/12 var\LMS/ntxsy/m/n/12 ¹[]º \U/ntxmia/m/it/12 = \OT1/ntxtlf/m/
+n/12 0\OML/ntxmi/m/it/12 :\OT1/ntxtlf/m/n/12 8 \LMS/ntxsy/m/n/12 ^^B ¹\OT1/ntxt
+lf/m/n/12 0 \LMS/ntxsy/m/n/12 ^^@ \OT1/ntxtlf/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/
+ntxtlf/m/n/12 35\LMS/ntxsy/m/n/12 º[] Ï \OT1/ntxtlf/m/n/12 0\OML/ntxmi/m/it/12 
+:\OT1/ntxtlf/m/n/12 1 \LMS/ntxsy/m/n/12 ^^B ¹\OT1/ntxtlf/m/n/12 1 \LMS/ntxsy/m/
+n/12 ^^@ \OT1/ntxtlf/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/ntxtlf/m/n/12 35\LMS/ntxs
+y/m/n/12 º[] Ï \OT1/ntxtlf/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/ntxtlf/m/n/12 06 \L
+MS/ntxsy/m/n/12 ^^B ¹\OT1/ntxtlf/m/n/12 2 \LMS/ntxsy/m/n/12 ^^@ \OT1/ntxtlf/m/n
+/12 0\OML/ntxmi/m/it/12 :\OT1/ntxtlf/m/n/12 35\LMS/ntxsy/m/n/12 º[] Ï \OT1/ntxt
+lf/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/ntxtlf/m/n/12 03 \LMS/ntxsy/m/n/12 ^^B ¹\OT
+1/ntxtlf/m/n/12 3 \LMS/ntxsy/m/n/12 ^^@ \OT1/ntxtlf/m/n/12 0\OML/ntxmi/m/it/12 
+:\OT1/ntxtlf/m/n/12 35\LMS/ntxsy/m/n/12 º[] Ï \OT1/ntxtlf/m/n/12 0\OML/ntxmi/m/
+it/12 :\OT1/ntxtlf/m/n/12 01 \LMS/ntxsy/m/n/12 ^^B ¹\OT1/ntxtlf/m/n/12 4 \LMS/n
+txsy/m/n/12 ^^@ \OT1/ntxtlf/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/ntxtlf/m/n/12 35\L
+MS/ntxsy/m/n/12 º[] \U/ntxmia/m/it/12 = \OT1/ntxtlf/m/n/12 0\OML/ntxmi/m/it/12 
+:\OT1/ntxtlf/m/n/12 647
+ []
+
+[8] [9]
 File: normal.jpg Graphic file (type bmp)
 <normal.jpg>
+ [10]
 File: snormal.jpg Graphic file (type bmp)
 <snormal.jpg>
- [9] [10]
+ [11] [12]
 File: chi.jpg Graphic file (type bmp)
 <chi.jpg>
 File: t.jpg Graphic file (type bmp)
 <t.jpg>
+ [13]
 File: F.jpg Graphic file (type bmp)
 <F.jpg>
- [11] [12] [13]
+ [14] [15] [16]
+Overfull \hbox (2.87712pt too wide) in paragraph at lines 625--626
+[]\TU/SongtiSCLight(0)/m/n/12 但 是，|  计 算 样 本 均 值 $[]$ 是 得 到 总 体 均 值 估 计 量 的 唯 一
+ 一 种 方 式 吗？|  答 案 是 否 定 的。| $\OML/ntxmi/m/it/12 Y[]; []  ; Y[]$
+ []
+
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 634.
+(Font)              scaled to size 10.0pt on input line 634.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.2pt on input line 634.
- [14]
+(Font)              scaled to size 7.3pt on input line 634.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 5.5pt on input line 634.
+[17]
 File: p.jpg Graphic file (type bmp)
 <p.jpg>
+ [18]
 Missing character: There is no 如 ("5982) in font ntx-Regular-tlf-ot1!
 Missing character: There is no 果 ("679C) in font ntx-Regular-tlf-ot1!
 Missing character: There is no 拒 ("62D2) in font ntx-Regular-tlf-ot1!
 Missing character: There is no 绝 ("7EDD) in font ntx-Regular-tlf-ot1!
- [15] [16]
+ [19] [20]
 第 3{} 章 3.
-[17
+[21
 
 ]
 File: score.png Graphic file (type bmp)
 <score.png>
- [18]
+ [22]
 File: stata1.jpg Graphic file (type bmp)
 <stata1.jpg>
- [19]
+ [23] [24]
 File: Rline.png Graphic file (type bmp)
 <Rline.png>
- [20]
+ [25]
 Missing character: There is no ） ("FF09) in font ntx-Regular-tlf-ot1!
 Missing character: There is no ） ("FF09) in font ntx-Regular-tlf-ot1!
- [21] [22]
+ [26] [27]
 File: dummy.jpg Graphic file (type bmp)
 <dummy.jpg>
 File: stata.jpg Graphic file (type bmp)
 <stata.jpg>
 File: data edit.png Graphic file (type bmp)
 <data edit.png>
+ [28]
 File: data edit1.png Graphic file (type bmp)
 <data edit1.png>
 File: properties.png Graphic file (type bmp)
 <properties.png>
- [23] [24]
 File: data edit2.png Graphic file (type bmp)
 <data edit2.png>
 File: command.png Graphic file (type bmp)
@@ -2501,6 +2531,7 @@ File: windows1.png Graphic file (type bmp)
 <windows1.png>
 File: list.png Graphic file (type bmp)
 <list.png>
+ [29] [30]
 File: sum.png Graphic file (type bmp)
 <sum.png>
 File: Graph.png Graphic file (type bmp)
@@ -2511,29 +2542,24 @@ File: reg.png Graphic file (type bmp)
 <reg.png>
 File: regr.png Graphic file (type bmp)
 <regr.png>
- [25] [26] [27] [28] [29] [30]
+ [31] [32] [33] [34] [35]
+[36]
 第 4{} 章 4.
-[31
+[37
 
-]
-Overfull \hbox (39.6282pt too wide) in paragraph at lines 1254--1255
-[]\TU/SongtiSCLight(0)/m/n/10 回 忆 一 下，|  一 元 回 归 的 \T1/ntxtlf/m/n/10 OLS \TU/So
-ngtiSCLight(0)/m/n/10 估 计 量：|  选 择 系 数 来 最 小 化 预 测 误 差 平 方 和，|  即 选 择 $[]\OML/n
-txmi/m/it/10 ; []$ \TU/SongtiSCLight(0)/m/n/10 来 最 小 化 $[][] []$。|
- []
-
-[32]
+] [38]
 File: mreg.jpg Graphic file (type bmp)
 <mreg.jpg>
- [33] [34]
+ [39] [40] [41]
 File: SE.jpg Graphic file (type bmp)
 <SE.jpg>
+ [42]
 File: expn.jpg Graphic file (type bmp)
 <expn.jpg>
- [35] [36]
+ [43]
 File: F2.jpg Graphic file (type bmp)
 <F2.jpg>
- [37] [38]
+ [44] [45] [46]
 File: elr.png Graphic file (type bmp)
 <elr.png>
 File: lunch.png Graphic file (type bmp)
@@ -2542,20 +2568,20 @@ File: income.png Graphic file (type bmp)
 <income.png>
 File: corr.jpg Graphic file (type bmp)
 <corr.jpg>
- [39] [40] [41]
+ [47] [48] [49]
 File: cmd.jpg Graphic file (type bmp)
 <cmd.jpg>
- [42]
+ [50]
 第 5{} 章 5.
-[43
+[51
 
-] [44] [45] [46] [47]
+] [52] [53] [54] [55] [56] [57]
 第 6{} 章 6.
 File: balancedpanel.jpg Graphic file (type bmp)
 <balancedpanel.jpg>
 File: unbalancedpanel.jpg Graphic file (type bmp)
 <unbalancedpanel.jpg>
-[48
+[58
 
 ]
 Missing character: There is no （ ("FF08) in font ntx-Regular-tlf-ot1!
@@ -2568,13 +2594,12 @@ Missing character: There is no 年 ("5E74) in font ntx-Regular-tlf-ot1!
 Missing character: There is no ） ("FF09) in font ntx-Regular-tlf-ot1!
 File: 1988.png Graphic file (type bmp)
 <1988.png>
- [49]
+ [59] [60]
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
- [50]
 File: 8288.png Graphic file (type bmp)
 <8288.png>
- [51]
+ [61] [62]
 Missing character: There is no （ ("FF08) in font ntx-Regular-tlf-ot1!
 Missing character: There is no 去 ("53BB) in font ntx-Regular-tlf-ot1!
 Missing character: There is no 均 ("5747) in font ntx-Regular-tlf-ot1!
@@ -2582,105 +2607,153 @@ Missing character: There is no 值 ("503C) in font ntx-Regular-tlf-ot1!
 Missing character: There is no 结 ("7ED3) in font ntx-Regular-tlf-ot1!
 Missing character: There is no 果 ("679C) in font ntx-Regular-tlf-ot1!
 Missing character: There is no ） ("FF09) in font ntx-Regular-tlf-ot1!
- [52]
+ [63]
 File: results.jpg Graphic file (type bmp)
 <results.jpg>
- [53] [54]
+ [64] [65]
 第 7{} 章 7.
-Missing character: There is no 、 ("3001) in font ntx-Regular-tlf-ot1!
-[55
+[66
 
-] [56] [57]
+]
+Missing character: There is no 、 ("3001) in font ntx-Regular-tlf-ot1!
+ [67] [68] [69]
 File: results.jpg Graphic file (type bmp)
 <results.jpg>
- [58] [59] [60]
+ [70] [71] [72]
+Overfull \hbox (13.455pt too wide) in paragraph at lines 2262--2264
+[]\T1/ntxtlf/m/n/12 ***********************************************************
+*; \TU/SongtiSCLight(0)/m/n/12 上 述 回 归 数 据 和 \T1/ntxtlf/m/n/12 stata
+ []
+
+[73]
 第 8{} 章 8.
-[61
+[74
 
-] [62]
-Overfull \hbox (0.49312pt too wide) in paragraph at lines 2426--2427
-[]\TU/SongtiSCLight(0)/m/n/10 下 面，|  我 们 来 看 看 上 海 对 外 经 贸 大 学 的 司 继 春 博 士 在  |
-“知 乎”|  上 举 的 一 个 例 子： （[][]$\T1/ntxtlf/m/n/10 https : / / www . zhihu . com / 
-question /
+]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[75] [76] [77]
+Overfull \hbox (117.12553pt too wide) in paragraph at lines 2488--2489
+[]\TU/SongtiSCLight(0)/m/n/12 总 而 言 之，|  我 们 想 要 的 $[] \U/ntxmia/m/it/12 = \LMS
+/ntxsy/m/n/12 ¹[]º ^^@ ¹[]º$\TU/SongtiSCLight(0)/m/n/12 。|
  []
 
-[63]
-Overfull \hbox (16.98842pt too wide) in paragraph at lines 2488--2489
-[]\TU/SongtiSCLight(0)/m/n/10 总 而 言 之，|  我 们 想 要 的 $[] \U/ntxmia/m/it/10 = \LMS
-/ntxsy/m/n/10 ¹[]º ^^@ ¹[]º$\TU/SongtiSCLight(0)/m/n/10 。|
- []
-
-[64]
+[78] [79]
 File: commontrend.jpg Graphic file (type bmp)
 <commontrend.jpg>
- [65] [66]
-Overfull \hbox (12.93321pt too wide) in paragraph at lines 2571--2572
-[]\TU/SongtiSCLight(0)/m/n/10 在 一 定 条 件 下，|  可 通 过 引 入 两 个 控 制 组，|  进 行 三 次 差 分
-，|  称 为  |“三 重 差 分 法” （\T1/ntxtlf/m/n/10 difference-in-differences-in-differenc
-es\TU/SongtiSCLight(0)/m/n/10 ，|
- []
+ [80] [81]
+
+Package fontspec Warning: Font "STFangsong" does not contain requested Script
+(fontspec)                "CJK".
+
+
+Package fontspec Info: Could not resolve font "STFangsong/BI" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: Could not resolve font "STFangsong/B" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: Could not resolve font "STFangsong/I" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: Font family 'STFangsong(0)' created for font
+(fontspec)             'STFangsong' with options [Script={CJK}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"STFangsong/OT:language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
 File: var.jpg Graphic file (type bmp)
 <var.jpg>
-[67]
 File: DIDresults.jpg Graphic file (type bmp)
 <DIDresults.jpg>
 File: DIDcov.jpg Graphic file (type bmp)
 <DIDcov.jpg>
- [68] [69]
+[82] [83] [84]
+File: dynamicDID.png Graphic file (type bmp)
+<dynamicDID.png>
+ [85] [86]
 File: rdgraph.png Graphic file (type bmp)
 <rdgraph.png>
- [70] [71] [72]
+ [87] [88] [89] [90]
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
- [73]
+ [91]
 File: findit.jpg Graphic file (type bmp)
 <findit.jpg>
+ [92]
 File: rdgraph.png Graphic file (type bmp)
 <rdgraph.png>
 File: rdbw.jpg Graphic file (type bmp)
 <rdbw.jpg>
 File: rdresults.jpg Graphic file (type bmp)
 <rdresults.jpg>
- [74] [75] [76] [77] [78]
+ [93] [94] [95] [96]
+[97] [98]
 File: teffects.jpg Graphic file (type bmp)
 <teffects.jpg>
- [79] [80] [81]
+ [99] [100] [101]
+Overfull \hbox (40.5166pt too wide) in paragraph at lines 3129--3130
+[]$\OML/ntxmi/m/it/12 synth [] []y [] []x\OT1/ntxtlf/m/n/12 1 [] []\OML/ntxmi/m
+/it/12 x\OT1/ntxtlf/m/n/12 2 [] []\OML/ntxmi/m/it/12 x\OT1/ntxtlf/m/n/12 3\OML/
+ntxmi/m/it/12 ;  [] []trunit\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 #\LMS/ntxsy/m
+/n/12 º [] []\OML/ntxmi/m/it/12 trperiod\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 #
+\LMS/ntxsy/m/n/12 º [] []\OML/ntxmi/m/it/12 counit\LMS/ntxsy/m/n/12 ¹\OML/ntxmi
+/m/it/12 numlist\LMS/ntxsy/m/n/12 º [] []\OML/ntxmi/m/it/12 xperiod\LMS/ntxsy/m
+/n/12 ¹\OML/ntxmi/m/it/12 numlist\LMS/ntxsy/m/n/12 º [] []\OML/ntxmi/m/it/12 ms
+peperiod\LMS/ntxsy/m/n/12 ¹º [] []\OML/ntxmi/m/it/12 figure [] [][] 
+ []
+
+[102]
+Overfull \hbox (22.83528pt too wide) in paragraph at lines 3156--3157
+[]$\OML/ntxmi/m/it/12 synth [] []cigsale [] []retprice [] []lnincome [] []age\O
+T1/ntxtlf/m/n/12 15\OML/ntxmi/m/it/12 to\OT1/ntxtlf/m/n/12 24 [] []\OML/ntxmi/m
+/it/12 beer [] []cigsale\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 1975\LMS/ntxsy/m/
+n/12 º [] []\OML/ntxmi/m/it/12 cigsale\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 198
+0\LMS/ntxsy/m/n/12 º [] []\OML/ntxmi/m/it/12 cigsale\LMS/ntxsy/m/n/12 ¹\OT1/ntx
+tlf/m/n/12 1988\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 ; [] 
+ []
+
 File: weight.jpg Graphic file (type bmp)
 <weight.jpg>
 
-
-LaTeX Warning: Float too large for page by 133.06052pt on input line 3105.
+LaTeX Warning: Float too large for page by 135.5605pt on input line 3164.
 
 File: sys.jpg Graphic file (type bmp)
 <sys.jpg>
 File: synth.png Graphic file (type bmp)
 <synth.png>
-[82] [83] [84]
 File: line2.png Graphic file (type bmp)
 <line2.png>
- [85] [86] [87]
+[103] [104] [105] [106] [107]
 第 9{} 章 9.
-[88
+[108
 
 ]
 第 10{} 章 10.
-[89
+[109
 
 ]
 第 11{} 章 11.
-[90
+[110
 
-] [91] [92] [93] [94]
+] [111] [112] [113] [114] [115]
 第 12{} 章 12.
 
-LaTeX Warning: Empty bibliography on input line 3508.
+LaTeX Warning: Empty bibliography on input line 3567.
 
-[95
+[116
 
 ]
 附录 A.
-[96
+[117
 
 ] (./AppliedEconometrics.aux)
 
@@ -2690,7 +2763,7 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `AppliedEconometrics.out' has not changed.
-(rerunfilecheck)             Checksum: 06A1B1DCDC5E1FCB17BA61069E3BAF6F;18901.
+(rerunfilecheck)             Checksum: 789B51AFBAE3A3D53D9C4DFC1D0A187A;18901.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                AppliedEconometrics
@@ -2701,12 +2774,12 @@ Package logreq Info: Writing requests to 'AppliedEconometrics.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 47965 strings out of 476476
- 1022478 string characters out of 5814302
- 2019659 words of memory out of 5000000
- 67503 multiletter control sequences out of 15000+600000
- 473944 words of font info for 137 fonts, out of 8000000 for 9000
+ 49406 strings out of 476476
+ 1042151 string characters out of 5814302
+ 2076729 words of memory out of 5000000
+ 68931 multiletter control sequences out of 15000+600000
+ 479734 words of font info for 156 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 107i,13n,136p,752b,873s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 107i,13n,136p,752b,2278s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on AppliedEconometrics.pdf (102 pages).
+Output written on AppliedEconometrics.pdf (123 pages).

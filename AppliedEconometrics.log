@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  9 SEP 2021 17:39
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  10 SEP 2021 09:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1954,10 +1954,10 @@ LaTeX Warning: Label `fig:digit' multiply defined.
 LaTeX Warning: Label `fig:digit' multiply defined.
 
 
-LaTeX Warning: Label `tab:digit' multiply defined.
-
-
 LaTeX Warning: Label `fig:digit' multiply defined.
+
+
+LaTeX Warning: Label `tab:digit' multiply defined.
 
 
 LaTeX Warning: Label `fig:digit' multiply defined.
@@ -2679,7 +2679,14 @@ File: DIDcov.jpg Graphic file (type bmp)
 [82] [83] [84]
 File: dynamicDID.png Graphic file (type bmp)
 <dynamicDID.png>
- [85] [86]
+ [85]
+Overfull \hbox (13.4402pt too wide) in paragraph at lines 2681--2682
+[]\TU/SongtiSCLight(0)/m/n/12 我 们 在 展 示 动 态 处 理 效 应 图 时，|  其 核 心 就 是 画 出 $\LMS/
+ntxsy/m/n/12 f\OML/ntxmi/m/it/12 k; []\LMS/ntxsy/m/n/12 g[]$ \TU/SongtiSCLight(
+0)/m/n/12 的 散 点 图。| \T1/ntxtlf/m/n/12 Si-mon Freyalden-
+ []
+
+[86]
 File: rdgraph.png Graphic file (type bmp)
 <rdgraph.png>
  [87] [88] [89] [90]
@@ -2695,12 +2702,12 @@ File: rdbw.jpg Graphic file (type bmp)
 <rdbw.jpg>
 File: rdresults.jpg Graphic file (type bmp)
 <rdresults.jpg>
- [93] [94] [95] [96]
-[97] [98]
+ [93] [94] [95] [96] [97] [98]
 File: teffects.jpg Graphic file (type bmp)
 <teffects.jpg>
- [99] [100] [101]
-Overfull \hbox (40.5166pt too wide) in paragraph at lines 3129--3130
+ [99] [100]
+[101]
+Overfull \hbox (40.5166pt too wide) in paragraph at lines 3153--3154
 []$\OML/ntxmi/m/it/12 synth [] []y [] []x\OT1/ntxtlf/m/n/12 1 [] []\OML/ntxmi/m
 /it/12 x\OT1/ntxtlf/m/n/12 2 [] []\OML/ntxmi/m/it/12 x\OT1/ntxtlf/m/n/12 3\OML/
 ntxmi/m/it/12 ;  [] []trunit\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 #\LMS/ntxsy/m
@@ -2712,7 +2719,7 @@ peperiod\LMS/ntxsy/m/n/12 ¹º [] []\OML/ntxmi/m/it/12 figure [] [][]
  []
 
 [102]
-Overfull \hbox (22.83528pt too wide) in paragraph at lines 3156--3157
+Overfull \hbox (22.83528pt too wide) in paragraph at lines 3180--3181
 []$\OML/ntxmi/m/it/12 synth [] []cigsale [] []retprice [] []lnincome [] []age\O
 T1/ntxtlf/m/n/12 15\OML/ntxmi/m/it/12 to\OT1/ntxtlf/m/n/12 24 [] []\OML/ntxmi/m
 /it/12 beer [] []cigsale\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 1975\LMS/ntxsy/m/
@@ -2724,7 +2731,7 @@ tlf/m/n/12 1988\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 ; []
 File: weight.jpg Graphic file (type bmp)
 <weight.jpg>
 
-LaTeX Warning: Float too large for page by 135.5605pt on input line 3164.
+LaTeX Warning: Float too large for page by 135.5605pt on input line 3188.
 
 File: sys.jpg Graphic file (type bmp)
 <sys.jpg>
@@ -2747,7 +2754,7 @@ File: line2.png Graphic file (type bmp)
 ] [111] [112] [113] [114] [115]
 第 12{} 章 12.
 
-LaTeX Warning: Empty bibliography on input line 3567.
+LaTeX Warning: Empty bibliography on input line 3591.
 
 [116
 
@@ -2776,7 +2783,7 @@ Package logreq Info: Writing requests to 'AppliedEconometrics.run.xml'.
 Here is how much of TeX's memory you used:
  49406 strings out of 476476
  1042151 string characters out of 5814302
- 2076729 words of memory out of 5000000
+ 2077728 words of memory out of 5000000
  68931 multiletter control sequences out of 15000+600000
  479734 words of font info for 156 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191

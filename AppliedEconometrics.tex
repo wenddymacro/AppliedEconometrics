@@ -2542,7 +2542,7 @@
 	
 	既然common trend是DID最关键的假设，那么，我们如何评价非平行趋势呢？也就是，我们可以采取一些方法和方式来检查一下平行趋势假设，看看我们采用的DID识别是否可信。但是，需要特别提醒的是，这些方法和方式并不是检验平行趋势是否成立。即使”通过“了这些检验，我们也不能说平行趋势就一定成立。实际上，没有检验可以证实或者证伪平行趋势假设，因为它是反事实的，我们观测不到。这些检验方法更多是建议性的证据。如果没通过这些检验，那么，平行趋势假设可行度就很低。
 	
-	此外，下面我们来看看实际操作中最常用的两种方法（必做）：
+	此外，下面我们来看看检验平行趋势假设在实际操作中最常用的两种方法（必做）：
 	
 	\textbf{方法一、画时间趋势图}
 	
@@ -2666,7 +2666,31 @@
 		Y_{i,t} = \alpha_i + \gamma_t + \sum_{k= -G-L_G}^{M+L_M-1} \delta_k \Delta D_{i,t-k} + \delta_{M+L_M}D_{i,t-M-L_M} + \delta_{-G-L_G-1}(-D_{i,t+G+L_G}) + \phi X_{i,t} + C_{i,t} + \epsilon_{i,t}
 	\end{equation}
 	
-	其中，$\Delta$表示一阶差分算子。
+	其中，$\Delta$表示一阶差分算子。注意，（8.11）也可以应用于交叠DID的情形（下文会更详细的讲解），这个时候，$\Delta D_{i,t-k}$表示个体i在t期前的k期是否被处理，$(1-D_{i,t+G+L_G})$表示个体i在t期后的$G+L_G$期是否被处理，$D_{i,t-M-L_M}$表示个体i在t期前的至少$M+L_M$是否被处理。
+	
+	参数$\{\delta\}_{k=-G-L_G-1}^{k=M+L_M}$可以理解成不同时期的累积处理效应。尤其是，结合（8.10）意味着
+	
+\begin{equation}
+\delta_k =	\begin{cases}
+		 0  & \text{当} k< -G \\
+		\sum_{m=-G}^{k}\beta_m    &\text{当}-G \le k \le M \\
+		\sum_{m=-G}^{M}\beta_m  & \text{当} k \ge M 
+	\end{cases}
+\end{equation}
+		
+我们在展示动态处理效应图时，其核心就是画出$\{k,\dot{\delta}_k\}_{k=-G-L_G-1}^{k=M+L_M}$的散点图。Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021）给出了实践操作中展示处理效应图的7点建议：
+
+\textbf{1、当估计（8.11）时，标准化$\delta_{-G-1}=0$}。
+
+\textbf{2、在图中加入系数$\delta_{k^\star}$的括号标签，其值为}：
+
+\begin{equation}
+	\frac{\sum_{(i,t):\Delta D_{i,t+k^\star} \neq 0}Y_{i,t}}{|(i,t):\Delta D_{i,t+k^\star} \neq 0|}
+\end{equation}
+	
+	
+	
+	
 	
 	在DID时，如果组群之间的动态处理效应都是一样的，那么，这会对DID造成什么问题吗？
 	

@@ -192,7 +192,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {8.3.5}动态处理效应}{82}{subsection.8.3.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.3.6}交叠DID}{86}{subsection.8.3.6}%
+\contentsline {subsection}{\numberline {8.3.6}交叠DID}{87}{subsection.8.3.6}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {8.4}断点回归设计（RDD）}{87}{section.8.4}%
 \defcounter {refsection}{0}\relax 

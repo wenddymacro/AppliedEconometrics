@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  13 SEP 2021 12:19
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  13 SEP 2021 17:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2748,19 +2748,26 @@ File: line2.png Graphic file (type bmp)
 [109
 
 ] [110] [111] [112]
-第 11{} 章 11.
-[113
+Overfull \hbox (2.45912pt too wide) in paragraph at lines 3468--3469
+[]\TU/SongtiSCLight(0)/m/n/12 前 面 的 模 型 都 是 静 态 的，|  它 们 确 实 是 宏 观 经 济 与 政 策 的 
+最 简 化 的 分 析 框 架  |（\T1/ntxtlf/m/n/12 Mankiw\TU/SongtiSCLight(0)/m/n/12 ，| \T1/n
+txtlf/m/n/12 2019\TU/SongtiSCLight(0)/m/n/12 ） 。|
+ []
 
-] [114] [115] [116] [117] [118]
+[113] [114] [115]
+第 11{} 章 11.
+[116
+
+] [117] [118] [119] [120] [121]
 第 12{} 章 12.
 
-LaTeX Warning: Empty bibliography on input line 3722.
+LaTeX Warning: Empty bibliography on input line 3843.
 
-[119
+[122
 
 ]
 附录 A.
-[120
+[123
 
 ] (./AppliedEconometrics.aux)
 
@@ -2770,7 +2777,7 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `AppliedEconometrics.out' has not changed.
-(rerunfilecheck)             Checksum: 6C762A4C3BD594363450CE80C071211F;20165.
+(rerunfilecheck)             Checksum: 9A6D0C6F257E618B541B7C48A666B061;20421.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                AppliedEconometrics
@@ -2781,12 +2788,12 @@ Package logreq Info: Writing requests to 'AppliedEconometrics.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 49441 strings out of 476476
- 1044461 string characters out of 5814302
- 2078041 words of memory out of 5000000
- 68966 multiletter control sequences out of 15000+600000
+ 49430 strings out of 476476
+ 1043693 string characters out of 5814302
+ 2079304 words of memory out of 5000000
+ 68955 multiletter control sequences out of 15000+600000
  479734 words of font info for 156 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  107i,13n,136p,752b,2278s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on AppliedEconometrics.pdf (127 pages).
+Output written on AppliedEconometrics.pdf (130 pages).

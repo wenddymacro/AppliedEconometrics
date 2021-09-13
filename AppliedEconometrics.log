@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  12 SEP 2021 20:24
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  13 SEP 2021 12:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2396,11 +2396,11 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 ]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 8.0pt on input line 139.
- [3] [4])
+ [3] [4] [5])
 \tf@toc=\write8
 \openout8 = `AppliedEconometrics.toc'.
 
- [5]
+ [6]
 第 1{} 章 1.
 LaTeX Font Info:    Trying to load font information for T1+ntxsups on input lin
 e 67.
@@ -2747,20 +2747,20 @@ File: line2.png Graphic file (type bmp)
 第 10{} 章 10.
 [109
 
-] [110]
+] [110] [111] [112]
 第 11{} 章 11.
-[111
+[113
 
-] [112] [113] [114] [115] [116]
+] [114] [115] [116] [117] [118]
 第 12{} 章 12.
 
-LaTeX Warning: Empty bibliography on input line 3602.
+LaTeX Warning: Empty bibliography on input line 3722.
 
-[117
+[119
 
 ]
 附录 A.
-[118
+[120
 
 ] (./AppliedEconometrics.aux)
 
@@ -2770,7 +2770,7 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `AppliedEconometrics.out' has not changed.
-(rerunfilecheck)             Checksum: 18D841DA4D561E670020776D647DBA20;19031.
+(rerunfilecheck)             Checksum: 6C762A4C3BD594363450CE80C071211F;20165.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                AppliedEconometrics
@@ -2781,12 +2781,12 @@ Package logreq Info: Writing requests to 'AppliedEconometrics.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 49407 strings out of 476476
- 1042165 string characters out of 5814302
- 2077869 words of memory out of 5000000
- 68932 multiletter control sequences out of 15000+600000
+ 49441 strings out of 476476
+ 1044461 string characters out of 5814302
+ 2078041 words of memory out of 5000000
+ 68966 multiletter control sequences out of 15000+600000
  479734 words of font info for 156 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  107i,13n,136p,752b,2278s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on AppliedEconometrics.pdf (124 pages).
+Output written on AppliedEconometrics.pdf (127 pages).

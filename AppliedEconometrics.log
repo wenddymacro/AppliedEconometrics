@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  13 SEP 2021 17:04
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  17 SEP 2021 17:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1910,6 +1910,25 @@ Package bm Info: No bold for \U/rsfs/m/n, using \pmb.
 Package bm Info: No bold for \U/msa/m/n, using \pmb.
 Package bm Info: No bold for \U/msb/m/n, using \pmb.
 ))
+(/usr/local/texlive/2021/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2021-05-07 v4.16 Multi-page Table package (DPC)
+\LTleft=\skip107
+\LTright=\skip108
+\LTpre=\skip109
+\LTpost=\skip110
+\LTchunksize=\count560
+\LTcapwidth=\dimen350
+\LT@head=\box134
+\LT@firsthead=\box135
+\LT@foot=\box136
+\LT@lastfoot=\box137
+\LT@gbox=\box138
+\LT@cols=\count561
+\LT@rows=\count562
+\c@LT@tables=\count563
+\c@LT@chunks=\count564
+\LT@p@ftn=\toks50
+)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 
@@ -2103,54 +2122,54 @@ LaTeX Warning: Label `fig:digit' multiply defined.
 )
 \openout1 = `AppliedEconometrics.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 27.
+LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 29.
 LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line
- 27.
+ 29.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/omlntxmi.fd
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 29.
 LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 
-27.
+29.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 29.
 LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line
- 27.
+ 29.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 29.
 LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input lin
-e 27.
+e 29.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 27.
-Package hyperref Info: Link coloring ON on input line 27.
+LaTeX Font Info:    ... okay on input line 29.
+Package hyperref Info: Link coloring ON on input line 29.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -2162,11 +2181,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count560
+\c@section@level=\count565
 )
-LaTeX Info: Redefining \ref on input line 27.
-LaTeX Info: Redefining \pageref on input line 27.
-LaTeX Info: Redefining \nameref on input line 27.
+LaTeX Info: Redefining \ref on input line 29.
+LaTeX Info: Redefining \pageref on input line 29.
+LaTeX Info: Redefining \nameref on input line 29.
  (./AppliedEconometrics.out) (./AppliedEconometrics.out)
 \@outlinefile=\write7
 \openout7 = `AppliedEconometrics.out'.
@@ -2206,16 +2225,21 @@ LaTeX Info: Redefining \nameref on input line 27.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@mv@tabular=\count561
-\c@mv@boldtabular=\count562
+\c@mv@tabular=\count566
+\c@mv@boldtabular=\count567
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
+Package caption Info: longtable package is loaded.
+(/usr/local/texlive/2021/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
+)
 Package caption Info: End \AtBeginDocument code.
+
 (/usr/local/texlive/2021/texmf-dist/tex/latex/footmisc/footmisc.sty
 Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
-\FN@temptoken=\toks50
-\footnotemargin=\dimen350
-\c@pp@next@reset=\count563
+\FN@temptoken=\toks51
+\footnotemargin=\dimen351
+\c@pp@next@reset=\count568
 Package footmisc Info: Declaring symbol style bringhurst on input line 855.
 Package footmisc Info: Declaring symbol style chicago on input line 863.
 Package footmisc Info: Declaring symbol style wiley on input line 872.
@@ -2250,10 +2274,10 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'AppliedEconometrics.bbl' not found.
 
 No file AppliedEconometrics.bbl.
-Package biblatex Info: Reference section=0 on input line 27.
-Package biblatex Info: Reference segment=0 on input line 27.
-\c@lstlisting=\count564
-Package hyperref Info: Option `pageanchor' set `false' on input line 29.
+Package biblatex Info: Reference section=0 on input line 29.
+Package biblatex Info: Reference segment=0 on input line 29.
+\c@lstlisting=\count569
+Package hyperref Info: Option `pageanchor' set `false' on input line 31.
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: xetex
 * paper: a4paper
@@ -2289,64 +2313,64 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 29.
 File: ./figure//cover1.png Graphic file (type bmp)
 <./figure//cover1.png>
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 29.
+(Font)              scaled to size 12.0pt on input line 31.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 24.88pt on input line 29.
+(Font)              scaled to size 24.88pt on input line 31.
 LaTeX Font Info:    Trying to load font information for OT1+ntxtlf on input lin
-e 29.
+e 31.
 (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/ot1ntxtlf.fd
 File: ot1ntxtlf.fd 2021/05/24 v1.0 font definition file for OT1/ntx/tlf
 )
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 29.
+(Font)              scaled to size 12.0pt on input line 31.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.8pt on input line 29.
+(Font)              scaled to size 8.8pt on input line 31.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.6pt on input line 29.
+(Font)              scaled to size 6.6pt on input line 31.
 LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 
-29.
+31.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
 LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 
-29.
+31.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/untxsym.fd
 File: untxsym.fd 2015/03/20 Fontinst v1.933 font definitions for U/ntxsym.
 )
 LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 
-29.
+31.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
-LaTeX Font Info:    Trying to load font information for U+esint on input line 2
-9.
+LaTeX Font Info:    Trying to load font information for U+esint on input line 3
+1.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 29
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 31
 .
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 29.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 31.
 
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 29.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
 
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 17.28pt on input line 29.
+(Font)              scaled to size 17.28pt on input line 31.
 
 
 Package fontspec Warning: Font "Kaiti SC" does not contain requested Script
@@ -2386,7 +2410,7 @@ File: ./figure//cimers_logo.jpg Graphic file (type bmp)
 
 ]
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 20.74pt on input line 32.
+(Font)              scaled to size 20.74pt on input line 34.
  [1
 
 
@@ -2403,28 +2427,28 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
  [6]
 第 1{} 章 1.
 LaTeX Font Info:    Trying to load font information for T1+ntxsups on input lin
-e 67.
+e 69.
 (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/t1ntxsups.fd
 File: t1ntxsups.fd 2015/01/17 v1.0
 )
 LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 12.0pt on input line 67.
+(Font)              scaled to size 12.0pt on input line 69.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 67.
+(Font)              scaled to size 10.0pt on input line 69.
 LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 10.0pt on input line 67.
+(Font)              scaled to size 10.0pt on input line 69.
  [1
 
 
 ] [2]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.8pt on input line 138.
+(Font)              scaled to size 8.8pt on input line 140.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.6pt on input line 138.
+(Font)              scaled to size 6.6pt on input line 140.
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 173.
+(Font)              scaled to size 14.4pt on input line 175.
 
 [3] [4] [5]
 第 2{} 章 2.
@@ -2438,9 +2462,9 @@ File: pdf.jpg Graphic file (type bmp)
 
 ]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 12.0pt on input line 272.
+(Font)              scaled to size 12.0pt on input line 274.
  [7]
-Overfull \hbox (13.73578pt too wide) detected at line 296
+Overfull \hbox (13.73578pt too wide) detected at line 298
 \OML/ntxmi/m/it/12 var\LMS/ntxsy/m/n/12 ¹[]º \U/ntxmia/m/it/12 = \OT1/ntxtlf/m/
 n/12 0\OML/ntxmi/m/it/12 :\OT1/ntxtlf/m/n/12 8 \LMS/ntxsy/m/n/12 ^^B ¹\OT1/ntxt
 lf/m/n/12 0 \LMS/ntxsy/m/n/12 ^^@ \OT1/ntxtlf/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/
@@ -2474,17 +2498,17 @@ File: t.jpg Graphic file (type bmp)
 File: F.jpg Graphic file (type bmp)
 <F.jpg>
  [14] [15] [16]
-Overfull \hbox (2.87712pt too wide) in paragraph at lines 625--626
+Overfull \hbox (2.87712pt too wide) in paragraph at lines 627--628
 []\TU/SongtiSCLight(0)/m/n/12 但 是，|  计 算 样 本 均 值 $[]$ 是 得 到 总 体 均 值 估 计 量 的 唯 一
  一 种 方 式 吗？|  答 案 是 否 定 的。| $\OML/ntxmi/m/it/12 Y[]; []  ; Y[]$
  []
 
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 634.
+(Font)              scaled to size 10.0pt on input line 636.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 7.3pt on input line 634.
+(Font)              scaled to size 7.3pt on input line 636.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 634.
+(Font)              scaled to size 5.5pt on input line 636.
 [17]
 File: p.jpg Graphic file (type bmp)
 <p.jpg>
@@ -2620,7 +2644,7 @@ Missing character: There is no 、 ("3001) in font ntx-Regular-tlf-ot1!
 File: results.jpg Graphic file (type bmp)
 <results.jpg>
  [70] [71] [72]
-Overfull \hbox (13.455pt too wide) in paragraph at lines 2262--2264
+Overfull \hbox (13.455pt too wide) in paragraph at lines 2264--2266
 []\T1/ntxtlf/m/n/12 ***********************************************************
 *; \TU/SongtiSCLight(0)/m/n/12 上 述 回 归 数 据 和 \T1/ntxtlf/m/n/12 stata
  []
@@ -2634,15 +2658,23 @@ Overfull \hbox (13.455pt too wide) in paragraph at lines 2262--2264
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [75] [76] [77]
-Overfull \hbox (117.12553pt too wide) in paragraph at lines 2488--2489
+第 9{} 章 9.
+[78
+
+]
+第 10{} 章 10.
+[79
+
+]
+Overfull \hbox (117.12553pt too wide) in paragraph at lines 2505--2506
 []\TU/SongtiSCLight(0)/m/n/12 总 而 言 之，|  我 们 想 要 的 $[] \U/ntxmia/m/it/12 = \LMS
 /ntxsy/m/n/12 ¹[]º ^^@ ¹[]º$\TU/SongtiSCLight(0)/m/n/12 。|
  []
 
-[78] [79]
+[80]
 File: commontrend.jpg Graphic file (type bmp)
 <commontrend.jpg>
- [80] [81]
+ [81] [82] [83]
 
 Package fontspec Warning: Font "STFangsong" does not contain requested Script
 (fontspec)                "CJK".
@@ -2674,40 +2706,63 @@ File: var.jpg Graphic file (type bmp)
 <var.jpg>
 File: DIDresults.jpg Graphic file (type bmp)
 <DIDresults.jpg>
+[84] [85]
 File: DIDcov.jpg Graphic file (type bmp)
 <DIDcov.jpg>
-[82] [83] [84]
+ [86]
 File: dynamicDID.png Graphic file (type bmp)
 <dynamicDID.png>
- [85]
-Overfull \hbox (13.4402pt too wide) in paragraph at lines 2681--2682
+ [87]
+Overfull \hbox (13.4402pt too wide) in paragraph at lines 2698--2699
 []\TU/SongtiSCLight(0)/m/n/12 我 们 在 展 示 动 态 处 理 效 应 图 时，|  其 核 心 就 是 画 出 $\LMS/
 ntxsy/m/n/12 f\OML/ntxmi/m/it/12 k; []\LMS/ntxsy/m/n/12 g[]$ \TU/SongtiSCLight(
 0)/m/n/12 的 散 点 图。| \T1/ntxtlf/m/n/12 Si-mon Freyalden-
  []
 
-[86]
+[88]
+Overfull \hbox (30.35109pt too wide) in alignment at lines 2732--2755
+ [] [] [] 
+ []
+
+
+LaTeX Warning: Float too large for page by 25.29233pt on input line 2756.
+
+
+LaTeX Warning: Float too large for page by 26.09232pt on input line 2785.
+
+[89] [90] [91] [92]
+第 11{} 章 11.
 File: rdgraph.png Graphic file (type bmp)
 <rdgraph.png>
- [87] [88] [89] [90]
+[93
+
+] [94] [95] [96]
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
- [91]
+ [97] [98]
 File: findit.jpg Graphic file (type bmp)
 <findit.jpg>
- [92]
 File: rdgraph.png Graphic file (type bmp)
 <rdgraph.png>
 File: rdbw.jpg Graphic file (type bmp)
 <rdbw.jpg>
+ [99] [100]
 File: rdresults.jpg Graphic file (type bmp)
 <rdresults.jpg>
- [93] [94] [95] [96] [97] [98]
+ [101] [102]
+第 12{} 章 12.
+[103
+
+] [104]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 3175.
+
+[105]
 File: teffects.jpg Graphic file (type bmp)
 <teffects.jpg>
- [99] [100]
-[101]
-Overfull \hbox (40.5166pt too wide) in paragraph at lines 3153--3154
+ [106] [107] [108]
+Overfull \hbox (40.5166pt too wide) in paragraph at lines 3264--3265
 []$\OML/ntxmi/m/it/12 synth [] []y [] []x\OT1/ntxtlf/m/n/12 1 [] []\OML/ntxmi/m
 /it/12 x\OT1/ntxtlf/m/n/12 2 [] []\OML/ntxmi/m/it/12 x\OT1/ntxtlf/m/n/12 3\OML/
 ntxmi/m/it/12 ;  [] []trunit\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 #\LMS/ntxsy/m
@@ -2718,8 +2773,8 @@ ntxmi/m/it/12 ;  [] []trunit\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 #\LMS/ntxsy/m
 peperiod\LMS/ntxsy/m/n/12 ¹º [] []\OML/ntxmi/m/it/12 figure [] [][] 
  []
 
-[102]
-Overfull \hbox (22.83528pt too wide) in paragraph at lines 3180--3181
+
+Overfull \hbox (22.83528pt too wide) in paragraph at lines 3291--3292
 []$\OML/ntxmi/m/it/12 synth [] []cigsale [] []retprice [] []lnincome [] []age\O
 T1/ntxtlf/m/n/12 15\OML/ntxmi/m/it/12 to\OT1/ntxtlf/m/n/12 24 [] []\OML/ntxmi/m
 /it/12 beer [] []cigsale\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 1975\LMS/ntxsy/m/
@@ -2731,43 +2786,44 @@ tlf/m/n/12 1988\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 ; []
 File: weight.jpg Graphic file (type bmp)
 <weight.jpg>
 
-LaTeX Warning: Float too large for page by 135.5605pt on input line 3188.
+LaTeX Warning: Float too large for page by 135.5605pt on input line 3299.
 
 File: sys.jpg Graphic file (type bmp)
 <sys.jpg>
 File: synth.png Graphic file (type bmp)
 <synth.png>
+[109] [110] [111]
 File: line2.png Graphic file (type bmp)
 <line2.png>
-[103] [104] [105] [106] [107]
-第 9{} 章 9.
-[108
+ [112] [113] [114]
+第 13{} 章 13.
+[115
 
 ]
-第 10{} 章 10.
-[109
+第 14{} 章 14.
+[116
 
-] [110] [111] [112]
-Overfull \hbox (2.45912pt too wide) in paragraph at lines 3468--3469
+] [117] [118] [119]
+Overfull \hbox (2.45912pt too wide) in paragraph at lines 3579--3580
 []\TU/SongtiSCLight(0)/m/n/12 前 面 的 模 型 都 是 静 态 的，|  它 们 确 实 是 宏 观 经 济 与 政 策 的 
 最 简 化 的 分 析 框 架  |（\T1/ntxtlf/m/n/12 Mankiw\TU/SongtiSCLight(0)/m/n/12 ，| \T1/n
 txtlf/m/n/12 2019\TU/SongtiSCLight(0)/m/n/12 ） 。|
  []
 
-[113] [114] [115]
-第 11{} 章 11.
-[116
+[120] [121] [122]
+第 15{} 章 15.
+[123
 
-] [117] [118] [119] [120] [121]
-第 12{} 章 12.
+] [124] [125] [126] [127] [128]
+第 16{} 章 16.
 
-LaTeX Warning: Empty bibliography on input line 3843.
+LaTeX Warning: Empty bibliography on input line 3954.
 
-[122
+[129
 
 ]
 附录 A.
-[123
+[130
 
 ] (./AppliedEconometrics.aux)
 
@@ -2777,7 +2833,7 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `AppliedEconometrics.out' has not changed.
-(rerunfilecheck)             Checksum: 9A6D0C6F257E618B541B7C48A666B061;20421.
+(rerunfilecheck)             Checksum: A102442279E4C598C39188FC81517A09;21403.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                AppliedEconometrics
@@ -2788,12 +2844,12 @@ Package logreq Info: Writing requests to 'AppliedEconometrics.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 49430 strings out of 476476
- 1043693 string characters out of 5814302
- 2079304 words of memory out of 5000000
- 68955 multiletter control sequences out of 15000+600000
+ 49583 strings out of 476476
+ 1047123 string characters out of 5814302
+ 2083115 words of memory out of 5000000
+ 69103 multiletter control sequences out of 15000+600000
  479734 words of font info for 156 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  107i,13n,136p,752b,2278s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on AppliedEconometrics.pdf (130 pages).
+Output written on AppliedEconometrics.pdf (137 pages).

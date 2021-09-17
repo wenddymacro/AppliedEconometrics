@@ -19,7 +19,9 @@
 
 % 本文档命令
 \usepackage{array}
+\usepackage{longtable}
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}  %表格自动换行
 
 \definecolor{customcolor}{RGB}{32,178,170}
 \colorlet{coverlinecolor}{customcolor}
@@ -2265,6 +2267,21 @@
 	
 	
 	
+	\section{流行的IV设计}
+	\subsection{the lottery design}
+	
+	
+	
+	
+	\subsection{the judge fixed effects design}
+	
+	
+	
+	\subsection{Bartik Shift-Share IV}
+	
+	
+	
+	
 	\chapter{实验和自然实验}
 	在许多领域，实验是最常用的因果效应估计方法，例如心理学和医药学。研发了一种新药，投放市场前，必须要经过临床实验检验其效力。而这种临床试验就是随机的选择一些病人来服用这种新药，而另一些病人服用无害的无效替代品（也称为“安慰剂”，这就是为什么我们经常在论文中看到“安慰剂检验”）。只有这种随机控制实验表明新药是安全有效的（可信的统计证据），新药才会投放市场。
 	
@@ -2410,18 +2427,18 @@
 	
 	下面的问题就是，我们如何估计自然实验中的因果效应。
 	
-	\section{事件研究}
+	\chapter{事件研究}
 	
 	
 	
 	
-	\section{双重差分(DID)}
+	\chapter{双重差分(DID)}
 	
 	在自然实验中，个体接受处理与否似乎是随机分配的，但是我们并不能控制这种随机性，即使我们控制了那些影响随机性的变量W，处理组和控制组之间的某些效应仍然不能估计出来。
 	
 	有一种方法可以消除上述问题：我们不去比较处理组和控制组之间产出水平Y的差异，而是去比较两组产出Y变化的差异，和处理前后Y变化的差异。这个估计量是处理组和控制组之间效应变化的差异，或者时间上的差异，因此，这就是我们熟知的\textbf{双重差分（DID）估计量}。这种方法似乎与事件研究设计类似。与事件研究设计不同的是，DID引入了永远不被处理的组群，也就是说，在数据中，我们既有处理组，也有未处理组。这似乎有点反直觉：未处理组可能与处理组存在差异。那么，我们不是引入了组群差异等额外的因素来影响识别结果吗？这样不是让事情变得更坏了吗？尽管可能会有这些问题，但是，DID的关键在于，我们现在有了未处理组，虽然增加了其它因素，我们就可以控制这些因素。
 	
-	\subsection{DID}
+	\section{DID}
 	
 	下面，我们来看看上海对外经贸大学的司继春博士在“知乎”上举的一个例子：（\url{https://www.zhihu.com/question/24322044}）
 	
@@ -2488,11 +2505,11 @@
     总而言之，我们想要的$\text{估计量} = (\text{处理后的处理组 - 处理前的处理组}) - (\text{处理后的未处理组 - 处理前的未处理组})$。这隐含意味着，未处理组的变动代表着没有发生处理时，处理组的预期变动。因此，未处理组对于DID非常关键，没有未处理组，就不能做DID。
 	
 	
-	\subsection{更多经典DID的例子}
+	\section{更多经典DID的例子}
 	
 	
 	
-	\subsection{未处理组与平行趋势假设}
+	\section{未处理组与平行趋势假设}
 	
 	既然未处理组这么重要，那么，它要具备什么特征，DID才是一个好的识别策略呢？在做DID的时候，我们需要未处理组满足一定的条件，我们称之为\textbf{平行趋势假设}。
 	
@@ -2574,7 +2591,7 @@
 	
 	这是一件显而易见的事，但是我们当中许多人从来不会去考虑这个问题。因此，我们仔细思考一下因变量满足平行趋势的形式是什么，然后我们就使用这种形式的因变量。
 	
-	\subsection{DID在Stata中的实现}
+	\section{DID在Stata中的实现}
 	
 	要估计自然实验中的平均处理效应，如果直接在stata中run（9）式，那么，直接使用普通的面板数据命令$xtreg$即可。而DID则有专门的命令估计。厦门大学赵西亮老师的书里介绍了一种DID的命令，$diff$，其语法和基本选项为：
 	\begin{lstlisting}
@@ -2619,7 +2636,7 @@
 	\end{figure}
 	
 	
-	\subsection{动态处理效应}
+	\section{动态处理效应}
 	
 	在上文中，我们所讨论的DID都是两组和两期（$2 \times 2$），尤其是两期——处理前和处理后。但我们在现实中遇到的情形肯定不止两期，那么，DID设计可以使用吗？答案是当然，但是附带条件。（8.9）式的双向固定效应（TWFE）模型可以用于多期处理的情形：将多期划分为两个大类——前和后，然后估计单一效应——整个处理后时期的效应。
 	
@@ -2701,15 +2718,93 @@
 	TBA
 	
 	
-	\subsection{交叠DID}
+	\section{交叠DID}
 	
-	迄今为止，我们讨论的处理期都是同一时点，也就是说，对于所有的个体来说，都在同一期发生处理。但是，现实社会中，很多事件发生在不同的时点，也就是说，不同个体受到处理的时间可能不同。这个时候，我们还可以按照上面的双向固定效应（TWFE）估计量那样来理解DID估计系数吗？
+	迄今为止，我们讨论的处理期都是同一时点，也就是说，对于所有的个体来说，都在同一期发生处理。但是，现实社会中，很多事件发生在不同的时点，也就是说，不同个体受到处理的时间可能不同。这个时候，我们还可以按照上面的双向固定效应（TWFE）估计量那样来理解DID估计系数吗？明确的答案：肯定不行！
 	
-	TBA
+	2018以来，关于交叠DID的双向固定效应的问题及其稳健估计量的论文呈现出了爆炸性的增长，如表10.3和10.4所示。这么多的论文确实把我们”炸伤“了，要跟踪这些论文，并充分学习、理解它们之间的差异，有时候真的比走蜀道还难。要知道，人们都习惯于“吃老本”，因为我们前期已经在这些老本上花了大量的时间和精力，而且对于“发论文”来说似乎也够用，因此，学习新的知识花的时间和精力成本太大，而且边际收益也是递减的。但是，做真正的研究和教学来说，学习这些最新的进展肯定是必须的，因为学生们需要老师去指引。
+	
+	下面，我们就带大家来学习一下交叠DID估计。我们忽略那些“艰涩难懂”的数学与统计细节，更多关注于这些最新的稳健DID估计量的直观含义与Stata操作。
+	
+	\begin{table}[htbp]
+		\centering
+		\caption{交叠DID的Stata包及对应文献}
+		\begin{longtable}{|c|c|c|}
+			\hline
+			Stata包&安装  & 参考文献 \\
+			\hline
+			bacondecomp& \tabincell{c}{ ssc install bacondecomp, replace
+				\\
+				or
+				\\
+				net install ddtiming, from (https://tgoldring.com/code/)} & \tabincell{c}{ Andrew Goodman-Bacon\\(2021). Difference-in-\\differences with \\variation in \\treatment timing. \\Journal of Econometrics}\\
+			\hline
+			eventstudyinteract & ssc install eventstudyinteract, replace & \tabincell{c}{ Liyang Sun, Sarah \\Abraham (2020).\\ Estimating dynamic \\treatment effects\\ in event studies with\\ heterogeneous treatment \\effects. \\Journal of Econometrics}\\
+			\hline
+			did\_multiplegt &	ssc install did\_multiplegt, replace & \tabincell{c}{Clément de Chaisemartin,\\ Xavier D'Haultfoeuille \\(2020). Two-Way \\Fixed Effects Estimators \\with Heterogeneous \\Treatment Effects. \\American Economic \\Review.\\
+				Clément de Chaisemartin, \\Xavier D'Haultfoeuille \\(2021). Two-way\\ fixed effects regressions\\ with several treatments.\\
+				Clément de Chaisemartin, \\Xavier D'Haultfoeuille \\(2021). Difference-in-\\Differences Estimators \\of Inter-temporal \\Treatment Effects.} \\
+			\hline
+			did\_imputation&	ssc install did\_imputation, replace& \tabincell{c}{Kirill Borusyak , \\Xavier Jaravel , \\Jann Spiess  (2021). \\Revisiting Event Study \\Designs\\: Robust and Efficient \\Estimation.} \\
+			\hline
+			
+			drdid &	ssc install drdid, replace& \tabincell{c}{ Pedro H.C. Sant'Anna ,\\ Jun Zhao (2020).\\ Doubly robust\\ difference-in-\\differences estimators, \\Journal of Econometrics.}\\
+			\hline
+		
+			
+		\end{longtable}
+	\end{table}
+	
+	
+	\begin{table}[htbp]
+		\centering
+		\caption{交叠DID的Stata包及对应文献(续表)}
+		\begin{longtable}{|c|c|c|}
+			\hline
+			Stata包&安装  & 参考文献 \\
+			\hline
+	
+		csdid &	ssc install csdid, replace& \tabincell{c}{Brantly Callaway, \\Pedro H.C. Sant'Anna  \\(2020).\\ Difference-in-\\Differences with multiple \\time periods, \\Journal of Econometrics.}\\
+	\hline
+	flexpaneldid &	ssc install flexpaneldid, replace&\tabincell{c}{Antje Weyh\\	Eva Dettmann, \\Alexander Giebler,\\ Antje Weyh (2020).\\ Flexpaneldid: A \\Stata Toolbox \\for Causal Analysis \\with Varying Treatment \\Time and Duration. \\IWH Discussion Papers \\No. 3/2020} \\
+	\hline
+	
+	xtevent	& ssc install xtevent, replace&\tabincell{c}{Simon Freyaldenhoven, \\Christian Hansen, \\Jesse M. Shapiro\\ (2019). Pre-event \\Trends in the Panel \\Event-Study Design.\\ American Economic\\ Review.}\\
+	\hline
+	did2s&	ssc install did2s, replace	& \tabincell{c}{John Gardner (2021). \\Two-stage differences \\in differences.}\\
+	\hline
+	stackedev &	github install joshbleiberg/stackedev&  \tabincell{c}{Doruk Cengiz , \\Arindrajit Dube , \\Attila Lindner,\\ Ben Zipperer  (2019). \\The effect of minimum \\wages on low-wage\\ jobs. The Quarterly \\Journal of Economics.} \\
+	\hline
+	
+	eventdd	&ssc install eventdd, replace&	 \tabincell{c}{Damian Clarke,\\ Kathya Tapia (2020). \\Implementing the Panel \\Event Study.}\\
+	\hline
+	staggered\_stata&	github install jonathandroth/staggered\_stata&	 \tabincell{c}{Jonathan Roth , \\Pedro H.C. Sant'Anna  \\(2021). Efficient\\ Estimation for Staggered \\Rollout Designs} \\
+	\hline
+			
+\end{longtable}
+\end{table}
+	
+	所有稳健DiD 估计量都专注于通过避免使用已处理的个体作为对照组，来估计处理组的处理效应。然而，要避免使用已处理组作为对照组，就需要引入样本选择，因此，我们必须要解释它。交叠DID估计的作者们分别采用不同的策略来实现这一点，其中大多数策略涉及通过基于估计子样本的 ATT 来加权得到整体 ATT，例如，组群-时间 ATT 或估计组群处理效应本身。Scott Cunningham（2021）将这些稳健DID估计器分为以下类别：
+	
+	\begin{itemize}
+		\item [1] 加权组群-时间的ATT
+		\item [2] 通过相对事件时间的平衡来堆叠
+		\item [3] 插补(imputation)方法
+	\end{itemize}
+	
+	
+	Callaway and Sant'Anna (2020)和Sun and Abraham (2020) 就是采用的加权组群-时间的ATT。这两个估计量是彼此的嵌套的，这使它们“感觉”更有可能是“正确”的方法。而且已经有Stata包可以得到这类估计量，见表10.3和10.4。
+	
+	但是，使用从不或尚未处理的组群作为对照组来加权 ATT 并不是解决交叠处理的唯一方法。例如，堆叠（Stacking ）也是可行的替代方案。堆叠是通过将数据集重组为相对事件时间，而不是日历时间，将时序差分问题重新转换为两个组群的研究设计，从而解决了该问题。这样做是因为两组设计实际上不会遇到交叠处理TWFE 的问题。一旦数据被重建为相对事件时间的平衡面板，其中处理以相同的“相对处理日期”为中心，然后可以估计传统的 TWFE 模型——控制组群和时间固定效应，以得到处理效应的加权平均值。因此，与堆叠法最相关的文章是Cengiz  et al.（2019）。当然，还有其它文献。
+	
+	第三种方法是一种估算方法，它在一个多步骤过程中估计缺失的反事实，该过程利用平行趋势假设对未处理组群中的动态效应。这方面的文献是Borusyak、Jaravel and Spiess（2021 ）及其插补估计量。尽管在很多方面，Athey et al.（2021）关于使用面板数据完成矩阵的文章也是用了类似的方法，但在技术上，他们不是 DiD 估计量，而是合成控制估计量。
+	
+	此外，今年的一篇NBER工作论文中，Gardner （2021）提出了一个两阶段DID估计量，它应该介于上述三类方法之间。从技术上讲，Gardner 确实从一个相同的加权组群时间 ATT 的目标参数开始，将其与 Callaway and Sant'Anna (2020) 等放在一起。但它不会使用双重稳健方法或逆概率权重来估计整体 ATT。相反，正如他所说的那样，两阶段DID (2sDiD) 最终将是我们最熟悉的双向固定效应 (TWFE) 回归的解决方案的一种扩展，如堆叠。但它也是一个多步骤过程，仅使用控制组来估计拟合值，这使它与 Borusyak、Jaravel and Spiess（2021）的插补方法比较类似。
 	
 	
 	
-	\section{断点回归设计（RDD）}
+	
+	\chapter{断点回归设计（RDD）}
 	
 	如果大家关注了微信公众号“香樟经济学术圈”的话，肯定记得2016年的时候，“满天都是RD”——各种RD经典文献解读，RD原理介绍。社科院付明卫老师写了一篇”断点回归（RD）的规定动作“的推文。里面写道：
 	
@@ -2717,7 +2812,7 @@
 	
 	RD确实是个好方法。它等于是在断点附近的局部随机试验。这一点赖以成立的前提条件，并不难以满足。此外，跟随机试验中全域（global）随机性可以被检验一样，RDD等于局部随机试验的假设，也可以通过观察前定变量的分布是否平衡来检验。从这个意义上讲，RD方法比IV、DiD更接近于随机试验。随机试验是因果识别的终极杀招，越接近随机试验的方法当然越好！
 	
-	\subsection{断点回归估计量}
+	\section{断点回归估计量}
 	
 	在自然实验中，还可能出现一种情形：个体接受处理完全或部分依赖于某个可观测变量W是否超过某一阈值（门槛）。例如，一个学生是否要参加“短学期”依赖于他期末平均绩点（GPA）是否在规定阈值以下。根据前面的理想实验中平均处理效应的idea，估计参加“短学期”的效应也是要比较那些GPA在阈值以下（参加短学期）的学生成绩与那些GPA在阈值以上（不参加短学期）的学生成绩。这个有阈值限制的可观测变量W称为\textbf{参考变量}。
 	
@@ -2765,7 +2860,7 @@
 	
 	由于在参考变量的阈值处，结果变量的跳跃或断点，那些探讨在某一阈值处接受处理的概率的非连续性的研究被称为\textbf{断点回归(RD)}设计。它又分为精准断点回归（sharp RD）和模糊断点回归（fuzzy RD）。SRD在断点$x_i=w_0$处，个体接受处理的概率从0跳跃到1，而FRD在断点$x_i=w_0$处，我们只知道个体接受处理的概率从a跳跃到b，而$0\le{a}\le{b}\le{1}$。
 	
-	I. 精准断点回归
+	\subsection{精准断点回归}
 	
 	在Sharp RDD中，接受处理完全由参考变量W是否超过某一阈值决定：当$W>=0$时，民主党是在位党，当$W<0$时，共和党是在位党；即用D表示民主党是否在位，当$W>=0$时，$D_i=1$，当$W<0$ 时，$D_i=0$。在这种情形下，下一次获得选票份额Y在$W=0$处的跳跃就等于$W=0$时子样本的处理效应。
 	
@@ -2804,11 +2899,11 @@
 	4、进行模型设定检验时，包括检验分组变量与协变量的条件密度在断点处是否存在跳跃。
 	
 	
-	II. 模糊断点回归
+	\subsection{模糊断点回归}
 	
 	在Fuzzy RDD中，参考变量超过阈值会影响到是否接受处理，但这不是决定处理的唯一影响因素。例如，假设有些GPA在阈值以下的学生并没有参加短学期，而有些GPA超过阈值的学生又参加了短学期。如果临界值规则是一个决定treated非常复杂的过程的一部分，那么上述情况就可能会出现。在模糊断点回归中，$X_i$一般与误差项$u_i$相关。
 	
-	\subsection{断点回归的规定动作}
+	\section{断点回归的规定动作}
 	
 	下面的内容来源于“香樟经济学术圈”的推文，付明卫（2016）：
 	
@@ -2846,7 +2941,7 @@
 	
 	\textbf{3. 核密度检验}。Lee和Lemieux（2010）介绍了McCrary（2008）的核密度检验方法。Frandsen (2013)提出了一种新的检验方法，感兴趣的请参考原文。
 	
-	\subsection{例子与stata操作}
+	\section{stata操作}
 	
 	下面，我们使用Lee(2008)的数据来演示一下断点回归的stata操作。这个数据集中包括两个变量：vote表示民主党的选票份额；margin表示民主党在上次竞选中获得的选票与共和党选票份额之差。因此，margin就是参考变量，如果margin大于0，民主党就是在位党，这是一个SRD。我们感兴趣的问题是，在位党是否会获得优势。我们将样本限制在$margin\pm0.5$之间，样本共有4900个。
 	
@@ -2948,9 +3043,24 @@
 	估计命令与带宽估计命令相似。
 	
 	
-	\section{其他因果效应识别方法——匹配与合成控制法}
+	\section{Kink回归设计}
 	
-	\subsection{匹配法}
+	
+	
+	
+	\section{rdmulti包}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	\chapter{其他因果效应识别方法——匹配与合成控制法}
+	
+	\section{匹配法}
 	
 	我们回忆一下在理想实验中，平均处理效应（ATE）等于服用新药之后的病情（$E(Y_{1i}\big|D_i=1)$）与没有服用新药病情（$E(Y_{0i}\big|D_i=0)$）之间的差异。即
 	$ATE=E(Y_{1i}\big|D_i=1)-E(Y_{0i}\big|D_i=0)$。
@@ -3079,7 +3189,7 @@
 	
 	
 	
-	\subsection{合成控制法}
+	\section{合成控制法}
 	在上面的讲解中，我们反复多次强调，随机实验中的“随机性”最为关键，因为它可以很好地识别出我们所要进行比较的“处理组”和“控制组”。一旦“处理组”和“控制组”的outcomes被我们观测到，我们就可以利用处理组的结果减去控制组的结果得到我们感兴趣的处理效应，例如产业政策效应。
 	
 	但困难之处在于，实践中，我们往往只能观测到“处理组”的结果，而观测不到“如果处理组没有接受处理”的结果。这个时候，我们就需要去选择或“假象”一个或多个“控制组”（注：这里的假象，也是有理有据地假象。我们还有一个专业术语叫做“构造”）。
@@ -3137,7 +3247,8 @@
 	
 	\textbf{小贴士：合成控制法对样本数据的要求为政策干预以前需要很多期数据，有人认为至少需要15年的数据，而政策干预后需要有5年以上的数据。同时地区最好超过10 个，但是又不会太多。最为重要的是，接受政策干预的地区个数极少。}
 	
-	\subsubsection{例子及stata操作}
+	\
+	section{例子及stata操作}
 	
 	我们来继续看看加州控烟税政策的效果。
 	

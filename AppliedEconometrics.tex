@@ -2284,7 +2284,8 @@
 	\begin{lstlisting}
 		* Stata代码
 		
-		use https://github.com/scunning1975/mixtape/raw/master/card.dta, clear
+		use /Users/xuwenli/OneDrive/DSGE建模及软件编程/教学大纲与讲稿/应用计量    ///
+		经济学讲稿/应用计量经济学讲稿与code/data/card.dta,clear
 		
 		* 教育年限对工资对数的OLS估计
 		
@@ -2358,7 +2359,7 @@
 	那么，一个自然的问题就出现了：为什么那些受大学影响的孩子的教育收入效应比总体效应（OLS）要大呢？（1）也许遗漏了个人能力？但是受教育越多，能力应该越大，教育收入效应应该更大才对呀。可是上面的结果恰恰相反。（2）受教育年限的测量误差导致了偏误？测量误差会让估计系数趋向于0，而2SLS可以修正这个估计结果。可是人们并不知道他们目前受教育的精确年限，因此，这种解释也很牵强。那么，到底该怎么解释这个结果对比呢？前文说过了，我们进行的工具变量回归是那些生活在有大学城市的孩子们可能会增加他们的受教育年限，这意味着大学降低了他们的边际教育成本。这就是最重要的原因，即更高的边际教育成本会降低了人们的教育投资。但是，实际上，对于这部分人来说，教育的收入效应非常大。
 	
 	
-	\subsection{一些警告}
+	\section{一些提醒}
 	
 	Lewis Caroll（2015）写过一篇博文，名叫《Friends don't let Friends do IV》。其中写道：
 	
@@ -2376,7 +2377,24 @@
 	
 	
 	\section{流行的IV设计}
-	\subsection{随机实验设计(the lottery design)}
+	\subsection{随机实验设计(the lottery design)：抓阄}
+	
+	在IV的应用中，最特别的IV可能就是随机实验。我们先来看看一个利用随机实验作为IV的例子：21世纪第一个十年，俄勒冈州的医疗补助计划。这场随机实验有两位经济学家参与其中：一位是来自Harvard的Katherine Baicker（\href{https://connects.catalyst.harvard.edu/Profiles/display/Person/40507}{个人主页}），另一位是来自MIT的Amy Finkelstein（\href{http://economics.mit.edu/faculty/afink}{个人主页}）。如果大家去看看她们的个人主页，可能就会发现，她们利用这个实验数据在QJE(2012)、AER(2014)、JPE(2019)、AEJ: EP(2021)等等发了至少7、8篇论文。
+	
+	21世纪头十年，美国俄勒冈州扩大成年人的医疗补助（Medicaid）计划。凡是19-64岁，收入小于联邦政府贫困线的成年人均可以参与该计划。这个项目被称为俄勒冈健康计划标准（OHPS）。这个计划之所以能发这么多顶刊，最重要的原因就是其具有随机实验的性质，因为俄勒冈州采用了“抓阄”的方法来登记自愿参与人。人们有五周的时间来登记参与该计划。而且参与计划的门槛非常低。然后，俄勒冈州在2008年3-10月，从85000报名者中随机抽取了30000人。这些幸运儿有机会来提交参与医疗补助计划的申请，如果申请被批准，他们需要在45天内回复确认，那些这些人的整个家庭都可以获得医疗补助。最后，只有10000人实际参加了该计划。
+	
+	这个实验的数据非常丰富(\href{https://www.nber.org/research/data/oregon-health-insurance-experiment-data}{数据集})，参与该计划的两位经济学家研究了医疗补助计划可能产生的因果效应，例如，福利效应（Finkelstein et al.，2019，JPE）、对投票率的影响（Baicker and Finkelstein，2019，QJPS）、对劳动力的影响（Baicker et al.,2014,AER）、对急诊的影响（Baicker et al., 2014,Science）、临床诊断的影响（Baicker et al., 2013, NEJM）、医疗保健使用、财务负担、低收入成年人的健康等等的影响（Finkelstein et al.，2012，QJE）。
+	
+	作者使用了IV研究设计。当然，在她们的研究中，有时候使用OLS估计，有时候使用2SLS。2SLS模型为：
+	
+	\begin{equation}
+		\begin{aligned}
+			\text { INSURANCE }_{i h j} &=\delta_{0}+\delta_{1} \text { LOTTERY }_{i h}+X_{i h} \delta_{2}+V_{i h} \delta_{3}+\mu_{i h j} \\
+			y_{i h j} &=\pi_{0}+\pi_{1} \hat{INSURANCE}_{i h}+X_{i h} \pi_{2}+V_{i h} \pi_{3}+v_{i h j}
+		\end{aligned}
+	\end{equation}
+	
+	其中，$\text { INSURANCE }_{i h j}$表示医疗保险，$\text { LOTTERY }_{i h}$表示“抓阄”，是工具变量，$\hat{INSURANCE}_{i h}$用IV预测的医疗保险，$y_{i h j}$表示结果变量，其它都是协变量、误差项以及系数。
 	
 	在许多领域，实验是最常用的因果效应估计方法，例如心理学和医药学。研发了一种新药，投放市场前，必须要经过临床实验检验其效力。而这种临床试验就是随机的选择一些病人来服用这种新药，而另一些病人服用无害的无效替代品（也称为“安慰剂”，这就是为什么我们经常在论文中看到“安慰剂检验”）。只有这种随机控制实验表明新药是安全有效的（可信的统计证据），新药才会投放市场。
 	

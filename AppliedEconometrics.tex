@@ -20,6 +20,7 @@
 % 本文档命令
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{threeparttable}
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
 \newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}  %表格自动换行
 
@@ -2250,6 +2251,11 @@
 	
 	\textbf{千万要记住：统计证据并不能告诉我们哪一种可能是正确的，因此这就需要我们根据我们的经验以及经济理论去argue。}
 	
+	
+   \section{异质性处理效应的IV估计量}
+
+
+
 	\section{哪里去寻找有效的工具变量呢？}
 	
 	在实践中，IV回归最难的就是找到有效的工具变量。虽然如此，但是还是有两种指导性的方法：
@@ -2261,157 +2267,125 @@
 	
 	\section{Stata命令}
 	
-	************************************************************;
-	上述回归数据和stata命令可以给我发邮件所要！
+	我们再来看两个两个例子：1、同质处理效应——教育年限对收入的影响；2、异质性处理效应——富尔顿渔业市场的售价对营业额的影响。
+	
+	\subsection{教育年限的工具变量：城市是否存在大学}
+	
+	数据和代码来源于Scott Cunningham（2021）：“Causal Inference：The Mixtape”的第七章。而教育年限对收入的影响则是Card（1995）研究的劳动经济学问题。作者设立了一个回归：
+	
+	\begin{equation}
+		Y_i = \alpha +\delta S_i + \gamma X_i +\epsilon_i
+	\end{equation}
+	
+	其中，$Y$表示收入对数，S是受教育年限，X是外生协变量矩阵，$\epsilon$是误差项——包含不可观测的个人能力，由于能力与受教育年限相关，这就意味着上述估计结果是有偏的。为了解决这个问题，Card（1995）提出用工具变量策略，即用“城市是否存在大学”这个虚拟变量来作为受教育年限的工具变量。
+	
+	还记得前面的内容反复提到的“自问”吗？此时，我们仍要首先啪啪脑门（注意，只是轻拍，千万不要抓，抓会掉头发的），自问一下：为什么城市是否存在大学这个虚拟变量可以作为受教育年限S的工具变量呢？我能想到的第一个原因就是：父母想把我们留在身边读书。但是，这个答案是否仍然有点牵强。我们再想想，我是武汉人，在武汉上的大学，那个时候家境一般，父母供三个孩子读书，负担还是挺重的，所以在武汉读书也许会减轻家里的学费、生活费、交通费等等负担，因为我就住在武汉。确实，武汉存在大学，所以可能会通过降低了我们继续受教育的成本，进而提高了我们继续读书的可能性——可能增加了受教育年限S。好了，那么，我们就姑且先用这个虚拟变量作为IV来估计上述回归方程的OLS估计量和2SLS估计量，并进行比较。
+	
+	\begin{lstlisting}
+		* Stata代码
+		
+		use https://github.com/scunning1975/mixtape/raw/master/card.dta, clear
+		
+		* 教育年限对工资对数的OLS估计
+		
+		reg lwage  educ  exper black south married smsa
+		
+		* 用“城市是否存在大学”作为受教育年限的工具变量跑2SLS估计
+		
+		ivregress 2sls lwage (educ=nearc4) exper black south married smsa, first 
+		
+		* 大学和城市变量以及所有协变量对受教育年限的第一阶段回归
+		
+		reg educ nearc4 exper black south married smsa
+		
+		* 第一阶段回归的F统计量：IV的排除性
+		
+		test nearc4
+	\end{lstlisting}
+	
+	表7.1 给出了上述估计结果。从表中可以看出，第二列OLS的回归结果显示受教育年限每增加一年，工资对数会提高7.1\%左右，且在1\%的置信水平下显著。第三例2SLS的回归结果显示，受教育年限每增加一年，工资对数提高12.4\%左右，这个估计结果比OLS还要大。
+	
+	下面，我们来看看第一阶段的回归结果，列示在“第一阶段IV回归”的“College in the county”行中。结果显示，城市存在大学可以增加0.327年的受教育年限，而且在1\%的水平下显著。F统计量也超过了15，这意味着并不存在弱工具变量问题。
+	
+	\begin{table}[htbp]\centering
+		\scriptsize
+		\caption{受教育年限对收入对数的OLS and 2SLS回归}
+		\label{2sls_1}
+		\begin{center}
+			\begin{threeparttable}
+				\begin{tabular}{l*{2}{c}}
+					\toprule
+					\multicolumn{1}{l}{\textbf{因变量}}&
+					\multicolumn{2}{c}{\textbf{Log wage}}\\
+					\multicolumn{1}{c}{}&
+					\multicolumn{1}{c}{OLS}&
+					\multicolumn{1}{c}{2SLS}\\
+					\midrule
+					educ                &       0.071***&       0.124** \\
+					&     (0.003)   &     (0.050)   \\
+					exper               &       0.034***&       0.056***\\
+					&     (0.002)   &     (0.020)   \\
+					black               &      -0.166***&      -0.116** \\
+					&     (0.018)   &     (0.051)   \\
+					south               &      -0.132***&      -0.113***\\
+					&     (0.015)   &     (0.023)   \\
+					married             &      -0.036***&      -0.032***\\
+					&     (0.003)   &     (0.005)   \\
+					smsa                &       0.176***&       0.148***\\
+					&     (0.015)   &     (0.031)   \\
+					\\
+					\midrule
+					\multicolumn{1}{c}{第一阶段IV回归}\\
+					College in the county&               &       0.327***\\
+					Robust standard error &               &       0.082   \\
+					F statistic for IV in first stage&               &      15.767   \\
+					Anderson-Rubin test &               &           .   \\
+					N                   &       3,003   &       3,003   \\
+					Mean Dependent Variable&       6.262   &       6.262   \\
+					Std. Dev. Dependent Variable&       0.444   &       0.444   \\
+					\bottomrule
+				\end{tabular}
+				\begin{tablenotes}
+					\tiny
+					\item Standard errors in parenthesis. * p$<$0.10, ** p$<$0.05, *** p$<$0.01
+				\end{tablenotes}
+			\end{threeparttable}
+		\end{center}
+	\end{table}
+	
+	在理解受教育年限的收入效应时，有几个问题需要特别注意：我们用城市是否有大学来作为受教育年限的IV，这就意味着我们选择的组群的行为（是否接受教育）会受到IV的影响。换言之，在总体样本中，应该会有部分学生总会去读大学，还有一部分学者就是不想去读大学，这两部分人的教育决策并不受到城市是否有大学的影响。但是，还有第三类群体——他们是否读大学仅仅只因为他们生活的城市有大学。这个时候，实际上我们挑选的研究样本仅仅是那些生活在这个有大学的城市又去读大学的这部分学生。因此，我们估计得到的教育年限对收入的效应并不是总体样本的平均处理效应（ATE），而只表达了一个局部平均处理效应（LATE）。尽管如此，我们上面估计出来的教育对收入的效应（12.4\%）仍然非常有意义，至少对于降低低收入家庭的孩子教育成本问题非常有指导价值。
+	
+	那么，一个自然的问题就出现了：为什么那些受大学影响的孩子的教育收入效应比总体效应（OLS）要大呢？（1）也许遗漏了个人能力？但是受教育越多，能力应该越大，教育收入效应应该更大才对呀。可是上面的结果恰恰相反。（2）受教育年限的测量误差导致了偏误？测量误差会让估计系数趋向于0，而2SLS可以修正这个估计结果。可是人们并不知道他们目前受教育的精确年限，因此，这种解释也很牵强。那么，到底该怎么解释这个结果对比呢？前文说过了，我们进行的工具变量回归是那些生活在有大学城市的孩子们可能会增加他们的受教育年限，这意味着大学降低了他们的边际教育成本。这就是最重要的原因，即更高的边际教育成本会降低了人们的教育投资。但是，实际上，对于这部分人来说，教育的收入效应非常大。
 	
 	
+	\subsection{一些警告}
+	
+	Lewis Caroll（2015）写过一篇博文，名叫《Friends don't let Friends do IV》。其中写道：
+	
+	不要用IV回归！如果你非要做，亲爱的如来佛祖啊，请不要用Arellano-Bond类动态面板模型来做IV （它是最差劲的）。
+	
+	首先，无论你读了什么论文和教材，识别都是一个假设。你不可能证明你的IV是有效的。
+	
+	其次，无论你读了什么论文和教材，Sargon类型的检验只是为检验过度识别！过度识别！过度识别！而不是检验识别的。你可以说你通过了这个检验，但它仍然不能说明获得有效识别。
+	
+	第三，即使通过这个检验，也并不意味着在0.05甚至0.1的水平下不能拒绝原假设。
+	
+	就算你把你的IV解释得天花乱坠，解释到海枯石烂，我还是不相信它们。但是也不要灰心，我们还可以使用DID、匹配、合成控制和断点回归等等（后面会讲解）。虽然这些方法也都有各自的问题，但是它们总归比IV要好点。我的一个合作者曾经也提醒我，尽量还是不要用IV回归吧。
+	
+	尽管如此，可能有三种IV回归我们还是可以尝试一下，而且这些工具变量设计确实在最近几年的因果推断中变得越来越流行——随机实验IV、法官固定效应（Judge Fixed Effect）IV和Bartik Share-Shift IV。
 	
 	
 	\section{流行的IV设计}
-	\subsection{the lottery design}
+	\subsection{随机实验设计(the lottery design)}
 	
-	
-	
-	
-	\subsection{the judge fixed effects design}
-	
-	
-	
-	\subsection{Bartik Shift-Share IV}
-	
-	
-	
-	
-	\chapter{实验和自然实验}
 	在许多领域，实验是最常用的因果效应估计方法，例如心理学和医药学。研发了一种新药，投放市场前，必须要经过临床实验检验其效力。而这种临床试验就是随机的选择一些病人来服用这种新药，而另一些病人服用无害的无效替代品（也称为“安慰剂”，这就是为什么我们经常在论文中看到“安慰剂检验”）。只有这种随机控制实验表明新药是安全有效的（可信的统计证据），新药才会投放市场。
 	
 	从目前来看，随机控制实验也是经济学中最重要的关注点，现在很多学者都“绞尽脑汁”去寻找各种政策的“随机控制实验（自然实验）”。如果你找到了，恭喜你成功了一大半了！
-	
-	当你幸运地发现了一个别人还没有做过的政策”随机控制实验“的时候，接下来你可以就要思考，用什么方法把政策的效应给估计出来。那么，本讲的内容对你可能是最实用的。我们在进行项目评估，也就是估计一个项目、政策、干预或”处理”的效应时，\textbf{最常用的估计方法有：双重差分（DID）、断点回归设计（RDD）、倾向性匹配得分（PSM）和合成控制法。而其中前两种是最流行、最常用的方法。}
-	
-	\section{理想实验}
 	
 	假设我们正在进行医药试验，随机选择一部分病患服用试验药品，被称为\textbf{处理组}；另一部分病患服用无害无效的安慰剂，称为\textbf{控制组}。这样，我们就可以得到两种结果。这两种\textbf{潜在结果}的差异就是试验药品对病患的（因果）效应。
 	
 	在理想实验中，处理组与控制组的病患选择完全是随机的。因此，病患个体究竟被分到哪一组或是否服用试验药品，与个体的特征或其他可能影响潜在结果的因素是完全独立的。因此，解释变量（是否服用试验药品）与扰动项不相关，即$cov(X_i,u_i)=0$。这样，无论是否有遗漏变量，都不会出现遗漏变量偏误。这就是理想实验的最大优点。
 	
-	I. 差分估计量
-	
-	假设$X_i=1$表示服用新药，$X_i=0$表示未服用新药，$Y_i$表示病人的病情。那么，服用新药后的潜在结果为$\overline{Y}_{i,treat}=E(Y_i\big|X_i=1)$，而服用安慰剂的潜在病情为$\overline{Y}_{i,control}=E(Y_i\big|X_i=0)$。那么，\textbf{平均处理效应（ATE）}就是两种潜在结果之差，即$E(Y_i\big|X_i=1)-E(Y_i\big|X_i=0)$。如果我们写出回归方程
-	\begin{equation}
-		Y_i=\beta_0+\beta_1X_i+u_i
-	\end{equation}
-	
-	那么，（1）式的OLS估计量为
-	\begin{equation}
-		\tilde{\beta}_1^{OLS}=\overline{Y}_{i,treat}-\overline{Y}_{i,control}
-	\end{equation}
-	
-	由此，可以看出，$\beta_1$的OLS估计量是处理组样本均值与控制组样本均值之差，故也被成为\textbf{“差分估计量”}。
-	
-	\textbf{注意：虽然，在理想实验中，服用新药的病人是随机分配的，无论是否存在遗漏变量，服用新药（处理）对病情影响的估计量总是无偏、一致的。但是，在实践中，我们通常还是会加入如控制变量W，因为在回归中加入控制变量W可以提高$\beta_1$的OLS估计量的效率（Stock and Watson，2015）。如果控制变量W对解释Y的变动有帮助，那么，回归中加入控制变量W可以降低$\beta_1$的OLS估计量的标准误。}
-	
-	II. 小班教学实验
-	
-	20世纪80年代初期，美国田纳西州进行了一项围棋4年的初级教育阶段班级缩减的实验，STAR项目。这项实验主要是想评价小班教学的效果。这次小班教学实验划分了三种班级规模：普通规模——22-25名学生/班/教师，无助教；小班——13-17名学生/班/教师，无助教；普通规模，有助教。学生和老师在入学时都是\textbf{随机分配}到不同班级规模。这项实验的第一年，大约有6400名学生，108个小班，101个无助教普通班，99个有助教普通班。4年期间，共有11600名学生和80所学校参与小班教学实验。
-	
-	这个实验与上面论述的有点差异：两个\textbf{处理组}——小班（$SC_i$）和有助教普通班（$RA_i$），一个\textbf{控制组}——无助教普通班。因此，小班教学实验的基准回归模型为
-	\begin{equation}
-		Y_i=\beta_0+\beta_1SC_i+\beta_2RA_i+W_i\gamma_i+u_i
-	\end{equation}
-	
-	其中，$Y_i$表示考试成绩；如果第i个学生在小班，那么$SC_i=1$，否则等于0；如果第i个学生在有助教普通班，那么$RA_i=1$，否则等于0；$W_i$表示控制变量向量。根据前面对平均处理效应的论述，相对于无助教普通班来说，小班的效应就是$\beta_1$，有助教普通班的效应是$\beta_2$。回归方程（3）中，$\beta_1$，$\beta_2$的OLS估计量可以通过差分估计量计算得到。如表1所示。
-	
-	\begin{center}
-		\begin{table}[!h]
-			\caption{小班教学实验的效应：无控制变量}\label{tab:digit}
-			\begin{center}
-				\begin{tabular}{lcccc}
-					\hline
-					解释变量&(1)&(2)&(3)&(4)\\
-					\cline{1-5}
-					小班&13.90**&29.78**&19.39**&19.59**\\
-					&(2.45)&(2.83)&(2.71)&(2.40)\\
-					
-					有助教普通班&0.31&11.96**&3.48&-0.29\\
-					&(2.27)&(2.65)&(2.54)&(2.27)\\
-					
-					常数项&918.04**&1039.39**&1157.81**&1228.51**\\
-					&(1.63)&(1.78)&(1.82)&(1.68)\\
-					
-					\cline{1-5}
-					Obs.&5786&6379&6049&5967\\
-					
-					\cline{1-5}
-					\multicolumn{5}{l}{注：(1)1-4列分别为全样本，以及1-3年级样本；}\\
-					\multicolumn{5}{l}{(2)括号中为标准误；}\\
-					\multicolumn{5}{l}{(3)***、**、*表示1\%、5\%、10\%的显著性水平。}\\
-					\hline
-				\end{tabular}
-			\end{center}
-		\end{table}
-	\end{center}
-	
-	下面，我们加入一些控制变量。回归结果如表2所示。
-	\begin{center}
-		[插入表2]
-	\end{center}
-	
-	\begin{center}
-		\begin{table}[!h]
-			\caption{小班教学实验的效应：控制变量}\label{tab:digit}
-			\begin{center}
-				\begin{tabular}{lcccc}
-					\hline
-					解释变量&(1)&(2)&(3)&(4)\\
-					\cline{1-5}
-					小班&13.90**&14.00**&15.93**&15.89**\\
-					&(2.45)&(2.45)&(2.24)&(2.16)\\
-					
-					有助教普通班&0.31&-0.60&1.22&1.79\\
-					&(2.27)&(2.25)&(2.04)&(1.96)\\
-					
-					教师执教年数&&1.47**&0.74**&0.66**\\
-					&&(0.17)&(0.17)&(0.17)\\
-					
-					男孩&&&&-12.09**\\
-					&&&&(1.67)\\
-					
-					免费午餐&&&&-34.70**\\
-					&&&&(1.99)\\
-					
-					黑人&&&&-25.43**\\
-					&&&&(3.50)\\
-					
-					其他种族&&&&-8.50\\
-					&&&&(12.52)\\
-					
-					常数项&918.04**&904.72**&&\\
-					&(1.63)&(2.22)&&\\
-					
-					\cline{1-5}
-					学校指标&no&no&yes&yes\\
-					$\overline{R}^2$&0.01&0.02&0.22&0.28\\
-					
-					Obs.&5786&5766&5766&5748\\
-					
-					\cline{1-5}
-					\multicolumn{5}{l}{注：(1)1-4列分别为全样本，以及1-3年级样本；}\\
-					\multicolumn{5}{l}{(2)括号中为标准误；}\\
-					\multicolumn{5}{l}{(3)***、**、*表示1\%、5\%、10\%的显著性水平。}\\
-					\hline
-				\end{tabular}
-			\end{center}
-		\end{table}
-	\end{center}
-	
-	表1和表2中估计的教学实验效果应该如何理解呢？
-	
-	有两种方式回答这个问题：
-	
-	第一，将每一行的考试分数估计值转换成单位考试得分标准差的效应，这就使得每个年级的估计效应可以进行比较。例如，学生考试成绩的全样本标准差为73.7，从表1中可以知道，小班教学的效应估计值是13.9，那么，小班教学的单位得分标准差效应为13.9/73.7=0.19，标准误为2.45/73.7=0.03。
-	
-	第二，将班级规模的效应系数与另外一些估计系数进行比较。
 	
 	III. 准实验或自然实验
 	
@@ -2425,7 +2399,88 @@
 	
 	（2）随机变动“似乎”只是部分决定了是否被处理。这个时候，因果效应就可以利用IV回归。回忆一下第七讲中构造IV的方法就是分离出与误差项无关的成分，而这种自然实验中的随机变动部分就提供了工具变量。
 	
-	下面的问题就是，我们如何估计自然实验中的因果效应。
+	下面的问题就是，我们利用随机实验来设计一个有效的工具变量。
+	
+	If there are data on both treatment actually received Xi and the initial random assignment, then the treatment effect can be estimated by instrumental variables regression. Instrumental variables estimation of the treatment effect entails the estimation of Equation (13.1)—or Equation (13.2) if there are control variables—using the initial random assignment Zi as an instrument for the treatment actually received Xi. Recall that a variable must satisfy the two conditions of instrument relevance and instrument exogeneity (Key Concept 12.3) to be a valid instrumental variable. As long as the protocol is partially followed, then the actual treatment level is partially determined by the assigned treatment level, so the instrumental variable Zi is relevant. If initial assignment is random, then Zi is distributed independently of ui (conditional on Wi, if randomization is conditional on covariates), so the instrument is exogenous. Thus in an experiment with randomly assigned treatment, partial compliance, and data on actual treatment, the original random assignment is a valid instrumental variable.
+	
+	Example 3: The effect of cardiac catheterization. Section 12.5 described the study
+by McClellan, McNeil, and Newhouse (1994), in which they used the distance from a
+heart attack patient’s home to a cardiac catheterization hospital, relative to the distance
+to a hospital lacking catheterization facilities, as an instrumental variable for
+actual treatment by cardiac catheterization. This study is a quasi-experiment with a
+variable that partially determines the treatment. The treatment itself, cardiac catheterization,
+is determined by personal characteristics of the patient and by the decision
+of the patient and doctor; however, it is also influenced by whether a nearby
+hospital is capable of performing this procedure. If the location of the patient is as-if
+randomly assigned and has no direct effect on health outcomes other than through
+its effect on the probability of catheterization, then the relative distance to a catheterization
+hospital is a valid instrumental variable.
+
+If the quasi-experiment yields a variable Zi that influences receipt of treatment, if data
+are available both on Zi and on the treatment actually received (Xi), and if Zi is as-if
+randomly assigned (perhaps after controlling for some additional variables Wi), then Zi
+is a valid instrument for Xi, and the coefficients of Equation (13.2) can be estimated using
+two stage least squares. Any control variables appearing in Equation (13.2) also appear
+as control variables in the first stage of the two stage least squares estimator of b1.
+
+In a fuzzy regression discontinuity design,
+crossing the threshold influences receipt of the treatment but is not the sole determinant.
+For example, suppose that some students whose GPA falls below the threshold
+are exempted from summer school while some whose GPA exceeds the threshold
+nevertheless attend. This situation could arise if the threshold rule is part of a more
+complicated process for determining treatment. In a fuzzy design, Xi will, in general,
+be correlated with ui in Equation (13.8). If, however, any special effect of crossing the
+threshold operates solely by increasing the probability of treatment—that is, the
+direct effect of crossing the threshold is captured by the linear term in W—then an
+instrumental variables approach is available. Specifically, let the binary variable Zi
+indicate crossing the threshold (so Zi = 1 if Wi 6 w0 and Zi = 0 if Wi Ú w0). Then
+Zt influences receipt of treatment but is uncorrelated with ui, so it is a valid instrument
+for Xi. Thus, in a fuzzy regression discontinuity design, b1 can be estimated by
+instrumental variables estimation of Equation (13.8), using as an instrument the
+binary variable indicating that Wi 6 w0.
+
+Instrument validity in quasi-experiments. An important step in evaluating a study
+that uses instrumental variables regression is careful consideration of whether the
+instrument is in fact valid. This general statement remains true in quasi-experimental
+studies in which the instrument is as-if randomly determined. As discussed in
+Chapter 12, instrument validity requires both instrument relevance and instrument
+exogeneity. Because instrument relevance can be checked using the statistical methods
+summarized in Key Concept 12.5, here we focus on the second, more judgmental
+requirement of instrument exogeneity.
+Although it might seem that a randomly assigned instrumental variable is necessarily
+exogenous, that is not so. Consider the examples of Section 13.4. In Angrist’s
+(1990) use of draft lottery numbers as an instrumental variable in studying the effect
+
+on civilian earnings of military service, the lottery numbers were, in fact, randomly
+assigned. But as Angrist (1990) points out and discusses, if a low draft number results
+in behavior aimed at avoiding the draft and that avoidance behavior subsequently
+affects civilian earnings, then a low lottery number (Zi) could be related to unobserved
+factors that determine civilian earnings (ui); that is, Zi and ui are correlated
+even though Zi is randomly assigned. As a second example, McClellan, McNeil, and
+Newhouse’s (1994) study of the effect on heart attack patients of cardiac catheterization
+treated the relative distance to a catheterization hospital as if it were randomly
+assigned. But as the authors highlight and examine, if patients who live close to a
+catheterization hospital are healthier than those who live far away (perhaps because
+of better access to medical care generally), then the relative distance to a catheterization
+hospital would be correlated with omitted variables in the error term of the
+health outcome equation. In short, just because an instrument is randomly determined
+or as-if randomly determined does not necessarily mean it is exogenous in the
+sense that corr(Zi, ui) = 0. Thus the case for exogeneity must be scrutinized closely
+even if the instrument arises from a quasi-experiment.
+
+	
+	
+	\subsection{the judge fixed effects design}
+	
+	
+	
+	\subsection{Bartik Shift-Share IV}
+	
+	需要加强的内容：What’s missing for an applied reader is more discussion and a framework on how to critique an IV – for example, he goes through the classic use of quarter of birth as an instrument for years of schooling when looking at impacts of schooling on earnings, where this would be an occasion to think talk through concerns of different types of parents being more likely to have kids at different types of the year. There is no discussion of overidentification tests and how they should be interpreted, nor of sensitivity analysis approaches that allow for some potential violations of the exclusion restriction.
+	
+	
+	
+
 	
 	\chapter{事件研究}
 	
@@ -3048,9 +3103,13 @@
 	
 	
 	
-	\section{rdmulti包}
+	\section{RDpackage}
 	
 	
+	
+	\section{空间断点回归}
+	
+	discussion of spatial RD designs and the different issues that may arise with them, nor again on power calculations and thinking through what size samples are needed for RD to work.
 	
 	
 	
@@ -3584,12 +3643,12 @@
 	综上所述，三方程NK模型是由动态IS曲线、动态菲利普斯曲线和货币政策规则组成：
 	
 	\begin{equation}
-		\text{动态IS曲线：}x_t = E_t x_{t+1} - (i_t - E_t\pi_{t+1} - g_t)
+		\text{动态IS曲线：}x_t = E_t x_{t+1} - \alpha(i_t - E_t\pi_{t+1} )+ g_t
 	\end{equation}
 
 
 \begin{equation}
-	\text{动态PC：}\pi_t =\beta E_t \pi_{t+1} + \kappa x_t
+	\text{动态PC：}\pi_t =\beta E_t \pi_{t+1} + \kappa x_t + u_t
 \end{equation}
 	
 	\begin{equation}

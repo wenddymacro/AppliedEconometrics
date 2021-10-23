@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  29 SEP 2021 16:53
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  23 OCT 2021 22:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2116,6 +2116,9 @@ LaTeX Warning: Label `fig:digit' multiply defined.
 
 LaTeX Warning: Label `fig:digit' multiply defined.
 
+
+LaTeX Warning: Label `param' multiply defined.
+
 )
 \openout1 = `AppliedEconometrics.aux'.
 
@@ -2400,6 +2403,11 @@ Package fontspec Info: Font family 'KaitiSC(0)' created for font 'Kaiti SC'
 (fontspec)             Bold/OT:language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
+
+Overfull \hbox (24.59068pt too wide) in paragraph at lines 32--32
+[] [] [] 
+ []
+
 File: ./figure//cimers_logo.jpg Graphic file (type bmp)
 <./figure//cimers_logo.jpg>
 [1
@@ -2445,10 +2453,11 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 6.6pt on input line 141.
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
+
+[3]
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 (Font)              scaled to size 14.4pt on input line 176.
-
-[3] [4] [5]
+ [4] [5]
 第 2{} 章 2.
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
@@ -2641,7 +2650,7 @@ Missing character: There is no 、 ("3001) in font ntx-Regular-tlf-ot1!
  [67] [68] [69]
 File: results.jpg Graphic file (type bmp)
 <results.jpg>
- [70] [71] [72]
+ [70] [71] [72] [73]
 
 Package fontspec Warning: Font "STFangsong" does not contain requested Script
 (fontspec)                "CJK".
@@ -2669,106 +2678,158 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 (fontspec)             <->"STFangsong/OT:language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.95pt on input line 2296.
-[73]
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 2317.
+(Font)              scaled to size 8.0pt on input line 2329.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.2pt on input line 2317.
+(Font)              scaled to size 6.2pt on input line 2329.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 8.0pt on input line 2319.
+(Font)              scaled to size 8.0pt on input line 2331.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.0pt on input line 2350.
+(Font)              scaled to size 6.0pt on input line 2362.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.5pt on input line 2351.
+(Font)              scaled to size 6.5pt on input line 2363.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 2351.
- [74] [75]
-Overfull \hbox (14.67194pt too wide) in paragraph at lines 2397--2398
-[]\TU/SongtiSCLight(0)/m/n/12 其 中，| $[][]$ 表 示 医 疗 保 险，| $[][]$ 表 示  |“抓 阄” ，| 
- 是 工 具 变 量，| $[][]$
+(Font)              scaled to size 5.5pt on input line 2363.
+[74] [75] [76]
+Overfull \hbox (27.19917pt too wide) in paragraph at lines 2425--2474
+ [] 
  []
 
-[76] [77] [78] [79]
+[77] [78]
+File: jfe.png Graphic file (type bmp)
+<jfe.png>
+ [79] [80]
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.95pt on input line 2544.
+ [81] [82] [83] [84] [85] [86]
 第 8{} 章 8.
-[80
+[87
 
 ]
-第 9{} 章 9.
-[81
-
-]
-Overfull \hbox (117.12553pt too wide) in paragraph at lines 2578--2579
+Overfull \hbox (117.12553pt too wide) in paragraph at lines 2784--2785
 []\TU/SongtiSCLight(0)/m/n/12 总 而 言 之，|  我 们 想 要 的 $[] \U/ntxmia/m/it/12 = \LMS
 /ntxsy/m/n/12 ¹[]º ^^@ ¹[]º$\TU/SongtiSCLight(0)/m/n/12 。|
  []
 
-[82]
+[88]
 File: commontrend.jpg Graphic file (type bmp)
 <commontrend.jpg>
- [83] [84] [85]
+ [89] [90] [91]
 File: var.jpg Graphic file (type bmp)
 <var.jpg>
 File: DIDresults.jpg Graphic file (type bmp)
 <DIDresults.jpg>
- [86] [87]
+ [92] [93]
 File: DIDcov.jpg Graphic file (type bmp)
 <DIDcov.jpg>
- [88]
+ [94]
 File: dynamicDID.png Graphic file (type bmp)
 <dynamicDID.png>
- [89]
-Overfull \hbox (13.4402pt too wide) in paragraph at lines 2771--2772
+ [95]
+Overfull \hbox (13.4402pt too wide) in paragraph at lines 2977--2978
 []\TU/SongtiSCLight(0)/m/n/12 我 们 在 展 示 动 态 处 理 效 应 图 时，|  其 核 心 就 是 画 出 $\LMS/
 ntxsy/m/n/12 f\OML/ntxmi/m/it/12 k; []\LMS/ntxsy/m/n/12 g[]$ \TU/SongtiSCLight(
 0)/m/n/12 的 散 点 图。| \T1/ntxtlf/m/n/12 Si-mon Freyalden-
  []
 
-[90]
-Overfull \hbox (30.35109pt too wide) in alignment at lines 2805--2828
+File: sug1.png Graphic file (type bmp)
+<sug1.png>
+[96]
+File: sug2.png Graphic file (type bmp)
+<sug2.png>
+File: sug3.png Graphic file (type bmp)
+<sug3.png>
+ [97]
+File: sug4.png Graphic file (type bmp)
+<sug4.png>
+ [98]
+Missing character: There is no   ("2000) in font ntx-Bold-tlf-t1!
+File: sug6.png Graphic file (type bmp)
+<sug6.png>
+ [99]
+File: sug7.png Graphic file (type bmp)
+<sug7.png>
+ [100]
+Overfull \hbox (30.35109pt too wide) in alignment at lines 3119--3142
  [] [] [] 
  []
 
 
-LaTeX Warning: Float too large for page by 25.29233pt on input line 2829.
+LaTeX Warning: Float too large for page by 25.29233pt on input line 3143.
 
+[101]
 
-LaTeX Warning: Float too large for page by 26.09232pt on input line 2858.
+LaTeX Warning: Float too large for page by 26.09232pt on input line 3172.
 
-[91] [92] [93] [94]
-第 10{} 章 10.
+File: GB_decom.png Graphic file (type bmp)
+<GB_decom.png>
+[102] [103] [104]
+File: GB_decomp_example.png Graphic file (type bmp)
+<GB_decomp_example.png>
+ [105] [106] [107] [108] [109]
+File: event_study_plot.png Graphic file (type bmp)
+<event_study_plot.png>
+ [110]
+File: cdl_bacon_decomp.png Graphic file (type bmp)
+<cdl_bacon_decomp.png>
+ [111] [112] [113]
+File: project_manager.png Graphic file (type bmp)
+<project_manager.png>
+
+[114] [115]
+File: jwdid.png Graphic file (type bmp)
+<jwdid.png>
+ [116]
+第 9{} 章 9.
 File: rdgraph.png Graphic file (type bmp)
 <rdgraph.png>
-[95
+[117
 
-] [96] [97] [98]
+] [118] [119] [120] [121]
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
- [99] [100]
+ [122] [123]
 File: findit.jpg Graphic file (type bmp)
 <findit.jpg>
 File: rdgraph.png Graphic file (type bmp)
 <rdgraph.png>
 File: rdbw.jpg Graphic file (type bmp)
 <rdbw.jpg>
- [101] [102]
 File: rdresults.jpg Graphic file (type bmp)
 <rdresults.jpg>
- [103] [104]
-第 11{} 章 11.
-[105
+ [124] [125] [126] [127]
+File: kink.png Graphic file (type bmp)
+<kink.png>
+File: kink2.png Graphic file (type bmp)
+<kink2.png>
+ [128]
+[129]
+Missing character: There is no š ("161) in font ntx-Regular-tlf-t1!
+ [130]
+Missing character: There is no 1 ("31) in font nullfont!
+Missing character: There is no 2 ("32) in font nullfont!
+Missing character: There is no 1 ("31) in font nullfont!
+Missing character: There is no 2 ("32) in font nullfont!
+Missing character: There is no 1 ("31) in font nullfont!
+Missing character: There is no 2 ("32) in font nullfont!
+Missing character: There is no 1 ("31) in font nullfont!
+Missing character: There is no 2 ("32) in font nullfont!
+Missing character: There is no 1 ("31) in font nullfont!
+Missing character: There is no 2 ("32) in font nullfont!
+ [131] [132]
+第 10{} 章 10.
+[133
 
-] [106]
+] [134]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 3252.
+(hyperref)                than one, level fixed on input line 4052.
 
-[107]
+[135]
 File: teffects.jpg Graphic file (type bmp)
 <teffects.jpg>
- [108] [109] [110]
-Overfull \hbox (40.5166pt too wide) in paragraph at lines 3341--3342
+ [136] [137] [138]
+Overfull \hbox (40.5166pt too wide) in paragraph at lines 4141--4142
 []$\OML/ntxmi/m/it/12 synth [] []y [] []x\OT1/ntxtlf/m/n/12 1 [] []\OML/ntxmi/m
 /it/12 x\OT1/ntxtlf/m/n/12 2 [] []\OML/ntxmi/m/it/12 x\OT1/ntxtlf/m/n/12 3\OML/
 ntxmi/m/it/12 ;  [] []trunit\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 #\LMS/ntxsy/m
@@ -2780,7 +2841,7 @@ peperiod\LMS/ntxsy/m/n/12 ¹º [] []\OML/ntxmi/m/it/12 figure [] [][]
  []
 
 
-Overfull \hbox (22.83528pt too wide) in paragraph at lines 3368--3369
+Overfull \hbox (22.83528pt too wide) in paragraph at lines 4168--4169
 []$\OML/ntxmi/m/it/12 synth [] []cigsale [] []retprice [] []lnincome [] []age\O
 T1/ntxtlf/m/n/12 15\OML/ntxmi/m/it/12 to\OT1/ntxtlf/m/n/12 24 [] []\OML/ntxmi/m
 /it/12 beer [] []cigsale\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 1975\LMS/ntxsy/m/
@@ -2792,44 +2853,86 @@ tlf/m/n/12 1988\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 ; []
 File: weight.jpg Graphic file (type bmp)
 <weight.jpg>
 
-LaTeX Warning: Float too large for page by 135.5605pt on input line 3376.
+LaTeX Warning: Float too large for page by 135.5605pt on input line 4176.
 
 File: sys.jpg Graphic file (type bmp)
 <sys.jpg>
 File: synth.png Graphic file (type bmp)
 <synth.png>
-[111] [112] [113]
+[139] [140] [141]
 File: line2.png Graphic file (type bmp)
 <line2.png>
- [114] [115] [116]
+ [142] [143] [144]
+第 11{} 章 11.
+File: google.png Graphic file (type bmp)
+<google.png>
+[145
+
+] [146] [147]
+File: google_AR.png Graphic file (type bmp)
+<google_AR.png>
+ [148]
+File: estudy_result.png Graphic file (type bmp)
+<estudy_result.png>
+ [149] [150]
+File: hijacking.png Graphic file (type bmp)
+<hijacking.png>
+ [151] [152]
+File: shock_type.png Graphic file (type bmp)
+<shock_type.png>
+ [153]
+File: var_ts.png Graphic file (type bmp)
+<var_ts.png>
+ [154] [155]
+File: lagsc.png Graphic file (type bmp)
+<lagsc.png>
+File: var_irf.png Graphic file (type bmp)
+<var_irf.png>
+ [156]
+[157]
 第 12{} 章 12.
-[117
+[158
 
-]
-第 13{} 章 13.
-[118
-
-] [119] [120] [121]
-Overfull \hbox (2.45912pt too wide) in paragraph at lines 3656--3657
+] [159] [160] [161]
+Overfull \hbox (2.45912pt too wide) in paragraph at lines 4753--4754
 []\TU/SongtiSCLight(0)/m/n/12 前 面 的 模 型 都 是 静 态 的，|  它 们 确 实 是 宏 观 经 济 与 政 策 的 
 最 简 化 的 分 析 框 架  |（\T1/ntxtlf/m/n/12 Mankiw\TU/SongtiSCLight(0)/m/n/12 ，| \T1/n
 txtlf/m/n/12 2019\TU/SongtiSCLight(0)/m/n/12 ） 。|
  []
 
-[122] [123] [124]
+
+Overfull \hbox (1.63113pt too wide) in paragraph at lines 4755--4756
+[]\TU/SongtiSCLight(0)/m/n/12 大 部 分 计 量 经 济 学 和 定 量 社 会 科 学 的 老 师 都 不 会 向 学 生 们
+ 介 绍 动 态 随 机 一 般 均 衡  |（\T1/ntxtlf/m/n/12 DSGE\TU/SongtiSCLight(0)/m/n/12 ）|
+ []
+
+[162] [163] [164] [165] [166] [167]
+File: fiscal.png Graphic file (type bmp)
+<fiscal.png>
+ [168] [169]
+File: fiscal4.png Graphic file (type bmp)
+<fiscal4.png>
+ [170]
+File: dsge_data.png Graphic file (type bmp)
+<dsge_data.png>
+ [171] [172] [173]
+[174]
+File: qe.png Graphic file (type bmp)
+<qe.png>
+ [175] [176]
+第 13{} 章 13.
+[177
+
+] [178] [179] [180] [181] [182]
 第 14{} 章 14.
-[125
 
-] [126] [127] [128] [129] [130]
-第 15{} 章 15.
+LaTeX Warning: Empty bibliography on input line 5538.
 
-LaTeX Warning: Empty bibliography on input line 4031.
-
-[131
+[183
 
 ]
 附录 A.
-[132
+[184
 
 ] (./AppliedEconometrics.aux)
 
@@ -2839,7 +2942,7 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `AppliedEconometrics.out' has not changed.
-(rerunfilecheck)             Checksum: 248F5E9B19933EE8E30227C62E9B2C94;21880.
+(rerunfilecheck)             Checksum: 37D5CC1D9D6B69C4E9ABAADB37A9B9FA;24411.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                AppliedEconometrics
@@ -2850,12 +2953,12 @@ Package logreq Info: Writing requests to 'AppliedEconometrics.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 49998 strings out of 476476
- 1053660 string characters out of 5814302
- 2084875 words of memory out of 5000000
- 69511 multiletter control sequences out of 15000+600000
- 505095 words of font info for 202 fonts, out of 8000000 for 9000
+ 52435 strings out of 476476
+ 1100334 string characters out of 5814302
+ 2250796 words of memory out of 5000000
+ 71947 multiletter control sequences out of 15000+600000
+ 505103 words of font info for 203 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 107i,13n,136p,1203b,3107s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 107i,13n,136p,1635b,2299s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on AppliedEconometrics.pdf (139 pages).
+Output written on AppliedEconometrics.pdf (191 pages).

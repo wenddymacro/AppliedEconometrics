@@ -16,7 +16,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.4.3}数据来源}{4}{subsection.1.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.5}计量软件}{4}{section.1.5}%
+\contentsline {section}{\numberline {1.5}计量软件}{5}{section.1.5}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.6}进一步阅读资料}{5}{section.1.6}%
 \defcounter {refsection}{0}\relax 
@@ -184,120 +184,144 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {7.8.1}随机实验设计(the lottery design)：抓阄}{76}{subsection.7.8.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.8.2}the judge fixed effects design}{79}{subsection.7.8.2}%
+\contentsline {subsection}{\numberline {7.8.2}法官仁慈设计（Judge leniency design）}{77}{subsection.7.8.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.8.3}Bartik Shift-Share IV}{79}{subsection.7.8.3}%
+\contentsline {subsection}{\numberline {7.8.3}Bartik Shift-Share IV}{83}{subsection.7.8.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {8}事件研究}{80}{chapter.8}%
+\contentsline {chapter}{\numberline {8}双重差分(DID)}{87}{chapter.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {9}双重差分(DID)}{81}{chapter.9}%
+\contentsline {section}{\numberline {8.1}DID}{87}{section.8.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9.1}DID}{81}{section.9.1}%
+\contentsline {section}{\numberline {8.2}更多经典DID的例子}{88}{section.8.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9.2}更多经典DID的例子}{82}{section.9.2}%
+\contentsline {section}{\numberline {8.3}未处理组与平行趋势假设}{88}{section.8.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9.3}未处理组与平行趋势假设}{82}{section.9.3}%
+\contentsline {section}{\numberline {8.4}DID在Stata中的实现}{92}{section.8.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9.4}DID在Stata中的实现}{86}{section.9.4}%
+\contentsline {section}{\numberline {8.5}动态处理效应}{94}{section.8.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9.5}动态处理效应}{88}{section.9.5}%
+\contentsline {section}{\numberline {8.6}交叠DID}{101}{section.8.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9.6}交叠DID}{91}{section.9.6}%
+\contentsline {subsection}{\numberline {8.6.1}异质性处理时点下TWFE模型的问题}{101}{subsection.8.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {10}断点回归设计（RDD）}{95}{chapter.10}%
+\contentsline {subsection}{\numberline {8.6.2}事件研究与Bacon分解}{107}{subsection.8.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {10.1}断点回归估计量}{95}{section.10.1}%
+\contentsline {subsection}{\numberline {8.6.3}其它交叠DID估计量}{113}{subsection.8.6.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {10.1.1}精准断点回归}{97}{subsection.10.1.1}%
+\contentsline {chapter}{\numberline {9}断点回归设计（RDD）}{117}{chapter.9}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {10.1.2}模糊断点回归}{98}{subsection.10.1.2}%
+\contentsline {section}{\numberline {9.1}断点回归估计量}{117}{section.9.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {10.2}断点回归的规定动作}{98}{section.10.2}%
+\contentsline {subsection}{\numberline {9.1.1}精准断点回归}{119}{subsection.9.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {10.3}stata操作}{101}{section.10.3}%
+\contentsline {subsection}{\numberline {9.1.2}模糊断点回归}{120}{subsection.9.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {10.4}Kink回归设计}{104}{section.10.4}%
+\contentsline {section}{\numberline {9.2}断点回归的规定动作}{120}{section.9.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {10.5}RDpackage}{104}{section.10.5}%
+\contentsline {section}{\numberline {9.3}stata操作}{123}{section.9.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {10.6}空间断点回归}{104}{section.10.6}%
+\contentsline {section}{\numberline {9.4}RD的新进展}{127}{section.9.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {11}其他因果效应识别方法——匹配与合成控制法}{105}{chapter.11}%
+\contentsline {subsection}{\numberline {9.4.1}Kink回归设计}{127}{subsection.9.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {11.1}匹配法}{105}{section.11.1}%
+\contentsline {subsection}{\numberline {9.4.2}多断点回归设计}{130}{subsection.9.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {11.1.0.1}PSM的Stata应用演示}{107}{subsubsection.11.1.0.1}%
+\contentsline {subsubsection}{\numberline {9.4.2.1}巴西执政党的选举优势}{130}{subsubsection.9.4.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {11.2}合成控制法}{108}{section.11.2}%
+\contentsline {subsubsection}{\numberline {9.4.2.2}巴西联邦转移支付对政治腐败的影响}{131}{subsubsection.9.4.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {11.3}克服计量方法选择困难症}{116}{section.11.3}%
+\contentsline {subsubsection}{\numberline {9.4.2.3}学校基础设施修缮对教育结果的效应}{131}{subsubsection.9.4.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {12}VARs}{117}{chapter.12}%
+\contentsline {subsection}{\numberline {9.4.3}排序断点回归（Count RD）设计}{131}{subsection.9.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {13}动态随机一般均衡模型}{118}{chapter.13}%
+\contentsline {subsection}{\numberline {9.4.4}空间断点回归}{131}{subsection.9.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {13.1}静态IS-LM-PC模型}{118}{section.13.1}%
+\contentsline {subsection}{\numberline {9.4.5}DID-Kink}{132}{subsection.9.4.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {13.1.1}IS-LM模型}{118}{subsection.13.1.1}%
+\contentsline {chapter}{\numberline {10}其他因果效应识别方法——匹配与合成控制法}{133}{chapter.10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {13.1.2}IS-LM-PC模型}{120}{subsection.13.1.2}%
+\contentsline {section}{\numberline {10.1}匹配法}{133}{section.10.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {13.1.3}金融市场摩擦：IS-LM-PC-FF模型}{121}{subsection.13.1.3}%
+\contentsline {subsubsection}{\numberline {10.1.0.1}PSM的Stata应用演示}{135}{subsubsection.10.1.0.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {13.2}DSGE模型}{122}{section.13.2}%
+\contentsline {section}{\numberline {10.2}合成控制法}{136}{section.10.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {13.2.1}动态IS-LM-PC模型：三方程NK}{122}{subsection.13.2.1}%
+\contentsline {section}{\numberline {10.3}克服计量方法选择困难症}{144}{section.10.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {13.2.2}动态IS-LM-PC-FF模型：四方程宏观金融模型}{123}{subsection.13.2.2}%
+\contentsline {chapter}{\numberline {11}时间序列的自回归模型}{145}{chapter.11}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {13.2.3}非常规货币政策：五方程NK模型}{123}{subsection.13.2.3}%
+\contentsline {section}{\numberline {11.1}事件研究：反事实预测}{145}{section.11.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {13.2.4}经济周期与内生增长的互动：五方程凯恩斯主义增长模型}{124}{subsection.13.2.4}%
+\contentsline {section}{\numberline {11.2}自回归模型}{150}{section.11.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {13.3}Stata命令}{124}{section.13.3}%
+\contentsline {section}{\numberline {11.3}向量自回归模型}{154}{section.11.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {14}极简CGE：一个教学式模型}{125}{chapter.14}%
+\contentsline {subsection}{\numberline {11.3.1}VAR}{154}{subsection.11.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {14.1}导论}{125}{section.14.1}%
+\contentsline {subsection}{\numberline {11.3.2}SVAR}{156}{subsection.11.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {14.2}极简CGE：McLure and Thirsk(1975)模型}{125}{section.14.2}%
+\contentsline {chapter}{\numberline {12}动态随机一般均衡模型}{158}{chapter.12}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {14.3}税收政策的一般均衡效应：CGE应用}{127}{section.14.3}%
+\contentsline {section}{\numberline {12.1}静态IS-LM-PC模型}{158}{section.12.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {14.3.1}企业所得税}{127}{subsection.14.3.1}%
+\contentsline {subsection}{\numberline {12.1.1}IS-LM模型}{158}{subsection.12.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {14.3.2}商品税/增值税}{128}{subsection.14.3.2}%
+\contentsline {subsection}{\numberline {12.1.2}IS-LM-PC模型}{160}{subsection.12.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {14.3.3}福利效应}{130}{subsection.14.3.3}%
+\contentsline {subsection}{\numberline {12.1.3}金融市场摩擦：IS-LM-PC-FF模型}{161}{subsection.12.1.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {15}如何讲好经济学故事：经济学论文的流行形式}{131}{chapter.15}%
+\contentsline {section}{\numberline {12.2}DSGE模型}{162}{section.12.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15.1}好的想法}{131}{section.15.1}%
+\contentsline {subsection}{\numberline {12.2.1}动态IS-LM-PC模型：三方程NK}{163}{subsection.12.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15.2}标题的流行形式}{131}{section.15.2}%
+\contentsline {subsection}{\numberline {12.2.2}动态IS-LM-PC-FF模型：四方程宏观金融模型}{172}{subsection.12.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15.3}文献综述}{131}{section.15.3}%
+\contentsline {section}{\numberline {12.3}经典论文复制1：Sims, Wu and Zhang(2021, REStat)评估非常规货币政策效应}{173}{section.12.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15.4}经验特征或待检验命题}{131}{section.15.4}%
+\contentsline {section}{\numberline {12.4}经典论文复制2：Benigno and Fornaro(2018， RES)的凯恩斯主义增长模型}{175}{section.12.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {15.4.1}逻辑推演式}{131}{subsection.15.4.1}%
+\contentsline {chapter}{\numberline {13}极简CGE：一个教学式模型}{177}{chapter.13}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {15.4.2}数理模型式}{131}{subsection.15.4.2}%
+\contentsline {section}{\numberline {13.1}导论}{177}{section.13.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15.5}实证分析}{131}{section.15.5}%
+\contentsline {section}{\numberline {13.2}极简CGE：McLure and Thirsk(1975)模型}{177}{section.13.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15.6}机制/反事实的数理模拟}{131}{section.15.6}%
+\contentsline {section}{\numberline {13.3}税收政策的一般均衡效应：CGE应用}{179}{section.13.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15.7}结论与政策含义}{131}{section.15.7}%
+\contentsline {subsection}{\numberline {13.3.1}企业所得税}{179}{subsection.13.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15.8}引言}{131}{section.15.8}%
+\contentsline {subsection}{\numberline {13.3.2}商品税/增值税}{180}{subsection.13.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15.9}摘要}{131}{section.15.9}%
+\contentsline {subsection}{\numberline {13.3.3}福利效应}{182}{subsection.13.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15.10}参考文献}{131}{section.15.10}%
+\contentsline {chapter}{\numberline {14}如何讲好经济学故事：经济学论文的流行形式}{183}{chapter.14}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {15.11}附录}{131}{section.15.11}%
+\contentsline {section}{\numberline {14.1}好的想法}{183}{section.14.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}基本数学工具}{132}{appendix.A}%
+\contentsline {section}{\numberline {14.2}标题的流行形式}{183}{section.14.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}求和算子与描述统计量}{132}{section.A.1}%
+\contentsline {section}{\numberline {14.3}文献综述}{183}{section.14.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {14.4}经验特征或待检验命题}{183}{section.14.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {14.4.1}逻辑推演式}{183}{subsection.14.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {14.4.2}数理模型式}{183}{subsection.14.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {14.5}实证分析}{183}{section.14.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {14.6}机制/反事实的数理模拟}{183}{section.14.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {14.7}结论与政策含义}{183}{section.14.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {14.8}引言}{183}{section.14.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {14.9}摘要}{183}{section.14.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {14.10}参考文献}{183}{section.14.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {14.11}附录}{183}{section.14.11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {A}基本数学工具}{184}{appendix.A}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.1}求和算子与描述统计量}{184}{section.A.1}%

@@ -1,10 +1,10 @@
 \documentclass[cn,12pt,math=newtx,citestyle=gb7714-2015,bibstyle=gb7714-2015]{elegantbook}
 
 \title{应用计量经济学讲稿}
-%\subtitle{Elegant\LaTeX{} 经典之作}
+\subtitle{效傲江湖：效应评估的独孤九剑}
 
 \author{许文立}
-\institute{安徽大学经济学院、东北财经大学国民经济工程实验室(北京)\\~~~~~~~~~~~~西蒙弗雷泽大学(温哥华)、宏观经济研学会}
+\institute{安徽大学经济学院(AHU，合肥)、西蒙菲莎大学(SFU，温哥华)\\~~~~~~~~~~~~宏观经济研学会(CIMERS，武汉)、国民经济工程实验室(NEEL，北京)}
 \date{\today}
 \version{2.1}
 \bioinfo{Email}{xuweny87@hotmail.com}
@@ -67,11 +67,11 @@
 	
 	\chapter{引言}
 	
-	从经验来看，计量经济学对于老师和学生来说都是一门非常有趣的课程。\footnote{例如，许多计量微信群、计量微信公众号等等，读者基本是老师和一些对此感兴趣的高年级本科生与研究生。}因为现实世界太复杂，我们不能凭直觉判断事物（变量）之间的关系。例如，
+	从经验来看，计量经济学对于老师和学生来说都是一门非常有趣的课程，它甚至是一门受用终身的技能培训课程。\footnote{例如，许多计量微信群、计量微信公众号等等，读者基本是老师和一些对此感兴趣的高年级本科生与研究生。}因为现实世界太复杂，我们不能凭直觉判断事物（变量）之间的关系。例如，
 	
 	1、\textbf{提高香烟消费税就能有效减少抽烟吗？}
 	
-	吸烟有害健康！这句话更可能的含义是，吸烟对他人的危害。因为二手烟可能给其他人他去更加严重的健康问题。因此，吸烟是一个全球面临的公共健康问题，随处可见禁止吸烟标识。经济理论告诉我们，治理外部性的一种方法是征税。目前，中国烟草企业缴税包括：烟草税、消费税、增值税、城市维护建设税、教育费附加、进口关税、企业所得税。2015年烟草消费税从5\%提高到11\%，以期控烟。
+	吸烟有害健康！这句话更可能的含义是，吸烟对他人的危害。因为二手烟可能给其他人带去更加严重的健康问题。因此，吸烟是一个全球面临的公共健康问题，随处可见禁止吸烟标识。经济理论告诉我们，治理外部性的一种方法是征税。目前，中国烟草企业缴税包括：烟草税、消费税、增值税、城市维护建设税、教育费附加、进口关税、企业所得税。2015年烟草消费税从5\%提高到11\%，以期控烟。
 	
 	经济理论告诉我们，烟草消费税提高，烟草价格上升，从而导致烟草需求量下降。但是经济理论不能告诉我们，消费税率提高1个百分点，烟草需求量下降多少。
 	
@@ -2264,6 +2264,18 @@
 	
 	（II）构造工具变量。从这种视角出发，我们要去寻找那些引起内生解释变量变化的随机事件，从这些随机事件中剥离出X变动的外生冲击。
 	
+	“连享会”微信公众号上有一篇关于寻找工具变量的推文（\href{https://www.lianxh.cn/news/946348365bb2d.html}{秦范 (2021)}）中写道：
+	
+	工具变量要满足外生性和相关性两个条件，因此寻找工具变量也一般从满足这两个条件出发。常见的寻找工具变量一般思路如下：
+	
+	\begin{itemize}
+		\item 气候、地理等自然因素：降雨等气象因素、地势等地理条件是高度随机的，但也会影响某些经济社会过程，从而能够满足外生性和相关性；
+			\item 历史因素：过去的历史事件一般与当今的社会经济结果无关；
+			\item 生理现象：生育双胞胎等现象具有较强的随机性。
+		\item 	使用更高层级的变量作为低层级变量的工具变量：比如，研究个体金融知识与创业选择时，创业概率与金融知识存在反向因果关系，因而金融知识是内生变量。为了克服内生性，作者选用同一个社区其它居民的金融知识平均水平作为个体金融知识的工具变量。但从这一角度寻找工具变量，往往不能完全保证外生性；
+			\item 内生变量的滞后项。
+	\end{itemize}
+	
 	
 	\section{Stata命令}
 	
@@ -2348,7 +2360,7 @@
 				\end{tabular}
 				\begin{tablenotes}
 					\tiny
-					\item Standard errors in parenthesis. * p$<$0.10, ** p$<$0.05, *** p$<$0.01
+					\item 括号里为标准误，* p$<$0.10, ** p$<$0.05, *** p$<$0.01
 				\end{tablenotes}
 			\end{threeparttable}
 		\end{center}
@@ -2357,6 +2369,8 @@
 	在理解受教育年限的收入效应时，有几个问题需要特别注意：我们用城市是否有大学来作为受教育年限的IV，这就意味着我们选择的组群的行为（是否接受教育）会受到IV的影响。换言之，在总体样本中，应该会有部分学生总会去读大学，还有一部分学者就是不想去读大学，这两部分人的教育决策并不受到城市是否有大学的影响。但是，还有第三类群体——他们是否读大学仅仅只因为他们生活的城市有大学。这个时候，实际上我们挑选的研究样本仅仅是那些生活在这个有大学的城市又去读大学的这部分学生。因此，我们估计得到的教育年限对收入的效应并不是总体样本的平均处理效应（ATE），而只表达了一个局部平均处理效应（LATE）。尽管如此，我们上面估计出来的教育对收入的效应（12.4\%）仍然非常有意义，至少对于降低低收入家庭的孩子教育成本问题非常有指导价值。
 	
 	那么，一个自然的问题就出现了：为什么那些受大学影响的孩子的教育收入效应比总体效应（OLS）要大呢？（1）也许遗漏了个人能力？但是受教育越多，能力应该越大，教育收入效应应该更大才对呀。可是上面的结果恰恰相反。（2）受教育年限的测量误差导致了偏误？测量误差会让估计系数趋向于0，而2SLS可以修正这个估计结果。可是人们并不知道他们目前受教育的精确年限，因此，这种解释也很牵强。那么，到底该怎么解释这个结果对比呢？前文说过了，我们进行的工具变量回归是那些生活在有大学城市的孩子们可能会增加他们的受教育年限，这意味着大学降低了他们的边际教育成本。这就是最重要的原因，即更高的边际教育成本会降低了人们的教育投资。但是，实际上，对于这部分人来说，教育的收入效应非常大。
+	
+	What’s missing for an applied reader is more discussion and a framework on how to critique an IV – for example, he goes through the classic use of quarter of birth as an instrument for years of schooling when looking at impacts of schooling on earnings, where this would be an occasion to think talk through concerns of different types of parents being more likely to have kids at different types of the year. There is no discussion of overidentification tests and how they should be interpreted, nor of sensitivity analysis approaches that allow for some potential violations of the exclusion restriction.
 	
 	
 	\section{一些提醒}
@@ -2379,9 +2393,9 @@
 	\section{流行的IV设计}
 	\subsection{随机实验设计(the lottery design)：抓阄}
 	
-	在IV的应用中，最特别的IV可能就是随机实验。我们先来看看一个利用随机实验作为IV的例子：21世纪第一个十年，俄勒冈州的医疗补助计划。这场随机实验有两位经济学家参与其中：一位是来自Harvard的Katherine Baicker（\href{https://connects.catalyst.harvard.edu/Profiles/display/Person/40507}{个人主页}），另一位是来自MIT的Amy Finkelstein（\href{http://economics.mit.edu/faculty/afink}{个人主页}）。如果大家去看看她们的个人主页，可能就会发现，她们利用这个实验数据在QJE(2012)、AER(2014)、JPE(2019)、AEJ: EP(2021)等等发了至少7、8篇论文。
+	在IV的应用中，最特别的IV可能就是随机实验。我们先来看一个利用随机实验作为IV的例子：21世纪第一个十年，俄勒冈州的医疗补助计划。这场随机实验有两位经济学家参与其中：一位是来自Harvard的Katherine Baicker（\href{https://connects.catalyst.harvard.edu/Profiles/display/Person/40507}{个人主页}），另一位是来自MIT的Amy Finkelstein（\href{http://economics.mit.edu/faculty/afink}{个人主页}）。如果大家去看看她们的个人主页，可能就会发现，她们利用这个实验数据在QJE(2012)、AER(2014)、JPE(2019)、AEJ: EP(2021)等等发了至少7、8篇论文。
 	
-	21世纪头十年，美国俄勒冈州扩大成年人的医疗补助（Medicaid）计划。凡是19-64岁，收入小于联邦政府贫困线的成年人均可以参与该计划。这个项目被称为俄勒冈健康计划标准（OHPS）。这个计划之所以能发这么多顶刊，最重要的原因就是其具有随机实验的性质，因为俄勒冈州采用了“抓阄”的方法来登记自愿参与人。人们有五周的时间来登记参与该计划。而且参与计划的门槛非常低。然后，俄勒冈州在2008年3-10月，从85000报名者中随机抽取了30000人。这些幸运儿有机会来提交参与医疗补助计划的申请，如果申请被批准，他们需要在45天内回复确认，那些这些人的整个家庭都可以获得医疗补助。最后，只有10000人实际参加了该计划。
+	21世纪头十年，美国俄勒冈州扩大成年人的医疗补助（Medicaid）计划。凡是19-64岁，收入小于联邦政府贫困线的成年人均可以参与该计划。这个项目被称为俄勒冈健康计划标准（OHPS）。这个计划之所以能发这么多顶刊，最重要的原因就是其具有随机实验的性质，因为俄勒冈州采用了“抓阄”的方法来登记自愿参与人。人们有五周的时间来登记参与该计划。而且参与计划的门槛非常低。随后，俄勒冈州在2008年早期从90000报名者中随机抽取了30000人。这些幸运儿有机会来提交参与医疗补助计划的申请，如果申请被批准，他们需要在45天内回复确认，那些这些人的整个家庭都可以获得医疗补助。最后，只有10000人实际参加了该计划。
 	
 	这个实验的数据非常丰富(\href{https://www.nber.org/research/data/oregon-health-insurance-experiment-data}{数据集})，参与该计划的两位经济学家研究了医疗补助计划可能产生的因果效应，例如，福利效应（Finkelstein et al.，2019，JPE）、对投票率的影响（Baicker and Finkelstein，2019，QJPS）、对劳动力的影响（Baicker et al.,2014,AER）、对急诊的影响（Baicker et al., 2014,Science）、临床诊断的影响（Baicker et al., 2013, NEJM）、医疗保健使用、财务负担、低收入成年人的健康等等的影响（Finkelstein et al.，2012，QJE）。
 	
@@ -2394,113 +2408,305 @@
 		\end{aligned}
 	\end{equation}
 	
-	其中，$\text { INSURANCE }_{i h j}$表示医疗保险，$\text { LOTTERY }_{i h}$表示“抓阄”，是工具变量，$\hat{INSURANCE}_{i h}$用IV预测的医疗保险，$y_{i h j}$表示结果变量，其它都是协变量、误差项以及系数。
+	其中，$\text { INSURANCE }_{i h j}$表示医疗保险，$\text { LOTTERY }_{i h}$是一个二值变量——家庭h是否被抽取到，即“抓阄”，是工具变量，$\hat{INSURANCE}_{i h}$用IV预测的医疗保险，$y_{i h j}$表示结果变量，其它都是协变量、误差项以及系数。表示个体，j表示家庭，h表示结果类型（例如，健康、财务负担）。
 	
-	在许多领域，实验是最常用的因果效应估计方法，例如心理学和医药学。研发了一种新药，投放市场前，必须要经过临床实验检验其效力。而这种临床试验就是随机的选择一些病人来服用这种新药，而另一些病人服用无害的无效替代品（也称为“安慰剂”，这就是为什么我们经常在论文中看到“安慰剂检验”）。只有这种随机控制实验表明新药是安全有效的（可信的统计证据），新药才会投放市场。
+	下面，我们就来看看Finkelstein et al.（2012，QJE）的主要回归结果。Finkelstein et al.（2012，QJE）在文章的开头就写到：“抓阄”给我们提供了一个使用随机控制实验的框架来研究公共保险效应的机会。医疗保险的研究非常多，但是这些研究面临着一个共同的挑战：如何控制保险者和未保险者之间的不可观测的差异（Levy and Meltzer， 2008），医疗保险随机地分配给人们则可以很好的克服这个问题。Finkelstein et al.（2012，QJE）的研究比较了处理组（“抓阄”挑选的参与人）与对照组（没有参与项目的人）的结果，而且用“抓阄”来作为保险覆盖率的工具变量研究了保险覆盖率的效应。
 	
-	从目前来看，随机控制实验也是经济学中最重要的关注点，现在很多学者都“绞尽脑汁”去寻找各种政策的“随机控制实验（自然实验）”。如果你找到了，恭喜你成功了一大半了！
+	那么，为什么这个研究设计是有效的呢？
 	
-	假设我们正在进行医药试验，随机选择一部分病患服用试验药品，被称为\textbf{处理组}；另一部分病患服用无害无效的安慰剂，称为\textbf{控制组}。这样，我们就可以得到两种结果。这两种\textbf{潜在结果}的差异就是试验药品对病患的（因果）效应。
+	作者们用了一节、两个附录和一张表来详细阐述了实验设计的有效性。尤其是“抓阄”的随机性，甚至用独立的计算机模拟过程来进行验证。他们的第一阶段估计结果如表7.2所示。
 	
-	在理想实验中，处理组与控制组的病患选择完全是随机的。因此，病患个体究竟被分到哪一组或是否服用试验药品，与个体的特征或其他可能影响潜在结果的因素是完全独立的。因此，解释变量（是否服用试验药品）与扰动项不相关，即$cov(X_i,u_i)=0$。这样，无论是否有遗漏变量，都不会出现遗漏变量偏误。这就是理想实验的最大优点。
+		\begin{table}[htbp]\centering
+		\scriptsize
+		\caption{医疗保险效应的第一阶段估计结果}
+		\label{2sls_2}
+		\begin{center}
+			\begin{threeparttable}
+				\begin{tabular}{lcccccc}
+					\toprule
+					\multicolumn{1}{l}{}&
+					\multicolumn{2}{c}{\textbf{全样本}} &\multicolumn{2}{c}{\textbf{信贷报告子样本}}&\multicolumn{2}{c}{\textbf{调查问卷}}\\
+					\multicolumn{1}{c}{}&
+					\multicolumn{1}{c}{控制组均值(1)} &
+					\multicolumn{1}{c}{第一阶段(2)} &
+					\multicolumn{1}{c}{控制组均值(3)} &
+					\multicolumn{1}{c}{第一阶段(4)}&
+					\multicolumn{1}{c}{控制组均值(5)} &
+					\multicolumn{1}{c}{第一阶段(6)}\\
+					\midrule
+					Ever on Medicaid                &       0.141&       0.256***&0.135&0.255***&0.135&0.290*** \\
+					&       &     (0.0035)  &&(0.0042)&&(0.0066) \\
+					Ever on OHPS              &       0.027&       0.264***&0.028&0.264***&0.026&0.302***\\
+					&      &     (0.0029) &&(0.0036) &&(0.0055) \\
+					\# of months on Medicaid               &      1.408&      3.355***&1.352&3.366&1.509&3.943***\\
+					&       &     (0.045)  &&(0.055)&&(0.090) \\
+					On Medicaid, end of study period               &      0.106&     0.148***&0.101&0.151***&0.105&0.189***\\
+					&        &     (0.0031)  &&(0.0038)&&(0.0061) \\
+					Currently have any insurance(self-report)            &      &   &&&0.325&0.179***   \\
+					&       &     &  &&&(0.0077) \\
+					Currently have private insurance(self-report)               &       &    &&&0.128&-0.0076   \\
+					&        &    &&&&(0.0053)    \\
+					Currently on Medicaid (self-report)& &&&&0.117&0.197 ***\\
+					&       &&&&&(0.0063)\\
+					Currently on Medicaid& &&&&0.105&0.191***\\
+					&&&&&&(0.0060)\\
+				    Ever on TANF    & 0.031 & 0.011&0.028&0.0021&0.023&0.0019\\
+				    & & (0.0013)&&(0.0016)&&(0.0025)\\
+				    TANF benefits (\$) & 124 & -1.659&111&1.543&100&-4.991\\
+				    & &(5.813)&&(6.571)&&(10.884)\\
+				    Ever on food stamps & 0.606 & 0.017***&0.594&0.018***&0.622&0.023***\\
+				    &&(0.0029)&&(0.0035)&&(0.0054)\\
+				    Food stamp benefits(\$) & 1776 & 61.3***&1787&60.0***&2202&122.4***\\
+				    &&(15.0)&&(18.8)&&(33.4)\\
+				    \midrule
+				    \multicolumn{1}{l}{第一阶段IV回归}\\
+				    F statistic for IV in first stage&               &   >500 &&>500&&>500   \\
+				    N&&74922&&49980&&23741
+					\\
+				
+					\bottomrule
+				\end{tabular}
+				\begin{tablenotes}
+					\tiny
+					\item 括号里为标准误， * p$<$0.10, ** p$<$0.05, *** p$<$0.01。“第一阶段”列展示了（7.11）式第一阶段的回归系数和标准误，因变量列示在第一列。所有的回归都包含家庭规模的虚拟变量，并用家庭聚类调整标准误。(2)和(4)列的回归包含”抓阄“虚拟变量；（6）包含调查轮次虚拟变量，以及调查轮次与家庭规模两个虚拟变量的交乘项，使用调查权重。The insurance measures are taken from the Medicaid enrollment administrative data except for those labeled ‘‘self-report’’ (rows (5) through (7)) which are taken from the survey. In the survey, respondents could report various types of insurance; we define ‘‘private insurance’’ as employer or private insurance and ‘‘any insurance’’ as Medicaid, Medicare, employer, private, or other insurance. In rows (1) and (2), ‘‘ever’’ refers to enrollment ever during the study period, as defined in the text. In row (3), ‘‘\# of months’’ refers to number of months enrolled during the study period. In row (8), insurance is measured as being on Medicaid according to the state Medicaid enrollment data on the day the survey was returned. All outcomes are measured for the individual except that in row (10) (12) where TANF (food stamp) benefits measure total household benefits received over the study period. For purposes of measuring the first stage, the study period is defined as ending on September 30, 2009. For the second-stage outcomes that we analyze in the administrative data, the study period in the first stage begins with the notification date (which varies by lottery draw). For the second stage outcomes that we analyze in the survey data, the study period in the first stage begins on the first notification date (March 10, 2008).
+				\end{tablenotes}
+			\end{threeparttable}
+		\end{center}
+	\end{table}
 	
+	从表7.2的第一行的结果可以看出，全样本和信贷报告子样本的第一阶段估计量为0.26，调查问卷子样本的结果为0.29，且均在1\%水平下显著。所有的一阶段回归F统计量均大于500。
 	
-	III. 准实验或自然实验
-	
-	这项实验花费了田纳西州1200万美元。因此，实验经济学成本实在太高，对于我们普通人来说几乎不可能实施。而理想实验的\textbf{最大优势在于处理组和控制组的随机配分配}。因此，我们要紧紧抓住这个\textbf{随机性}。
-	
-	在实践中，我们通常见到的是一种非实验情形，但它又具有某些随机性。我们把这种情形称为\textbf{准实验或自然实验}。在这些自然实验情形下，对个体的处理通常是\textbf{“似乎”}是随机分配的。在我们国家，最常见的自然实验就是各种改革措施或政策的试点，例如“营改增”、“省直管县”、“开发区”等等。
-	
-	两种类型的自然实验：
-	
-	（1）个体是否受到“处理”，似乎是随机决定的。这种情形就可以利用全面的“差分估计量”来计算处理效应；
-	
-	（2）随机变动“似乎”只是部分决定了是否被处理。这个时候，因果效应就可以利用IV回归。回忆一下第七讲中构造IV的方法就是分离出与误差项无关的成分，而这种自然实验中的随机变动部分就提供了工具变量。
-	
-	下面的问题就是，我们利用随机实验来设计一个有效的工具变量。
-	
-	If there are data on both treatment actually received Xi and the initial random assignment, then the treatment effect can be estimated by instrumental variables regression. Instrumental variables estimation of the treatment effect entails the estimation of Equation (13.1)—or Equation (13.2) if there are control variables—using the initial random assignment Zi as an instrument for the treatment actually received Xi. Recall that a variable must satisfy the two conditions of instrument relevance and instrument exogeneity (Key Concept 12.3) to be a valid instrumental variable. As long as the protocol is partially followed, then the actual treatment level is partially determined by the assigned treatment level, so the instrumental variable Zi is relevant. If initial assignment is random, then Zi is distributed independently of ui (conditional on Wi, if randomization is conditional on covariates), so the instrument is exogenous. Thus in an experiment with randomly assigned treatment, partial compliance, and data on actual treatment, the original random assignment is a valid instrumental variable.
-	
-	Example 3: The effect of cardiac catheterization. Section 12.5 described the study
-by McClellan, McNeil, and Newhouse (1994), in which they used the distance from a
-heart attack patient’s home to a cardiac catheterization hospital, relative to the distance
-to a hospital lacking catheterization facilities, as an instrumental variable for
-actual treatment by cardiac catheterization. This study is a quasi-experiment with a
-variable that partially determines the treatment. The treatment itself, cardiac catheterization,
-is determined by personal characteristics of the patient and by the decision
-of the patient and doctor; however, it is also influenced by whether a nearby
-hospital is capable of performing this procedure. If the location of the patient is as-if
-randomly assigned and has no direct effect on health outcomes other than through
-its effect on the probability of catheterization, then the relative distance to a catheterization
-hospital is a valid instrumental variable.
-
-If the quasi-experiment yields a variable Zi that influences receipt of treatment, if data
-are available both on Zi and on the treatment actually received (Xi), and if Zi is as-if
-randomly assigned (perhaps after controlling for some additional variables Wi), then Zi
-is a valid instrument for Xi, and the coefficients of Equation (13.2) can be estimated using
-two stage least squares. Any control variables appearing in Equation (13.2) also appear
-as control variables in the first stage of the two stage least squares estimator of b1.
-
-In a fuzzy regression discontinuity design,
-crossing the threshold influences receipt of the treatment but is not the sole determinant.
-For example, suppose that some students whose GPA falls below the threshold
-are exempted from summer school while some whose GPA exceeds the threshold
-nevertheless attend. This situation could arise if the threshold rule is part of a more
-complicated process for determining treatment. In a fuzzy design, Xi will, in general,
-be correlated with ui in Equation (13.8). If, however, any special effect of crossing the
-threshold operates solely by increasing the probability of treatment—that is, the
-direct effect of crossing the threshold is captured by the linear term in W—then an
-instrumental variables approach is available. Specifically, let the binary variable Zi
-indicate crossing the threshold (so Zi = 1 if Wi 6 w0 and Zi = 0 if Wi Ú w0). Then
-Zt influences receipt of treatment but is uncorrelated with ui, so it is a valid instrument
-for Xi. Thus, in a fuzzy regression discontinuity design, b1 can be estimated by
-instrumental variables estimation of Equation (13.8), using as an instrument the
-binary variable indicating that Wi 6 w0.
-
-Instrument validity in quasi-experiments. An important step in evaluating a study
-that uses instrumental variables regression is careful consideration of whether the
-instrument is in fact valid. This general statement remains true in quasi-experimental
-studies in which the instrument is as-if randomly determined. As discussed in
-Chapter 12, instrument validity requires both instrument relevance and instrument
-exogeneity. Because instrument relevance can be checked using the statistical methods
-summarized in Key Concept 12.5, here we focus on the second, more judgmental
-requirement of instrument exogeneity.
-Although it might seem that a randomly assigned instrumental variable is necessarily
-exogenous, that is not so. Consider the examples of Section 13.4. In Angrist’s
-(1990) use of draft lottery numbers as an instrumental variable in studying the effect
-
-on civilian earnings of military service, the lottery numbers were, in fact, randomly
-assigned. But as Angrist (1990) points out and discusses, if a low draft number results
-in behavior aimed at avoiding the draft and that avoidance behavior subsequently
-affects civilian earnings, then a low lottery number (Zi) could be related to unobserved
-factors that determine civilian earnings (ui); that is, Zi and ui are correlated
-even though Zi is randomly assigned. As a second example, McClellan, McNeil, and
-Newhouse’s (1994) study of the effect on heart attack patients of cardiac catheterization
-treated the relative distance to a catheterization hospital as if it were randomly
-assigned. But as the authors highlight and examine, if patients who live close to a
-catheterization hospital are healthier than those who live far away (perhaps because
-of better access to medical care generally), then the relative distance to a catheterization
-hospital would be correlated with omitted variables in the error term of the
-health outcome equation. In short, just because an instrument is randomly determined
-or as-if randomly determined does not necessarily mean it is exogenous in the
-sense that corr(Zi, ui) = 0. Thus the case for exogeneity must be scrutinized closely
-even if the instrument arises from a quasi-experiment.
+	总之，在许多随机实验中，“抓阄”来随机挑选自愿参与者作为处理组。且控制组的参与者通常并不能接受处理。也就是说，只有那些可以从处理中收益的人才可能接受处理，因此，这种情形几乎总是出现正的选择偏误。如果我们用OLS比较处理组和控制组的均值，我们会获得有偏的处理效应，即使实验是随机的，但是由于非遵从特点也会导致偏误。这个时候，我们就可以利用随机“抓阄”来作为参与处理的工具变量。需要注意的是，此时估计的是局部平均处理效应（LATE）。总而言之，如果仅仅由于人们常常拒绝处理或者参与实验，我们就可以考虑使用“抓阄”这个工具变量，效果出奇地好！
 
 	
 	
-	\subsection{the judge fixed effects design}
+	\subsection{法官仁慈设计（Judge leniency design）}
+	
+	第二个流行的IV研究设计称为“法官仁慈设计”(Judge leniency design)，也被称为“法官固定效应”（Judge fixed effect，JFE）设计。因为这类研究设计最初应用于法官判案，虽然现在的研究主题已经非常广泛，但这个名字仍然沿用至今。“仁慈”设计在近几年越来越受到社会科学定量分析的追捧。
+	
+	在“法官固定效应”设计中，利用随机分配给一个法官、管理者或者其他决策者外生的任务来识别处理对结果的效应（\href{https://www.nber.org/system/files/working_papers/w25528/w25528.pdf}{Frandsen et al., 2019, NBER w25528}）。最早利用这一想法的研究是Gaudet, Harris, and John (1933)，他们指出了法官在判决案件时存在系统性差异。第一篇明确提到“法官固定效应”设计的文献是Imbens and Angrist (1994)——假设一个社会项目的申请者由两位官员筛选，且即使基于相同的评选标准，两位官员也可能存在不同的入选率。第一篇经验识别文献是Waldfogel (1995)，而正式、明确使用IV策略的文献则是Kling (2006)——监禁期限对劳动收入的影响，用同一个法官所有判决的平均监禁期限来作为某个犯罪分子实际监禁期限的工具变量。最近几年的研究已经扩展到其他研究领域：监禁期限对经济和家庭结果的效应 (Green and Winik, 2010; Loeffler, 2013; Aizer and Doyle,
+	2015; Mueller-Smith, 2015; Bhuller et al., 2016; Eren and Mocan, 2017; Arteaga, 2018; Norris et al., 2018; Bhuller et al., 2018; Dobbie et al., 2018b)、法官之间的种族偏差（Arnold et al, 2018）、拘留生产的法律和经济结果(Gupta et al., 2016; Leslie and Pope, 2017; Dobbie et al., 2018a; Stevenson,2018)、消费者破产对家庭金融负担的效应 (Dobbie and Song, 2015; Dobbie et al., 2017)，破产对企业的影响 (Chang and Schoar, 2013)、养育对孩子的影响(Doyle, 2007, 2008；Norris et al.,2020)、残疾对劳动供给、死亡率和代际福利的影响 (Maestas et al., 2013; Dahl et al., 2014; Autor et al., 2017; Black et al., 2018)、专利对创新的影响(Galasso and Schankerman, 2015; Sampat and Williams, 2015)。
+	
+	当我们在使用“法官固定效应”设计时，我们时刻记住三个主要的识别假设：
+	
+	\begin{itemize}
+		\item 独立性假设。在JFE中，独立性假设似乎总是满足的，因为管理者是随机分配各个体的。例如，法官宣判的平均严厉程度这个工具变量就很容易通过独立性检验。但是，即使法官是随机分配给罪犯，也可能存在一部分罪犯采取策略行动来应对法官的严厉程度。有许多方法可以来评价独立性：（1）检验处理前协变量的平衡性（\textcolor{red}{必做}）;(2)工具应该使用初始的法官分配，因为初始分配才是随机的，但是在许多实践研究中初始分配的数据可能并不可用，这个时候，我们就应该尝试通过对管理者/法官进行访谈来判断数据中内生分类发生的程度。
+		\item 排他性约束。这个约束更加需要注意和小心。想象一下，一个犯罪分子随机分配了一个严厉的法官，我们可以预期到罪犯可能面临更高的处罚。这并不是由于其它原因，仅仅是因为更严厉的法官会选择更严厉的惩罚，因此，影响了预期惩罚程度。面对更高的预期惩罚，辩护律师和罪犯可能决定接受较轻的有罪判罚以应对法官的严厉程度。这时候，排他性约束就不成立了——因为排他性要求工具变量仅仅通过法官的判决来影响监禁结果。
+		\item 单调性假设。在JFE中，满足单调性非常的困难。这是因为这类工具变量要求在所有罪犯之间都类似——一个法官要么总是严厉，要么总是仁慈，而不能因案而异。但是，人类太复杂了，总会或多或少存在一些差异。例如，在美国，一个法官面对黑人或者其它肤色的人时非常严厉，面对白人罪犯则很仁慈。Mueller-Smith（2015）就通过同时工具化所有可观测的判决维度的一种参数化策略来克服排他性和单调性问题。
+	\end{itemize}
+	
+	\href{https://www.nber.org/system/files/working_papers/w25528/w25528.pdf}{Frandsen et al.(2019, NBER w25528)}提出关于排他性和单调性的一个检验。由于该检验同时测试排他性和单调性，因此，当检验不通过时，我们并不能判断是哪个假设不成立。此时，只能根据我们的理论、经验等先验信息来进行argue。该检验要求：\textbf{根据法官平均的观测结果是否与法官的平均倾向函数一致}。如图7.2所示。
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=0.8\linewidth]{jfe}
+		\caption{排他性和单调性检验}
+		\label{fig:jfe}
+	\end{figure}
+	
+	\href{https://www.nber.org/system/files/working_papers/w25528/w25528.pdf}{Frandsen et al.(2019, NBER w25528)}也给出了Stata命令包testjfe。下面我们来看看stata命令：
+	
+	\begin{lstlisting}
+		* 找到testjfe命令包
+		
+		findit testjfe
+		
+		* 加载例子的数据
+		
+		use http://fmwww.bc.edu/repec/bocode/f/fake_data_for_testjfe.dta,clear
+		
+		* 命令
+		
+		testjfe y d _Ijudge*,covariates(x1-x3) generate(eyj pj fit) graph
+		
+	\end{lstlisting}
+	
+	下面，我们以Stenvenson(2018)的研究为例来看看“法官固定效应”设计的IV应用。数据和代码来源于Scott Cunningham（2021）：“Causal Inference：The Mixtape”的第七章。作者关注于美国费城——保释法官随机分配，且法官对于可负担水平下判决保释的倾向是不同的，更加严厉的法官设定更高的保释金，因此，更多的犯罪嫌疑人不能支付保释金，那么，这些嫌疑人就会持续被拘留。作者发现，随机拘留的增加会导致有罪判决可能性增加13\%。她认为这是由于犯罪分子认罪的增加所导致的。拘留也导致了监禁期限增加了42\%，非保释金费用提高41\%。
+	
+	Stenvenson(2018)的数据包含331971个观测样本，8个随机分配的保释法官。她用JIVE估计量。虽然大部分经验研究军用IV估计量，但是当存在弱工具变量和使用多个工具变量时，IV估计量会出现有限样本问题。Angrist, Imbens, and Krueger (1999)提出JIVE估计量来减轻2SLS的有限样本偏误。需要注意，JIVE也并不是完美估计量，但是，当使用多个工具变量，并存在弱工具问题时，JIVE有很多优势。
+	
+	\begin{lstlisting}
+		use https://github.com/scunning1975/mixtape/raw/master/judge_fe.dta, clear
+		
+		global judge_pre judge_pre_1 judge_pre_2 judge_pre_3 judge_pre_4     \\\    
+		judge_pre_5  judge_pre_6 judge_pre_7  judge_pre_8
+		
+		global demo black age male white 
+		
+		global off      fel mis sum F1 F2 F3 F M1 M2 M3 M 
+		
+		global prior priorCases priorWI5 prior_felChar  prior_guilt onePrior threePriors
+		
+		global control2     day day2 day3  bailDate t1 t2 t3 t4 t5 t6
+		
+		
+		* Naive OLS
+		* minimum controls
+		
+		reg guilt jail3 $control2, robust
+		
+		* maximum controls
+		
+		reg guilt jail3 possess robbery DUI1st drugSell aggAss $demo $prior $off  $control2 , robust
+		
+		
+		* First stage
+		
+		reg jail3 $judge_pre $control2, robust
+		
+		reg jail3 possess robbery DUI1st drugSell aggAss $demo $prior $off  $control2  \\\
+		 $judge_pre, robust
+		
+		
+		
+		** Instrumental variables estimation
+		* 2sls main results
+		* minimum controls
+		
+		ivregress 2sls guilt (jail3= $judge_pre) $control2, robust first
+		* maximum controls
+		
+		ivregress 2sls guilt (jail3= $judge_pre) possess robbery DUI1st drugSell  \\\ aggAss $demo $prior $off $control2 , robust first
+		
+		* JIVE main results
+		* minimum controls
+		
+		jive guilt (jail3= $judge_pre) $control2, robust
+		
+		* maximum controls
+		
+		jive guilt (jail3= $judge_pre) possess robbery DUI1st drugSell aggAss $demo \\\ 
+		$prior $off $control2 , robust
+		
+	\end{lstlisting}
+	
+	表7.3给出了估计结果。用OLS时，在控制时间，拘留对认罪没有显著影响；控制罪犯特征后，拘留会提高3\%的认罪概率。当我们使用一个二值性法官固定效应最为IV时，这个效应就变得非常大（0.15-0.21），而且在5\%水平下显著。而且我们发现用JIVE估计量，效应更大。
+	
+	
+		\begin{table}[htbp]\centering
+		\scriptsize
+		\caption{拘留对认罪的OLS和IV估计}
+		\label{2sls_3}
+		\begin{center}
+			\begin{threeparttable}
+				\begin{tabular}{lcccccc}
+					\toprule
+					\multicolumn{1}{l}{模型}&
+					\multicolumn{2}{c}{\textbf{OLS}} &\multicolumn{2}{c}{\textbf{2SLS}}&\multicolumn{2}{c}{\textbf{JIVE}}\\
+					\midrule
+					拘留                &       -0.001&       0.029***&0.151**&0.186***&0.162**&0.212*** \\
+					&   （0.002）    &     (0.002)  &（0.065）&(0.064)&（0.070）&(0.076) \\
+					N& 331,971&331,971&	331,971	&331,971&	331,971	&331,971   \\
+					平均认罪&0.49&	0.49	&0.49&	0.49&	0.49&	0.49
+					\\
+					
+					\bottomrule
+				\end{tabular}
+				\begin{tablenotes}
+					\tiny
+					\item 括号里为标准误， * p$<$0.10, ** p$<$0.05, *** p$<$0.01。First model includes controls for time; second model controls for characteristics of the defendant. Outcome is guilty plea. Heteroskedastic robust standard errors in parenthesis. 
+				\end{tablenotes}
+			\end{threeparttable}
+		\end{center}
+	\end{table}
+	
+	注意：在使用JFE设计时，我们一定要仔细考察独立性假设、排他性约束与单调性假设。关于JFE更多的研究回顾和实践指导，可以参见\href{https://blogs.worldbank.org/impactevaluations/judge-leniency-iv-designs-now-not-just-crime-studies}{Mckenzie（2019）：“Judge leniency IV designs: Now not just for Crime Studies”}。
 	
 	
 	
 	\subsection{Bartik Shift-Share IV}
 	
-	需要加强的内容：What’s missing for an applied reader is more discussion and a framework on how to critique an IV – for example, he goes through the classic use of quarter of birth as an instrument for years of schooling when looking at impacts of schooling on earnings, where this would be an occasion to think talk through concerns of different types of parents being more likely to have kids at different types of the year. There is no discussion of overidentification tests and how they should be interpreted, nor of sensitivity analysis approaches that allow for some potential violations of the exclusion restriction.
+	Bartik工具变量，也就是大家熟知的“shift-share”工具变量，得名于Bartik（1991）对区域劳动力市场的研究。但是，Goldsmith-Pinkham et al.(2020，AER)指出，最早使用该思想的研究是Perioff（1957）——产业份额可以用于预测收入水平。而且Freeman（1980）也用产业结构的变化作为劳动需求的工具变量。
+	
+	Bartik工具变量的核心思想是：用国家层面对不同行业产品需求的变动来测度区域劳动需求的变动。Goldsmith-Pinkham et al.(2020)认为，只要用内生变量的内积结构来构造工具变量，都可以称为Bartik IV。假设，我们想要估计下列回归方程：
+	
+	\begin{equation}
+		Y_{l,t} = \alpha + \delta I_{l,t} +\rho X_{l,t} + \epsilon_{l,t}
+	\end{equation}
+	
+	其中，$Y_{l,t}$表示地区l，t期的原居民工资对数，$I_{l,t}$表示t期流入地区l的移民，$X_{l,t}$是控制变量，包括地区和时间固定效应。$\delta$就是我们感兴趣的移民对原居民工资的平均处理效应。问题是，我们几乎可以肯定，移民与扰动项高度相关（Sharpe，2019）。
+	
+	Bartik工具变量就是l地区的初始移民份额与国家层面的移民增长率进行交乘。一个地区移民增长偏离国家平均增长可以被移民增长预测变量偏离国家层面平均增长所解释。而增长预测变量偏离国家层面的平均增长则是由于份额（shares）变动，因为在某一时期，国家层面的平均增长效应对于所有地区都是一样的。我们可以将Bartik工具变量定义为：
+	
+	\begin{equation}
+		B_{l,t} = \sum_{k=1}^{K} z_{l,k,t^0} m_{k,t}
+	\end{equation}
+	
+	其中，$z_{l,k,t^0}$表示来l地区自于k地区的初始$t^0$移民份额，$m_{k,t}$表示整个国家层面来自于k地的移民变动。第一项是份额（share）变量，第二项是转换（shift）变量。进入l地区的移民预测B就是每个地区流入整个国家的移民的加权平均，权重依赖于初始的移民分布。只要，我们构造了Bartik工具，我们就可以利用2SLS来估计回归——第一阶段用Bartik IV对$I_{l,t}$进行回归，然后，用预测移民$\hat{I}_{l,t}$对$Y_{l,t}$进行回归来识别出移民度原居民工资的影响。
+	
+	我们在进行IV研究时，通常要花费大量的时间精力和内容来阐述工具的排他性约束。但是，对于Bartik工具来说，论述排他性约束似乎更加的困难，这正是因为涉及到share项和shift项。目前，现有研究也有两个不同的视角——share视角和shift视角——来阐述Bartik工具的识别假设。
+	
+	\textbf{Goldsmith-Pinkham et al.(2020，AER)解释了shares视角} 。他们显示，当shifts影响第一阶段的强度时，实际上，初始shares就提供了外生变动。那么，在实践中，我们就要花费更多的时间和内容来argue为什么初始shares是外生的。
+	
+	尽管我们永远也无法证实排他性约束是否成立，但是，至少我们可以仔细考察一下外生性的可信度：
+	
+	\begin{itemize}
+		\item 我们可以考察一下解释关键变动的初始份额在初始年份与其他的干扰因素的相关程度。例如，在一个贸易研究中，我们可以看看初始时期有许多计算机制造业的地区是否也有跟更多的教育。
+		\item 由于存在许多加权工具变量，我们就可以进行过度识别检验——待检验的原假设“恒定的处理效应”，拒绝原假设意味着有一些工具是内生的。
+	\end{itemize}
+	
+	Goldsmith-Pinkham et al.(2020，AER)开发了一个Rotemberg权重的\href{https://github.com/paulgp/bartik-weight}{Stata命令包和数据}来让我们可以练习一下。
+	
+	Goldsmith-Pinkham et al.(2020)指出，他们的研究中有两个关键的假设：位置是独立的（没有空间溢出）；数据是由一系列稳态构成的。但是，Jaeger et al.（2018）对第二个假设进行了评论。我们再次考察一下移民对原居民收入的影响：
+	
+		\begin{equation}
+		Y_{l,t} = \alpha + \delta I_{l,t} +\rho X_{l,t} + \epsilon_{l,t}
+	\end{equation}
+
+    通常，我们都会关心当期因素（例如，本地需求冲击）——影响本地居民工资和移民的因素。Bartik工具变量对于本地需求冲击是外生的。然而，jaeger et al.（2018）指出，如果面对冲击时，市场需要时间调整，那么，误差项$\epsilon_{l,t}$就会包含过去移民供给冲击的一般均衡调整效应。此时，Bartik工具变量估计量就会混合短期响应（新移民导致的工资下降）和长期响应（市场调整时间内的正向移民效应）。\textbf{我们可以在回归中增加移民的滞后项来控制这些动态效应，然后，在跑Bartik工具变量回归}：
+    
+    	\begin{equation}
+    	Y_{l,t} = \alpha + \delta I_{l,t} + \delta_1 I_{l,t-1} +\rho X_{l,t} + \epsilon_{l,t}
+    \end{equation}
+	
+	此时，有两个Bartik工具变量：
+	
+		\begin{equation}
+		B_{l,t} = \sum_{k=1}^{K} z_{l,k,t^0} m_{k,t}
+	\end{equation}
+
+	\begin{equation}
+	B_{l,t-1} = \sum_{k=1}^{K} z_{l,k,t^0} m_{k,t-1}
+\end{equation}
+	
+	其中，$\delta$刻画了短期效应，$\delta_1$刻画了过去供给冲击的长期响应。
+	
+	总之，我们也要考察“调整动态”。
+	
+	
+	\textbf{第二个视角就是shifts}，这是由Borusyak, Hull, and Jaravel (2021，RES)提出的一个识别框架，并允许shares是内生的，例如，Goldsmith-Pinkham et al.(2020，AER)基于外生的shares。可以从冲击中来进行识别，因为share-shift IV回归系数可以从一个冲击水平的IV估计中获得。BHJ显示许多行业的外生独立冲击可以用来作为Bartik工具来识别因果效应，只要冲击与shares偏误无关即可。
+	
+	BHJ提供了一个简单的Share-shift IV分类。在一些情形下，使用GPSS的外生shares识别更加合适，但是还要一些情形使用shift识别方法更合适。那么，我们就需要对哪种视角的识别更合适于我们的研究进行更多的先验argue。
+	
+	Borusyak, Hull, and Jaravel (2021，RES)也开发了一套Bartik
+	工具变量回归的Stata命令包\href{https://ideas.repec.org/c/boc/bocode/s458526.html}{SSAGGREGATE}。
+	
+	\begin{lstlisting}
+		* 安装SSAGGREGATE
+		
+		ssc install ssaggregate, replace
+		
+		* 查看帮助文件
+		
+		help ssaggregate
+		
+	\end{lstlisting}
+
+这个命令可以帮助我们实施shift-share (或者 "Bartik") 研究设计，in which the instrument averages a set of shocks with unit-specific weights measuring shock exposure. For example, a regional instrument is constructed from some industry shocks averaged using local employment shares, as in Bartik (1991) and Autor, Dorn, and Hanson (2013).
+
+Based on Borusyak, Hull, and Jaravel (2021，RES), the command exploits an equivalence result. In the example of regions and locations, the regional shift-share IV coefficient can be identically obtained from a different IV regression estimated in the sample of industries. In this regression the outcome and treatment are first averaged with exposure weights to obtain industry-level aggregates; industry shocks then instrument for aggregate treatment. ssaggregate produces those industry-level aggregates.
+
+The equivalent industry-level representation is useful when identification relies on as-good-as-random assignment of industry shocks (even if local shares are endogenous)---a quasi-experimental framework that may be plausible in many applications where the number of industries is large. The industry-level regression then helps visualize the identifying variation, produce corrected standard errors, test identifying assumptions, optimally combine multiple industry-level shocks, and more (see Borusyak, Hull, and Jaravel 2021).
+
+	
+需要增加的内容：What’s missing for an applied reader is more discussion and a framework on how to critique an IV – for example, he goes through the classic use of quarter of birth as an instrument for years of schooling when looking at impacts of schooling on earnings, where this would be an occasion to think talk through concerns of different types of parents being more likely to have kids at different types of the year. There is no discussion of overidentification tests and how they should be interpreted, nor of sensitivity analysis approaches that allow for some potential violations of the exclusion restriction.
 	
 	
 	
 
 	
-	\chapter{事件研究}
+%	\chapter{事件研究」
 	
 	
 	
@@ -2748,17 +2954,17 @@ even if the instrument arises from a quasi-experiment.
 	
 	此时的你还在为展示结果而发愁吗？你还在为自己的动态处理效应结果表格太多太长而苦恼吗？你还在为结果的清晰易懂而掉头发吗？你还在为没有充分展示自己刻苦跑回归而遗憾吗？
 	
-	好消息！好消息！Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021）给出了许多可视化动态处理效应的建议，让我们清晰地、尽可能多地展示这些回归结果和有用的信息。他们建议，我们可以做两个方面的工作，再来展示动态处理效应的图。第一，展示不同时期k的累积处理效应，即k期前的所有估计系数之和$\sum{m=-G}^{k}\beta_m$。为了简化估计积累效应，可以采用处理变量的变化项来修正动态处理效应DID（8.10）。第二，为了可视化过度识别信息，我们可以画出政策影响时期外的累积处理效应，这个时候，我们就需要修正模型（8.10）来包含t期的处理会导致$t-G$前的$L_G$期和$t+M$后的$L_M$期结果都会发生变化。
+	好消息！好消息！Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021）给出了许多可视化动态处理效应的建议，让我们清晰地、尽可能多地展示这些回归结果和有用的信息。他们建议，我们可以做两个方面的工作，再来展示动态处理效应的图。第一，展示不同时期k的累积处理效应，即k期前的所有估计系数之和$\sum{m=-G}^{k}\beta_m$。为了简化估计积累效应，可以采用处理变量的变化项来修正动态处理效应DID（9.7）。第二，为了可视化过度识别信息，我们可以画出政策影响时期外的累积处理效应，这个时候，我们就需要修正模型（9.7）来包含t期的处理会导致$t-G$前的$L_G$期和$t+M$后的$L_M$期结果都会发生变化。
 	
-	因此，我们将（8.10）修正为：
+	因此，我们将（9.7）修正为：
 	
 		\begin{equation}
 		Y_{i,t} = \alpha_i + \gamma_t + \sum_{k= -G-L_G}^{M+L_M-1} \delta_k \Delta D_{i,t-k} + \delta_{M+L_M}D_{i,t-M-L_M} + \delta_{-G-L_G-1}(-D_{i,t+G+L_G}) + \phi X_{i,t} + C_{i,t} + \epsilon_{i,t}
 	\end{equation}
 	
-	其中，$\Delta$表示一阶差分算子。注意，（8.11）也可以应用于交叠DID的情形（下文会更详细的讲解），这个时候，$\Delta D_{i,t-k}$表示个体i在t期前的k期是否被处理，$(1-D_{i,t+G+L_G})$表示个体i在t期后的$G+L_G$期是否被处理，$D_{i,t-M-L_M}$表示个体i在t期前的至少$M+L_M$是否被处理。
+	其中，$\Delta$表示一阶差分算子。注意，（9.8）也可以应用于交叠DID的情形（下文会更详细的讲解），这个时候，$\Delta D_{i,t-k}$表示个体i在t期前的k期是否被处理，$(1-D_{i,t+G+L_G})$表示个体i在t期后的$G+L_G$期是否被处理，$D_{i,t-M-L_M}$表示个体i在t期前的至少$M+L_M$是否被处理。
 	
-	参数$\{\delta\}_{k=-G-L_G-1}^{k=M+L_M}$可以理解成不同时期的累积处理效应。尤其是，结合（8.10）意味着
+	参数$\{\delta\}_{k=-G-L_G-1}^{k=M+L_M}$可以理解成不同时期的累积处理效应。尤其是，结合（9.7）意味着
 	
 \begin{equation}
 \delta_k =	\begin{cases}
@@ -2770,32 +2976,140 @@ even if the instrument arises from a quasi-experiment.
 		
 我们在展示动态处理效应图时，其核心就是画出$\{k,\dot{\delta}_k\}_{k=-G-L_G-1}^{k=M+L_M}$的散点图。Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021）给出了实践操作中展示处理效应图的7点建议：
 
-\textbf{1、当估计（8.11）时，标准化$\delta_{-G-1}=0$}。
+\textbf{1、当估计（9.8）时，标准化$\delta_{-G-1}=0$}。
 
-\textbf{2、在图中加入系数$\delta_{k^\star}$的括号标签，其值为}：
+图9.6 展示了标准化$\delta_{-1}=0$的动态效应图。两张图有类似的处理前趋势。在处理时间-1后，图9.6（a）仍然显示平滑的处理前趋势，而9.6(b)则显示了“跳跃”。且图中包含了95\%的置信区间。我们标准化$\delta_{-1}=0$就可以很容易的使用置信区间来检验点假设——处理-时间趋势在时期-1和k处相同（$\delta_{-1}=\delta_k$）。例如，设定k=0，读者就能很容易地从图9.6(b)中得到结论：处理时间0处的结果发生了显著地变化。而从9.6(a)可以看出，处理时点0处的结果并没有发生显著地变化。
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[tbph]
+	\centering
+	\includegraphics[width=1\linewidth]{sug1}
+	\caption{动态效应的标准化事件-时间（建议1）\\ 图片来源于：Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021，NBER, w29170）}
+	\label{fig:sug1}
+\end{figure}
+
+
+\textbf{2、在图中加入系数$\delta_{k^\star}$的标签，其值放入一个括号中，且值为}：
 
 \begin{equation}
 	\frac{\sum_{(i,t):\Delta D_{i,t+k^\star} \neq 0}Y_{i,t}}{|(i,t):\Delta D_{i,t+k^\star} \neq 0|}
 \end{equation}
 	
+	图9.7展示了建议2的括号标签——y轴0点处。这个标签可以很容易地让读者理解估计的积累政策效应的大小。例如，图9.7(a)中系数估计量$\hat{\delta}_3$意味着第3期（相对于处理时间-1期）的政策对结果的积累效应大约为-0.73，这个效应比较适中（相对于括号标签41.94——政策变化前一期的因变量样本均值）。
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{sug2}
+		\caption{系数标签（建议2）\\ 图片来源于：Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021，NBER, w29170）}
+		\label{fig:sug2}
+	\end{figure}
 	
 	
+	\textbf{3、除了为处理时间路径的单个要素画出点置信区间外，还要为结果$\delta$的处理时间路径画一条双向sup-t置信带宽。}
 	
+	图9.8呈现了建议3的增加双向置信带宽，即在点置信区间外的线条。任何落入点置信区间外的处理时间路径的值都可以理解成统计上与对应估计量不一致，任何没有完全通过置信带宽的处理时间路径都可以理解成统计上与估计路径不一致。例如，在9.8的两张图中，用双向置信带宽，我们不能拒绝所有处理前的处理时间路径等于0。但用点置信区间，我们可以得到结论$\hat{\delta}_{-5}$是统计显著的。除非我们已经预先设定我们只对原假设——$\delta_{-5}=0$——感兴趣，否则，基于双向置信带宽的结论似乎更合理一些。
 	
-	在DID时，如果组群之间的动态处理效应都是一样的，那么，这会对DID造成什么问题吗？
+		% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{sug3}
+		\caption{双向置信带宽（建议3）\\ 图片来源于：Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021，NBER, w29170）}
+		\label{fig:sug3}
+	\end{figure}
 	
-	TBA
+		\textbf{4、在图中包含下列假设的Wald检验p值：}
+		
+		$$
+		\begin{array}{lrl}
+			H_{0}: \delta_{k}=0, & -\left(G+L_{G}+1\right) & \leq k<-G (\text{no pre-trends})\\
+			H_{0}: \delta_{M}=\delta_{M+k}, & 0 & <k \leq L_{M}  (\text{dynamics level off})
+		\end{array}
+		$$
+		
+		图9.9展示了增加两个p值，给定$L_G=0$和$L_M=1$两张图都没有拒绝待检验假设。建议4中的待检验假设的精确声明都有赖于$L_G$和$L_M$的选择。即它们控制着（9.7）式施加给（9.8）式过度识别约束的数量。实践中，对于$L_G$和$L_M$的选择采用经验规则（参考经典文献的选择）。
 	
-	此外，我们还需要特别注意几件事。
+		% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{sug4}
+		\caption{增加Wald检验p值（建议4）\\ 图片来源于：Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021，NBER, w29170）}
+		\label{fig:sug4}
+	\end{figure}
+
+	\textbf{5、设定$L_M=1$和$L_G=M+G$}
 	
-	TBA
+	设定$L_M=1$可保证检验我们的假设：过去超过M期的政策变量变化并不会改变结果。而设定$L_G=M+G$则可以使事件图“对称”，从这个意义上来说，可以检验政策可能影响结果的期限内的处理前趋势。例如，图9.9设定了M=5，G=0。
+
+
+	\textbf{6、Plot the least “wiggly” confound whose path is contained in the Wald region $CR(\delta)$ for the event-time path of the outcome. Specifically, plot  $\delta*(v*)$, where}
+		
+		\begin{equation}
+			\begin{aligned}
+				p^{*} &=\min \left\{\operatorname{dim}(v): \delta^{*}(v) \in C R(\delta)\right\} \text { and } \\
+				v^{*} &=\arg \min _{v}\left\{v_{p^{*}}^{2}: \operatorname{dim}(v)=p^{*}, \delta^{*}(v) \in C R(\delta)\right\}
+			\end{aligned}
+		\end{equation}
+	
+	Figure 9.10 illustrates Suggestion 6 by adding the path $\delta*(v*)$ to the plot in Figure 9.9. In Figure 9.10(a), the estimated event-time path is consistent with a confound that follows a very “smooth” path, close to linear in event time, that begins pre-event and simply continues post-event. We suspect that in many economic settings such confound dynamics would be considered plausible, thus suggesting that a confound can plausibly explain the entire event-time path of the outcome, and therefore that the policy might plausibly have no effect on the outcome. In Figure 9.10(b), by contrast, the estimated event-time path demands a confound with a very “wiggly” path. We suspect that in many economic settings such confound dynamics would not be considered plausible, thus suggesting that a confound cannot plausibly explain the entire event-time path of the outcome, and therefore that the policy does affect the outcome.
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{sug6}
+		\caption{增加Wald检验p值（建议6）\\ 图片来源于：Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021，NBER, w29170）}
+		\label{fig:sug6}
+	\end{figure}
+		
+			\textbf{7、如果用一个比（9.7）式更多限制的回归模型来概述效应大小，我们就应该可视化下列限制：}
+
+            1、在预期限制下估计（9.7）；
+            
+            2、用（9.9）式将（9.7）式估计量转换成积累效应；
+            
+            3、将估计的累积效应画在事件研究图上。
+
+Figure 9.11 illustrates this suggestion in a hypothetical example in which the more restrictive model assumes that the policy effect is static, i.e., that the current value of the policy affects only the current value of the outcome. Comparison of the two event-time paths provides a visualization of the fit of the more restrictive model. The uniform confidence bands permit ready visual assessment of more restrictive models. In the case shown in Figure 9.11, the more restrictive model is not included in the uniform confidence band, implying that we can reject the hypothesis that the effect of the
+policy is static. Figure 9.11 also displays the p-value from a Wald test of the more restrictive model, which also implies that the more restrictive model is rejected. The Wald test may be more powerful for testing this joint hypothesis than the test based on the sup-t bands, but its implications are harder to visualize in this setting (Olea and Plagborg-Møller 2019).
+
+
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[tbph]
+	\centering
+	\includegraphics[width=1\linewidth]{sug7}
+	\caption{评价一个模型的拟合程度（建议7）\\ 图片来源于：Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021，NBER, w29170）}
+	\label{fig:sug7}
+\end{figure}
+	
+	Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021，NBER, w29170）开发的stata命令包——xtevent来实现上述建议。
+	
+	\begin{lstlisting}
+		* 首先，找到xtevent命令包
+		
+		findit xtevent
+		
+		* 或者直接安装命令包
+		
+		ssc install xtevent, replace
+		
+	\end{lstlisting}
+	
 	
 	
 	\section{交叠DID}
 	
 	迄今为止，我们讨论的处理期都是同一时点，也就是说，对于所有的个体来说，都在同一期发生处理。但是，现实社会中，很多事件发生在不同的时点，也就是说，不同个体受到处理的时间可能不同。这个时候，我们还可以按照上面的双向固定效应（TWFE）估计量那样来理解DID估计系数吗？明确的答案：肯定不行！
 	
-	2018以来，关于交叠DID的双向固定效应的问题及其稳健估计量的论文呈现出了爆炸性的增长，如表10.3和10.4所示。这么多的论文确实把我们”炸伤“了，要跟踪这些论文，并充分学习、理解它们之间的差异，有时候真的比走蜀道还难。要知道，人们都习惯于“吃老本”，因为我们前期已经在这些老本上花了大量的时间和精力，而且对于“发论文”来说似乎也够用，因此，学习新的知识花的时间和精力成本太大，而且边际收益也是递减的。但是，做真正的研究和教学来说，学习这些最新的进展肯定是必须的，因为学生们需要老师去指引。
+	\subsection{异质性处理时点下TWFE模型的问题}
+	
+	例如，我们想研究一下武汉的大学在郊区建新校区对当地经济的影响。我们可能知道，武汉的很多大学在21世纪初（例如2003年）都在武汉江夏区建设新校区，而在2010年在武汉黄陂区建设新校区。江夏区和黄陂区都有建设大学的前后时期，但是它们的“建设”时间不同。那么，研究大学新校区对当地经济社会的影响效应有什么问题吗？
+	
+	从研究设计的角度来看，没有任何问题，我们只需要把每个2*2的组群-时间放在一起即可。但是，Goodman-Bacon(2020)指出，从统计的角度看，异质性处理时点会使得双向固定效应（TWFE）回归不再有效。甚至在一些情形下，本来大学新校区会促进当地经济社会发展，但是，我们用TWFE来估计DID估计量会得到负向效应。
+	
+	之所以会产生这样的后果，原因非常的复杂，我们在这里并不去回顾这些复杂的数学推导，如有兴趣，可以参考Baker（2019）：“\href{https://andrewcbaker.netlify.app/2019/09/25/difference-in-differences-methodology/}{Difference-in-Differences Methodology}”、Callaway and Sant’Anna（2020）：“\href{https://cran.r-project.org/web/packages/did/vignettes/multi-period-did.html}{Introduction to DiD with Multiple Time Periods}”。总而言之，多期异质性处理时点的TWFE会将已经处理的组群作为控制组，这就会使得处理前的平行趋势不再满足。（1）如果效应本身就具有动态性，或者处理效应在组群间变动，那么，我们设定的回归不满足平行趋势。（2）如果处理效应会随着时间而增强，那么，“处理的控制组”会具有向上变动的趋势，而“刚刚受到处理”的组群则没有这个趋势，因此，平行趋势不成立，识别失败。正如Sun and Abraham (2020)指出：不同时期的效应会彼此交叠和影响。这也是被称为“交叠DID”的原因。
+	
+		2018以来，关于交叠DID的双向固定效应的问题及其稳健估计量的论文呈现出了爆炸性的增长，如表9.2和9.3所示（更多关于DID的进展信息，参见\href{https://asjadnaqvi.github.io/DiD/}{Asjad Naqvi的DID主页}）。这么多的论文确实把我们”炸伤“了，要跟踪这些论文，并充分学习、理解它们之间的差异，有时候真的比走蜀道还难。要知道，人们都习惯于“吃老本”，因为我们前期已经在这些老本上花了大量的时间和精力，而且对于“发论文”来说似乎也够用，因此，学习新的知识花的时间和精力成本太大，而且边际收益也是递减的。但是，做真正的研究和教学来说，学习这些最新的进展肯定是必须的，因为学生们需要老师去指引。
 	
 	下面，我们就带大家来学习一下交叠DID估计。我们忽略那些“艰涩难懂”的数学与统计细节，更多关注于这些最新的稳健DID估计量的直观含义与Stata操作。
 	
@@ -2823,7 +3137,7 @@ even if the instrument arises from a quasi-experiment.
 			
 			drdid &	ssc install drdid, replace& \tabincell{c}{ Pedro H.C. Sant'Anna ,\\ Jun Zhao (2020).\\ Doubly robust\\ difference-in-\\differences estimators, \\Journal of Econometrics.}\\
 			\hline
-		
+			
 			
 		\end{longtable}
 	\end{table}
@@ -2836,28 +3150,315 @@ even if the instrument arises from a quasi-experiment.
 			\hline
 			Stata包&安装  & 参考文献 \\
 			\hline
-	
-		csdid &	ssc install csdid, replace& \tabincell{c}{Brantly Callaway, \\Pedro H.C. Sant'Anna  \\(2020).\\ Difference-in-\\Differences with multiple \\time periods, \\Journal of Econometrics.}\\
-	\hline
-	flexpaneldid &	ssc install flexpaneldid, replace&\tabincell{c}{Antje Weyh\\	Eva Dettmann, \\Alexander Giebler,\\ Antje Weyh (2020).\\ Flexpaneldid: A \\Stata Toolbox \\for Causal Analysis \\with Varying Treatment \\Time and Duration. \\IWH Discussion Papers \\No. 3/2020} \\
-	\hline
-	
-	xtevent	& ssc install xtevent, replace&\tabincell{c}{Simon Freyaldenhoven, \\Christian Hansen, \\Jesse M. Shapiro\\ (2019). Pre-event \\Trends in the Panel \\Event-Study Design.\\ American Economic\\ Review.}\\
-	\hline
-	did2s&	ssc install did2s, replace	& \tabincell{c}{John Gardner (2021). \\Two-stage differences \\in differences.}\\
-	\hline
-	stackedev &	github install joshbleiberg/stackedev&  \tabincell{c}{Doruk Cengiz , \\Arindrajit Dube , \\Attila Lindner,\\ Ben Zipperer  (2019). \\The effect of minimum \\wages on low-wage\\ jobs. The Quarterly \\Journal of Economics.} \\
-	\hline
-	
-	eventdd	&ssc install eventdd, replace&	 \tabincell{c}{Damian Clarke,\\ Kathya Tapia (2020). \\Implementing the Panel \\Event Study.}\\
-	\hline
-	staggered\_stata&	github install jonathandroth/staggered\_stata&	 \tabincell{c}{Jonathan Roth , \\Pedro H.C. Sant'Anna  \\(2021). Efficient\\ Estimation for Staggered \\Rollout Designs} \\
-	\hline
 			
-\end{longtable}
-\end{table}
+			csdid &	ssc install csdid, replace& \tabincell{c}{Brantly Callaway, \\Pedro H.C. Sant'Anna  \\(2020).\\ Difference-in-\\Differences with multiple \\time periods, \\Journal of Econometrics.}\\
+			\hline
+			flexpaneldid &	ssc install flexpaneldid, replace&\tabincell{c}{Antje Weyh\\	Eva Dettmann, \\Alexander Giebler,\\ Antje Weyh (2020).\\ Flexpaneldid: A \\Stata Toolbox \\for Causal Analysis \\with Varying Treatment \\Time and Duration. \\IWH Discussion Papers \\No. 3/2020} \\
+			\hline
+			
+			xtevent	& ssc install xtevent, replace&\tabincell{c}{Simon Freyaldenhoven, \\Christian Hansen, \\Jesse M. Shapiro\\ (2019). Pre-event \\Trends in the Panel \\Event-Study Design.\\ American Economic\\ Review.}\\
+			\hline
+			did2s&	ssc install did2s, replace	& \tabincell{c}{John Gardner (2021). \\Two-stage differences \\in differences.}\\
+			\hline
+			stackedev &	github install joshbleiberg/stackedev&  \tabincell{c}{Doruk Cengiz , \\Arindrajit Dube , \\Attila Lindner,\\ Ben Zipperer  (2019). \\The effect of minimum \\wages on low-wage\\ jobs. The Quarterly \\Journal of Economics.} \\
+			\hline
+			
+			eventdd	&ssc install eventdd, replace&	 \tabincell{c}{Damian Clarke,\\ Kathya Tapia (2020). \\Implementing the Panel \\Event Study.}\\
+			\hline
+			staggered\_stata&	github install jonathandroth/staggered\_stata&	 \tabincell{c}{Jonathan Roth , \\Pedro H.C. Sant'Anna  \\(2021). Efficient\\ Estimation for Staggered \\Rollout Designs} \\
+			\hline
+			
+		\end{longtable}
+	\end{table}
 	
-	所有稳健DiD 估计量都专注于通过避免使用已处理的个体作为对照组，来估计处理组的处理效应。然而，要避免使用已处理组作为对照组，就需要引入样本选择，因此，我们必须要解释它。交叠DID估计的作者们分别采用不同的策略来实现这一点，其中大多数策略涉及通过基于估计子样本的 ATT 来加权得到整体 ATT，例如，组群-时间 ATT 或估计组群处理效应本身。Scott Cunningham（2021）将这些稳健DID估计器分为以下类别：
+	
+	Goodman-Bacon（2020）指出，\textbf{TWFE估计量实际上是所有可能的$2 \times 2$DID估计量的加权平均}。其权重与组群规模和每一对$2 \times 2$处理指标的方差成一定比例——面板数据中间处理的单元有最高的权重。他还推导了，有 一些$2 \times 2$DID估计量用特定时点处理的组群作为处理组，而从未处理的组群作为控制组，另一些$2 \times 2$DID估计量则用两个不同时点处理的组群——处理开始前，后一次处理的组群作为控制组，而处理开始后，前一次处理的组群作为控制组。因此，当处理效应不随时间变化时，$2 \times 2$DID估计量就是组间处理效应（以方差为权重）加权平均，且所有权重都为正。但是，当处理效应随时间变化时，有一些$2 \times 2$DID估计量就会出现负的权重。这是因为已经处理的组群被当作了控制组，其随时间变化的处理效应的比重会发生变化，但TWFE-DID估计量忽略了这一点。
+	
+	下面，我们还是来思考一下武汉的大学去郊区建设新校区对当地经济社会发展产生的效应：江夏区从2003年开始建设新校区，黄陂区从2010年开始建设新校区。假设我们有1998-2019年武汉两个郊区经济社会发展数据。这个数据集允许我们比较两个不同的DID：
+	
+	第一，我们关注于1998-2010年，如图9.12左图所示。在这一段时期，黄陂区从未建设大学新校区，而江夏区在2003年“被处理”了，因此，我们可以将黄陂区作为对照组，将江夏区作为处理组来估计大学新校区对经济社会发展的影响。
+	
+	第二，我们也可以关注2003-2019年，如图9.12右图所示。这一时期，江夏新建大学校区的状态并为发生变化，而黄陂区咋2010年有了新校区。因此，可以将江夏作为对照组，黄陂区作为处理组来估计大学新校区对经济社会发展的响应。
+	
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{GB_decom}
+		\caption{Goodman-Bacon分解}
+		\label{fig:GB_decom}
+	\end{figure}
+	
+	Goodman-Bacon(2020)显示，所有交叠DID的TWFE估计量都可以按照图9.12的方式进行分解：（1）先处理的组群（江夏）与后处理的组群（黄陂）在处理前时期的差分；（2）先处理的组群（江夏）在处理后时期与后处理组群（黄陂）的差分；（3）不同处理时点的组群与从未处理组群（如果存在）的差分。因此，他提出用三种差分的加权平均来作为交叠DID估计量。因此，TWFE的DID估计量只有在不随时间变化的同质处理效应情形下才适用，而在交叠处理时点情形，还采用其它方法。
+	
+	据此，更加突出，在做DID之前一定要检验面板数据的平行趋势是否成立。当遇到交叠处理时点时，我们要修正画平行趋势图的方法——重新寻找中心处理点，并堆叠所有可能的$2 \times 2$DID。关键点在于识别同时依赖于处理前后的共同趋势。由于我们要重新加权平均这$2 \times 2$DID估计量，因此，有一些组群不满足共同趋势假设的情况比另一些组群要更严重。好吧！优陷入死胡同了？没有！Goodman-Bacon（2020）也提出了一个检验——方差加权的共同趋势——来评价所有观测到的偏离的严重程度：分解并画出$2 \times 2$DID估计量的变动。Stata命令包为\textbf{bacondecomp}：
+	
+	\begin{lstlisting}
+		* 安装bacon分解包
+		
+		ssc install bacondecomp, replace
+		
+		* 加载Stevenson and Wolfers' (2006)关于无过错离婚改革对女性自杀效应的数据
+		
+		use http://pped.org/bacon_example.dta
+		
+		* 声明面板数据
+		
+		xtset stfips year
+		
+		* 估计双向固定效应TWFE
+		
+		xtreg asmrs post pcinc asmrh cases i.year, fe robust
+		
+		* Goodman-Bacon (2020)的DID分解应用于上述TWFE模型
+		
+		bacondecomp asmrs post pcinc asmrh cases, stub(Bacon_) robust
+		
+		* 显示详细的分解信息
+		
+		bacondecomp asmrs post pcinc asmrh cases, ddetail
+		
+		
+	\end{lstlisting}
+	
+    下面，我们用来自于bacondecomp包的案例和数据来说明一下Goodman-Bacon(2020)的DID分解：Stevenson and Wolfers' (2006)研究了无过错离婚改革对女性自杀的影响。图9.13展示了Goodman-Bacon分解的结果。红色的水平线表示DID估计量（-3.08）——y轴值乘以x轴的权重。三角点表示一个时变的组群作为处理组，1964年改革前的组群作为对照组。叉叉点表示一个时变处理的组群作为处理组，非改革组群作为对照组。
+	
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{GB_decomp_example}
+		\caption{无过错离婚改革的效应：Goodman-Bacon分解}
+		\label{fig:GB_decomp_example}
+	\end{figure}
+	
+\subsection{事件研究与Bacon分解}
+
+
+    Goodman-Bacon(2020)建议在异质性处理时点情形下，使用事件研究设计。下面，我们跟随Cheng and Hoekstra(2013)来看看事件研究和Bacon分解的用法。他们评估了美国枪支改革对暴力的影响。2012年2月26日，在美国佛罗里达的斯坦福，乔治.齐默尔曼开枪杀死了年仅17岁的非裔美国人本杰明.马丁。马丁从便利店回家，齐默尔曼尾随了很长一段路，并向警察报警说马丁行为很诡异，警察劝齐默尔曼离开。但齐默尔曼并未听警察的劝告，并在跟踪马丁的过程中激怒了马丁，两个人起了激烈的冲突。最终，齐默尔曼开枪杀死了马丁。齐默尔曼认为自己是正当防卫，并提出无罪辩护。陪审团也释放了他。
+    
+    陪审团认为齐默尔曼的行为是合法的，因为在2005年，佛罗里达改革规定了致命性正当防卫的使用情形。以前，致命性正当防卫只在家里使用才是合法的，但一部新的法律SYG将上述情形扩展到了公共区域。在2000-2010年间，美国21个州进行了类似的致命性正当防卫的范围。这些改革之后，只要人们感觉到危险，他们都可以使用致命性正当防卫来进行反击。甚至在一些州，只要人们感觉害怕就可以使用暴力回击。因此，检察官要起诉，就要证明“害怕”的感觉不合理，这几乎是不可能证明的。
+    
+    从经济学的视角来看，这些改革降低了开枪杀人的成本。人们能用致命性正当防卫来仅仅只是让自己害怕的感觉消失。因此，我们可以预期到对于可能的受害人来说，致命性暴力行为会增加。换言之，美国的枪支改革会导致故意暴力犯罪的上升。对于美国人来说，这是一场悲剧，但是官方统计数据并没有显示暴力犯罪的增加。Cheng and Hoekstra(2013)用DID研究设计来估计枪支改革对暴力犯罪的效应，致命性正当防卫使用条件的变化是处理变量，不同的州在不同的时点进行了这项改革。回归方程为：
+    
+    \begin{equation}
+    	Y_{i,t} = \alpha +\delta D_{i,t} +\gamma X_{i,t} +\sigma_{i} +\tau_t +\epsilon_{i,t}
+    \end{equation}
+
+    其中，$D_{i,t} $是处理变量，通常来说，它要么是0，要么是1。但是Cheng and Hoekstra(2013)让D是0-1之间的数，因为有一些州在年中实施了改革。因此，如果改革在7月实施，那么，在实施年之前的时期，D为0，在实施年，D为0.5，在实施年之后的时期，D为1。为了讨论事件研究和Bacon分解，我们还是使用传统的虚拟变量设定，即D要么为0，要么为1。
+
+    该例子的数据和stata代码来源于Scott Cunningham(2021):"Cause Inference: The Mixtape"第9章。
+    
+    \begin{lstlisting}
+    	* 加载数据
+    	
+    	use /Users/xuwenli/OneDrive/DSGE建模及软件编程/教学大纲与讲稿/应用计量经济学讲稿/应用计量经济学讲稿与code/data/mixtape/castle.dta, replace
+    	
+    	* 设立默认使用的图形，名称为cleanplots
+    	
+    	set scheme cleanplots
+    	
+    	* 安装bacondecomp包
+    	* 定义全局宏名称
+    	global crime1 jhcitizen_c jhpolice_c murder homicide  robbery assault burglary larceny motor robbery_gun_r 
+    	
+    	global demo blackm_15_24 whitem_15_24 blackm_25_44 whitem_25_44     //人口特征
+    	
+    	global lintrend trend_1-trend_51     //州线性趋势
+    	
+    	global region r20001-r20104           //区域-季度固定效应
+    	
+    	global exocrime l_larceny l_motor       // 外生犯罪率
+    	
+    	global spending l_exp_subsidy l_exp_pubwelfare
+    	
+    	global xvar l_police unemployrt poverty l_income l_prisoner l_lagprisoner $demo $spending
+    	
+    	* 用改革是否生效的虚拟变量，cdl
+    	
+    	 xi: xtreg l_homicide i.year $region $xvar $lintrend cdl [aweight=popwt], fe vce(cluster sid)
+    	
+    	* 设定变量post的标签
+    	
+    	label variable post "Year of treatment"
+    	
+    	* 用处理年份的虚拟变量，post
+    	
+    	xi: xtreg l_homicide i.year $region $xvar $lintrend post [aweight=popwt], fe vce(cluster sid)
+    	
+    	
+    	
+    \end{lstlisting}
+
+结果如表9.6第二列所示，我们可以看到，枪支改革（致命性防卫法案是否生效）会导致杀人犯罪升高10\%，且在5\%的水平下显著。当我们使用处理时间虚拟变量post时，改革效应为7.7\%，在5\%的水平下显著。
+
+下面，我们来看看事件研究回归。首先，我们定义处理前的时期leads和处理后的时期lags。用“time\_til”变量来表示地区受到处理的时期和之后的时期。用这个变量可以创建leads变量（处理前的时期数）和lags变量（处理后的时期数）。
+
+Stata命令为：
+
+\begin{lstlisting}
+	* 事件研究回归的处理年(lag0)作为忽略的类别
+	
+	xi: xtreg l_homicide  i.year $region lead9 lead8 lead7 lead6 lead5 lead4 lead3 lead2 lead1 lag1-lag5 [aweight=popwt], fe vce(cluster sid)
+	
+\end{lstlisting}
+
+结果展示在表9.6的第三列。由于忽略了处理年lag0，因此，其系数也忽略。我们可以从结果看出，处理前的所有时期系数均不显著，除了leads8和leads9，这可能是因为处理前8年只有3个州，处理前9年只有1个州。处理前1-6年的估计系数接近0，但统计上不显著。另一方面，处理后的时期估计系数均为正，且均在10\%的水平下显著。
+
+	\begin{table}[htbp]\centering
+	\scriptsize
+	\caption{美国枪支改革(cdl)对暴力犯罪的影响}
+	\label{DID_1}
+	\begin{center}
+		\begin{threeparttable}
+			\begin{tabular}{l*{2}{c}}
+				\toprule
+				\multicolumn{1}{l}{\textbf{因变量}}&
+				\multicolumn{2}{c}{\textbf{l\_homicides}}\\
+				\multicolumn{1}{c}{}&
+				\multicolumn{1}{c}{OLS}&
+				\multicolumn{1}{c}{事件研究}\\
+				\midrule
+				cdl                &       0.100**&      \\
+				&    (0.0388)    &       \\
+				post              &       0.077***&      \\
+				&     (0.0339)  &      \\
+				lead9& &-0.261*** \\
+				&  & (0.0450) \\
+				lead8 && -0.304***\\
+				 && (0.0816)\\
+				lead7 &&-0.137\\
+				&&  (0 .0863)\\
+				lead6 &&0.009 \\
+				&&(0.0596)   \\
+				lead5 &&0.005   \\
+				&&(0.0470)   \\
+				lead4 &&-0.004  \\
+				&&(0 .0466)    \\
+				lead3&&0.012  \\
+				&&(0.0349)     \\
+				lead2 && 0.019  \\
+				&&(0.0311)    \\
+				lead1 &&   -0.026  \\
+				&& (0.0330)   \\
+				lag1 && 0.078***  \\
+				&& (0.0281)    \\
+				lag2&&  0.082*  \\
+				&& (0.0453)    \\
+				lag3 &&  0.105* \\
+				&& (0.0530)    \\
+				lag4 && 0 .079  \\
+				&& (0.0589)    \\
+				lag5  && 0 .172*** \\
+				&&(0.0560)\\
+				
+				\\
+				\midrule
+				N                   &       550   &       550   \\
+				\bottomrule
+			\end{tabular}
+			\begin{tablenotes}
+				\tiny
+				\item 括号里为标准误，* p$<$0.10, ** p$<$0.05, *** p$<$0.01
+			\end{tablenotes}
+		\end{threeparttable}
+	\end{center}
+\end{table}
+
+    
+    下面，我们画出事件研究的结果。首先，我们安装一个stata程序包coefplot，也可以使用另一个程序包xtevent。
+    
+    \begin{lstlisting}
+        * 安装画图程序包coefplot
+        
+    	ssc install coefplot
+        
+        * 用coefplot来画出事件研究系数
+        
+    	coefplot, keep(lead9 lead8 lead7 lead6 lead5 lead4 lead3 lead2 lead1 lag1 lag2 lag3 lag4 lag5) xlabel(, angle(vertical)) yline(0) xline(9.5) vertical msymbol(D) mfcolor(white) ciopts(lwidth(*3) lcolor(*.6)) mlabel format(%9.3f) mlabposition(12) mlabgap(*2) title(Log Murder Rate) 
+    	
+    \end{lstlisting}
+    
+    从图9.14的事件研究图中可以清晰地看出，处理前的8-9年，改革的州杀人率的水平显著的低，但是这两年改革州的数量非常少，所以我们可以忽略这个负向效应，因为如此少的样本会得到过高的拒绝率（MacKinnon and Webb，2017）。的确，将注意力转移至处理前6年，改革州和控制组并没有差异。但是改革后，杀人率对数上升了，这与表9.6的post虚拟变量得到的结果一致，而且处理后的估计效应几乎恒定。
+    
+    % TODO: \usepackage{graphicx} required
+    \begin{figure}[tbph]
+    	\centering
+    	\includegraphics[width=1\linewidth]{event_study_plot}
+    	\caption{美国枪支改革的效应：事件研究图}
+    	\label{fig:event_study_plot}
+    \end{figure}
+    
+    我们知道交叠DID设计中的TWFE估计量存在将已处理的组群作为对照组。下面，我们用\textbf{Goodman-Bacon分解}来看看这个问题发生的频率。Bacon分解用二值处理变量，所以还是使用post虚拟变量来跑回归。下面演示的bacon分解没有协变量（注意：Bacon分解是可以带协变量的）。此外，我们使用stata，还要从Thomas Goldring的主页下载ddtiming。
+    
+    \begin{lstlisting}
+    	
+    	* 定义全局宏变量
+    	
+    	global law cdl  
+    	
+    	* Bacon分解
+    	* 加载ddtiming
+    	
+    	net install ddtiming, from(https://tgoldring.com/code/)
+    	
+    	areg l_homicide post i.year, a(sid) robust
+    	
+    	ddtiming l_homicide post, i(sid) t(year)
+    	
+    \end{lstlisting}
+    
+    美国枪支改革效应的DID估计量和Bacon分解如表9.7所示。我们将权重乘以对应的DID估计量，然后加权平均：
+    
+    $$(0.077 \times (-0.029)) + (0.024 \times 0.046) + (0.899 \times 0.078) = 0.069$$
+    
+    由此可以看出，双向固定效应的DID估计量确实是所有可能的$2 \times 2$DID估计量的加权平均。而且，我们从Bacon分解可以清晰地看出，TWFE的DID估计量大部分来自于处理组与从未处理的对照组的差分估计量（估计效应为0.078，权重为0.899）。不同处理时点的处理组与对照组的差分估计量对最后的结果权重非常小，但确实会产生影响。
+    
+    	\begin{table}[htbp]\centering
+    	\scriptsize
+    	\caption{美国枪支改革(cdl)对暴力犯罪影响的Bacon分解}
+    	\label{DID_2}
+    	\begin{center}
+    		\begin{threeparttable}
+    			\begin{tabular}{l*{2}{c}}
+    				\toprule
+    				\multicolumn{1}{l}{\textbf{自变量}}&
+    				\multicolumn{2}{c}{\textbf{杀人犯罪率的对数}}\\
+    				\multicolumn{1}{c}{DID估计量(post)}&
+    				\multicolumn{2}{c}{0.069**} \\
+    				\multicolumn{1}{c}{}& 
+    				\multicolumn{2}{c}{(0.034)}\\
+    				\midrule
+    				\textbf{Bacon分解} &权重&平均DID估计量\\
+    				早期处理组 vs 后期对照组               &      0.077&-0.029      \\
+    				后期处理组 vs 早期对照组 &   0.024   &    0.046   \\
+    				处理组 vs 从未处理的对照组        &     0.899&0.078      \\
+    				
+    				\\
+    				\bottomrule
+    			\end{tabular}
+    			\begin{tablenotes}
+    				\tiny
+    				\item 括号里为标准误，* p$<$0.10, ** p$<$0.05, *** p$<$0.01
+    			\end{tablenotes}
+    		\end{threeparttable}
+    	\end{center}
+    \end{table}
+    
+    下面，我们来看Bacon分解的权重图，如图9.15所示。图中每一个点都代表一个$2 \times 2$DID配对。横轴表示权重，纵轴表示$2 \times 2$DID估计量。红色线条表示最终的TWFE的DID估计量。
+    
+    
+     % TODO: \usepackage{graphicx} required
+    \begin{figure}[tbph]
+    	\centering
+    	\includegraphics[width=1\linewidth]{cdl_bacon_decomp}
+    	\caption{美国枪支改革的效应：Bacon分解图}
+    	\label{fig:cdl_bacon_decomp}
+    \end{figure}
+    
+    \subsection{其它交叠DID估计量}
+    
+	正如上文所述，2018年后，为了修正异质性处理时点的TWFE估计量的问题，许多学者都提出了一定程度的修正估计量，有一些文献已经在2020年JoE上发表，更多的文献也可以参见【\href{https://asjadnaqvi.github.io/DiD}{DID最新进展}和\href{https://christinecai.github.io/PublicGoods/applied_micro_methods.pdf}{DID最新文献合集}】。所有稳健DiD 估计量都专注于通过避免使用已处理的个体作为对照组，来估计处理组的处理效应。然而，要避免使用已处理组作为对照组，就需要引入样本选择，因此，我们必须要解释它。交叠DID估计的作者们分别采用不同的策略来实现这一点，其中大多数策略涉及通过基于估计子样本的 ATT 来加权得到整体 ATT，例如，组群-时间 ATT 或估计组群处理效应本身。Scott Cunningham（2021）将这些稳健DID估计量分为以下类别：
 	
 	\begin{itemize}
 		\item [1] 加权组群-时间的ATT
@@ -2866,17 +3467,105 @@ even if the instrument arises from a quasi-experiment.
 	\end{itemize}
 	
 	
-	Callaway and Sant'Anna (2020)和Sun and Abraham (2020) 就是采用的加权组群-时间的ATT。这两个估计量是彼此的嵌套的，这使它们“感觉”更有可能是“正确”的方法。而且已经有Stata包可以得到这类估计量，见表10.3和10.4。
+	Callaway and Sant'Anna (2020)就是采用的加权组群-时间的ATT。Callaway and Sant'Anna (2020)所做的事情就是，估计我们的样本数据中所有“好”的$2 \times 2$DID组群-时间配对。这个过程非常的耗费时间，因为$2 \times 2$DID的数量会随着组群数量和时期数量递增。例如，我们的样本数据有5个组群（不同时间接受处理）和10个时期，那么，我们用CS（2020）方法就要估计50个不同的ATTs。只要我们获得所有单个ATT估计量，我们就可以根据组群，时期，事件类型等等来平均这些ATT以获得最终的交叠DID估计量。此外，Sun and Abraham (2020) 估计量与CS类似，这两个估计量是彼此的嵌套的。这个加权平均的过程使它们“感觉”更有可能是“正确”的方法。而且已经有Stata包可以得到这类估计量，见表9.2和9.3。
 	
 	但是，使用从不或尚未处理的组群作为对照组来加权 ATT 并不是解决交叠处理的唯一方法。例如，堆叠（Stacking ）也是可行的替代方案。堆叠是通过将数据集重组为相对事件时间，而不是日历时间，将时序差分问题重新转换为两个组群的研究设计，从而解决了该问题。这样做是因为两组设计实际上不会遇到交叠处理TWFE 的问题。一旦数据被重建为相对事件时间的平衡面板，其中处理以相同的“相对处理日期”为中心，然后可以估计传统的 TWFE 模型——控制组群和时间固定效应，以得到处理效应的加权平均值。因此，与堆叠法最相关的文章是Cengiz  et al.（2019）。当然，还有其它文献。
 	
-	第三种方法是一种估算方法，它在一个多步骤过程中估计缺失的反事实，该过程利用平行趋势假设对未处理组群中的动态效应。这方面的文献是Borusyak、Jaravel and Spiess（2021 ）及其插补估计量。尽管在很多方面，Athey et al.（2021）关于使用面板数据完成矩阵的文章也是用了类似的方法，但在技术上，他们不是 DiD 估计量，而是合成控制估计量。
+	第三种方法是一种估算方法，它在一个多步骤过程中估计缺失的反事实，该过程利用平行趋势假设估计未处理组群中的动态效应。这方面的文献是Borusyak、Jaravel and Spiess（2021 ）及其插补估计量。尽管在很多方面，Athey et al.（2021）关于使用面板数据完成矩阵的文章也是用了类似的方法，但在技术上，他们不是 DID 估计量，而是合成控制估计量。
 	
 	此外，今年的一篇NBER工作论文中，Gardner （2021）提出了一个两阶段DID估计量，它应该介于上述三类方法之间。从技术上讲，Gardner 确实从一个相同的加权组群时间 ATT 的目标参数开始，将其与 Callaway and Sant'Anna (2020) 等放在一起。但它不会使用双重稳健方法或逆概率权重来估计整体 ATT。相反，正如他所说的那样，两阶段DID (2sDiD) 最终将是我们最熟悉的双向固定效应 (TWFE) 回归的解决方案的一种扩展，如堆叠。但它也是一个多步骤过程，仅使用控制组来估计拟合值，这使它与 Borusyak、Jaravel and Spiess（2021）的插补方法比较类似。
 	
+	Borusyak、Jaravel and Spiess（2021 ）和Gardner （2021）都采用多步骤来规避“已处理”组群进入控制组的的问题。即：
 	
+	\begin{itemize}
+		\item 第一步，用还未处理的观测样本来识别潜在结果（假设没有发生处理效应）：
+		$$y_{i,t} = \alpha_i +\alpha_t +e_{i,t}$$
+		\item 第二步，得到个体水平的处理（处理结果下的观测值与未处理结果下的预测值之间的差分）：
+		$$y_{i,t} = \hat{\alpha}_i - \hat{\alpha}_t = ATT_{i,t}$$
+	\end{itemize}
 	
+	第二步要求加总，我们可以按照感兴趣的一些组群来平均所有的$ATT_{i,t}$。此外，Gardner(2021)用GMM来估计该模型，而BJS(2021)用了其它方法来得到矫正的标准误。
 	
+	表9.2和9.3也列示了除Bacon分解外的其它11种用Stata估计的交叠DID程序包。为了更好地教学演示，在本讲稿伴随的stata dofile中，我修正了\href{https://github.com/pietrosantoleri/staggered_did}{Pietro Santoleri在github上分享的可以估计7种不同交叠DID 估计量（包括OLS估计量）的dofile}。也就是说，我扩展了\href{https://github.com/pietrosantoleri/staggered_did}{Kirill Borusyak、David Burgherr和Pietro Santoleri的dofile}，用模拟数据集来估计表9.2和9.3中的11种估计量，并画出事件研究估计系数图。
+	
+	本讲稿伴随的交叠DID估计量Dofile文件夹可以从\href{https://wenddymacro.github.io/Wenddy-XU/}{我的个人主页}上下载。从github上下载整个文件夹，打开文件夹中的Stata项目“staggered.stpr”，在stata的项目管理器中可以看到下列两个文件，如图9.16所示：
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{project_manager}
+		\caption{交叠DID估计量的Dofile}
+		\label{fig:project_manager}
+	\end{figure}
+	
+	\begin{itemize}
+		\item 0.run\_file.do：设定运行环境，调用scripts/1.staggered\_did\_analysis.do来计算估计量。我们不需要调整dofile中的路径，也不用下载表9.2和9.3中的交叠DID程序包，因为这些程序包已经下载、包含在stata\_packages子文件夹中。我们只需要运行scripts/0.run\_file.do来获得所有估计量。
+		\item 1.staggered\_did\_analysis.do：包含11种交叠DID估计量，并画出两张事件研究图——不同时间期限的图，储存在output子文件夹中。
+	\end{itemize}
+	
+	如果大家希望保持所有交叠DID估计量的程序包是最新版本，可以将scripts/0.run\_file.do中的global download后的数值从0改为1。这样就会自动升级所有用到的程序包。
+	
+	虽然TWFE确实存在很多的问题，但是Wooldrige（2021）（没错！就是那本经典计量经济学教材的作者，参见\href{https://www.dropbox.com/sh/zj91darudf2fica/AADj_jaf5ZuS1muobgsnxS6Za?dl=0}{他在dropbox里分享的论文“Two-Way Fixed Effects, the Two-Way Mundlak Regression, and Difference-in-Differences Estimators”及其dofile}）指出，只要我们恰当地实施TWFE，我们仍然可以使用它，并得到类似于BJS（2021）和Gardner(2021)处理效应一样的有效估计量。Fernando Rios-Avila（\href{https://friosavila.github.io/playingwithstata/main_jwdid.html}{他的网页}）写了一个关于“Two-Way Fixed Effects, the Two-Way Mundlak Regression, and Difference-in-Differences Estimators”非常棒的概述：Wooldridge使用的方法非常类似于两步插值（imputation）法。
+	
+	Wooldridge提出一个回归方程来估计两步，尤其是估计下列的方程：
+	
+	\begin{equation}
+		y_{i,t} = \alpha_i +\alpha_t + \sum_{g=g_0}^{G}\sum_{t=g}^{T} \lambda_{g,t} \times 1(g,t) +e_{i,t}
+	\end{equation}
+	
+	在没有协变量的情形下，他的建议是估计一个带有个体和时间固定效应，并只要组群-时间组合对应一个有效的处理个体，那么就要包含所有可能的组群-时间组合。此时，估计得到的$\lambda$就等价于CS（2020）的$ATT$。也就是说，Wooldridge认为，并不是TWFE不对，而是我们没有正确使用它。关于这篇文章idea的更详细概述信息，请参见\href{https://twitter.com/jmwooldridge/status/1427472491367305219}{Wooldridge的twitter概述}。
+	
+	Fernando Rios-Avila（\href{https://friosavila.github.io/playingwithstata/main_jwdid.html}{他的网页}）给出了一个例子来实施Wooldridge的方法，并给出了一些实践性建议。下面，我们来看看他的例子。
+	
+	首先，下载Wooldrige（2021）的\href{https://www.dropbox.com/sh/zj91darudf2fica/AADj_jaf5ZuS1muobgsnxS6Za?dl=0}{dofile}文件：
+	
+	\begin{itemize}
+		\item jwdid.ado：该文件应用双向固定效应方法，但还没有使用Wooldridge建议的Mundlack方法；
+		\item jwdid\_estat.ado：一系列程序来获得标准加总。
+	\end{itemize}
+	
+	下载上述两个文件后，将它们放入stata/ado/base/对应的首字母子文件夹，例如，上述两个文件以j字母开头，我们就将其放入j文件夹。这个时候，就可以执行下列stata代码了。
+	
+	\begin{lstlisting}
+		* 加载案例数据
+		
+		use https://friosavila.github.io/playingwithstata/drdid/mpdta.dta, clear
+		
+		* 使用jwdid命令，需要先安装双向固定效应模型命令reghdfe以及程序包ftools
+		* 如果没有安装要先安装它们(去掉命令行前的双斜杠//)
+		// ssc install reghdfe, replace
+		// ssc install ftools, replace
+		
+		* 使用jwdid命令
+		
+		 jwdid  lemp , i(countyreal) t(year) gvar(first_treat)
+		 
+	\end{lstlisting}
+
+    结果显示在图9.17中。
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{jwdid}
+		\caption{Wooldridge(2021)的did估计量}
+		\label{fig:jwdid}
+	\end{figure}
+
+    如果我们要看看按照时间、组群或者事件的加总结果，仅仅只需要输入下列stata命令：
+    
+    \begin{lstlisting}
+    	* stata命令
+    
+    	estat simple
+    	
+    \end{lstlisting}
+
+    总之，Wooldridge(2021)的方法非常类似于插值法，但是，其更加的灵活、容易实施，而且比CS(2020)的DID估计量更有效率。实践中，我们要正确地声明我们的回归模型，如果模型具有高度的非线性性，这个方法可能仍然得不到无偏的ATT估计量。
+
+
+
+
 	\chapter{断点回归设计（RDD）}
 	
 	如果大家关注了微信公众号“香樟经济学术圈”的话，肯定记得2016年的时候，“满天都是RD”——各种RD经典文献解读，RD原理介绍。社科院付明卫老师写了一篇”断点回归（RD）的规定动作“的推文。里面写道：
@@ -2978,11 +3667,11 @@ even if the instrument arises from a quasi-experiment.
 	
 	\section{断点回归的规定动作}
 	
-	下面的内容来源于“香樟经济学术圈”的推文，付明卫（2016）：
+	下面的内容结合了社科院付明卫老师2016年在“香樟经济学术圈”的推文\href{https://cec.blog.caixin.com/archives/193848}{“断点回归的规定动作”}，并进行一些扩展：
 	
 	\textbf{第1步}
 	
-	检查配置变量（assignment variable，又叫running variable、forcing variable）是否被操纵。画出配置变量的分布图。最直接的方法，是使用一定数量的箱体（bin），画出配置变量的历史直方图（histogrm）。为了观察出分布的总体形状，箱体的宽度要尽量小。频数（frequencies）在箱体间的跳跃式变化，能就断点处的跳跃是否正常给我们一些启发。从这个角度来说，最好利用核密度估计做出一个光滑的函数曲线。McCrary（2008）为判断密度函数是否存在断点提供了一个正规的检验（命令是DCdensity，介绍见陈强编著的《高级计量经济学及Stata应用》（第二版）第569页）。
+	检查配置变量（assignment variable，又叫running variable、forcing variable）是否被操纵。画出配置变量的分布图。最直接的方法，是使用一定数量的箱体（bin），画出配置变量的历史直方图（histogrm）。为了观察出分布的总体形状，箱体的宽度要尽量小。频数（frequencies）在箱体间的跳跃式变化，能就断点处的跳跃是否正常给我们一些启发。从这个角度来说，最好利用核密度估计做出一个光滑的函数曲线。McCrary（2008）为判断密度函数是否存在断点提供了一个正规的检验（命令是DCdensity，介绍见陈强编著的《高级计量经济学及Stata应用》（第二版）第569页）。最近，Cattaneo et al. (2018) 提出另一种估计量，这种方法有非常多的优势：并不需要预先计划，它主要基于核密度函数，而且很容易在Cattaneo他们开发的RD程序包中实现。
 	
 	\textbf{第2步}
 	
@@ -2998,21 +3687,33 @@ even if the instrument arises from a quasi-experiment.
 	
 	\textbf{第5步}
 	
-	检验结果对不同带宽、不同多项式次数的稳健性。尝试的其它带宽，一般是最优带宽的一半和两倍。挑选多项式的最优次数，可用赤池信息准则（Akaike's Information Criterion，AIC）。在我们尝试的包含配置变量1次方、2次方、⋯⋯N次方的众多方程中，AIC取值最小的那个就是我们想要的。实操时，试到多少次为好？原文中至少试到了6次。我们做研究时需要试到10次还是100次呢？Gelman和Imbens（2014）解除了我们的这个烦恼，详见“江湖上的新动作”这一部分。
+	检验结果对不同带宽的稳健性。尝试的其它带宽，一般是最优带宽的一半和两倍。Lee和Lemieux（2010）介绍了两种确定最优带宽的方法：拇指规则法（rule of thumb）和交叉验证法（CV）。现在，江湖上有另外两种比较受关注的方法：IK法和CCT法。IK法以Imbens和Kalyanaraman两个人命名，对应着论文Imbens和Kalyanaraman（2012）。这篇论文发表在Review of Economic Studies，Lee和Lemieux（2010）文中提到过此文2009年的NBER工作论文版。CCT法以Calonico、Cattaneo和Titiunik三个人命名，对应着论文Calonico、Cattaneo和Titiunik（2014a）。用非参数法做断点回归估计时的stata命令rd，就是用IK发确定最优带宽。stata命令rdrobust、rdbwselect，提供CV、IK、CCT三种不同的最优带宽计算方法选项。然而，尽管Calonico、Cattaneo和Titiunik（2014a）2014年发表在牛刊Econometrica上，AER2015-2016年上的文章没有买它的账。AER2015-2016年的6篇相关文章中，仅有1篇提到过CCT，其他5篇就像不知道Calonico、Cattaneo和Titiunik（2014a）这篇文章。我甚为不解！难道是因为CCT非牛人？
 	
-	\textbf{第6步}
+	强烈建议大家都画出不同带宽与带有置信区间的LATE的图，即x轴是带宽，y轴是估计的带有置信区间的局部平均处理效应（LATE）。
+	
+	
+		\textbf{第6步}
+	
+	非线性函数的稳健性检验：非参数和参数方法（不同多项式次数）的稳健性。早期的RD文献一般都会挑选多项式的最优次数，可用赤池信息准则（Akaike's Information Criterion，AIC）。在我们尝试的包含配置变量1次方、2次方、⋯⋯N次方的众多方程中，AIC取值最小的那个就是我们想要的。实操时，试到多少次为好？原文中至少试到了6次。我们做研究时需要试到10次还是100次呢？Gelman和Imbens（2019）解除了我们的这个烦恼。根据Lee和Lemieux（2010），配置变量的次数要试到N次。但是，Gelman和Imbens（2019）的论文说，试到N次的做法要不得，最多只能搞到2 次。至于原因，他们讲了三条，感兴趣的请参考原文。因为如果我们将参数法（多项式拟合法）应用于整个样本，那么，远离断点的观测值会获得更高的权重。因此，AER2015-2016年间所有用RD做的论文（共6篇）里，5篇都只用1次或2次。最近几年大家都开始更多关注非参数方法来拟合非线性数据产生过程。
+	
+	\textbf{第7步}
 	
 	检验结果对加入前定变量的稳健性。如上所述，如果不能操控配置变量的假设成立，那么无论前定变量与因变量的相关性有多高，模型中加入前定变量都不应该影响处理效应的估计结果。如果加入前定变量导致处理效应的估计结果变化较大，那么配置变量可能存在排序现象，前定变量在断点处也很可能存在跳跃。实操时在确定多项式的次数后，直接在回归方程中加入前定变量。如果这导致处理效应估计值大幅变化或者导致标准误大幅增加，那么可能意味着函数中多项式的次数不正确。另外一个检验是残差化，看相同次数的多项式模型对残差的拟合好不好。
 	
-	\textbf{江湖上的新动作}
+	\textbf{第8步}
 	
-	Thistlethwaite和Campbell1960年首次用RD方法做政策评估。经过近40年的沉寂后， 20世纪90年代末以来，经济学关于RD方法的性质、局限性等方面的理论研究有了巨大进展。关于RD方法本身的研究，并没有因为Lee和Lemieux（2010）的发表而停止。我把Lee和Lemieux（2010）发表后的进展称作“新招式”。据我的不完全了解，“新招式”有这些：
+	用“假定结果变量”来做安慰剂检验。断点回归基于连续性假设，也就是断点处唯一发生变化的是处理状态。这就意味着偏离处理状态的协变量在断点处是连续的。但是，实践中，几乎可能检验所有的可观测和不可观测变量是否在断点处发生“跳跃”。这个时候，我们就应该利用假定的结果变量来显示一些重要的观测变量在断点处确实没有“跳跃”。我们仅仅只需要用这些观测变量替换真实结果变量即可，即假定的结果变量来作为安慰剂检验。经典的安慰剂结果包括：滞后的因变量、地理单元、一些时间变量（例如，观测时的年月）、年龄、性别、收入等等。这些重要的协变量都不应在断点处显示出明显的“跳跃”。需要特别强调的是，可能我们需要做的 安慰剂结果变量非常多，这个时候难免会有一些安慰剂结果会发现显著的处理效应，我们需要记住，它们对于RD研究设计的效应估计来说并不是致命的问题。这个时候我们只需要加入更多的能使得安慰剂检验通过的变量作为控制变量即可。如果我们使用局部回归（local regression），加控制变量就是一种投机取巧的方法，因为我们还可以使用Calonico, Sebastian, Matias D Cattaneo, Max H Farrell, and Rocio Titiunik（2019，RES）提出的一些方法来解决这些问题，且都可以在\href{https://rdpackages.github.io/}{rd类程序包}中实现。
 	
-	\textbf{1. 多项式次数的选择}。根据Lee和Lemieux（2010），配置变量的次数要试到N次。但是，Gelman和Imbens（2014）的NBER工作论文说，试到N次的做法要不得，最多只能搞到2 次。至于原因，他们讲了三条，感兴趣的请参考原文。尽管他们的论文还未正式发表，但学界都已乖乖听他们的啦。AER2015-2016年间所有用RD做的论文（共6篇）里，5篇都只用1次或2次。
+	\textbf{第9步}
 	
-	\textbf{2. 最优带宽}。Lee和Lemieux（2010）介绍了两种确定最优带宽的方法：拇指规则法（rule of thumb）和交叉验证法（CV）。现在，江湖上有另外两种比较受关注的方法：IK法和CCT法。IK法以Imbens和Kalyanaraman两个人命名，对应着论文Imbens和Kalyanaraman（2012）。这篇论文发表在Review of Economic Studies，Lee和Lemieux（2010）文中提到过此文2009年的NBER工作论文版。CCT法以Calonico、Cattaneo和Titiunik三个人命名，对应着论文Calonico、Cattaneo和Titiunik（2014a）。用非参数法做断点回归估计时的stata命令rd，就是用IK发确定最优带宽。stata命令rdrobust、rdbwselect，提供CV、IK、CCT三种不同的最优带宽计算方法选项。然而，尽管Calonico、Cattaneo和Titiunik（2014a）2014年发表在牛刊Econometrica上，AER2015-2016年上的文章没有买它的账。AER2015-2016年的6篇相关文章中，仅有1篇提到过CCT，其他5篇就像不知道Calonico、Cattaneo和Titiunik（2014a）这篇文章。我甚为不解！难道是因为CCT非牛人？
+	用“假定的断点”来做安慰剂检验。我们需要在真实断点两边都人为的假定一些断点，然后检验结果变量在这些假定的断点处是否存在“跳跃”。根据连续性假设，要使得估计效应更可信，在假定断点处，结果变量不会有明显的跳跃。此外，Imbens and Lemieux (2008)建议使用处理组和控制组配置变量的中位数来进行安慰剂检验。在中位数附近跑回归可以提高统计量，并更可能得到效应。因为我们预期不存在效应，因此，统计量提高可以使得该安慰剂检验更加的谨慎。
 	
-	\textbf{3. 核密度检验}。Lee和Lemieux（2010）介绍了McCrary（2008）的核密度检验方法。Frandsen (2013)提出了一种新的检验方法，感兴趣的请参考原文。
+	\textbf{第10步}	
+	
+	需要特别关注效应的异质性。在其他的研究设计中，处理异质性效应只需要将所有的协变量都加入回归，并将这些协变量与处理变量进行交互。但是，在RD中，这个逻辑不成立。尤其是即使我们仅仅只使用配置变量断点附近的观测值来进行估计，当存在模型误设时，断点回归仍然会存在严重的过度拒绝问题。如果继续划分样本，在RD中必然会导致小样本问题，这就与RD要求的大规模数据样本要求相违背了。最近几年发表的文献开始使用倾向得分加权（后文还要专门讲这个方法）来解决上述问题。Practically, this means weighting observations of one subgroup inversely to the propensity to belong to this group on the basis of a set of covariates. Doing so generates two groups who differ in the moderator but are similar in their weighted propensity to belong to each of the subgroups, based on observables (Gerardino et al., 2017). Once these weights are applied, each subgroup-specific analysis can then be implemented. See more detailed description of the design in Gerardino et al. (2017) and Hsu and Shen (2019), who also offer a Stata 程序包\textbf{rddsga} to conduct subgroup analysis within the RD setup (Carril et al., 2017).
+	
+	
+
 	
 	\section{stata操作}
 	
@@ -3115,22 +3816,121 @@ even if the instrument arises from a quasi-experiment.
 	
 	估计命令与带宽估计命令相似。
 	
+	\section{RD的新进展}
+	\subsection{Kink回归设计}
+	好了，我们已经知道经典的断点回归设计怎么做了。断点回归确实非常的受欢迎，例如，\href{https://blogs.worldbank.org/impactevaluations/regression-discontinuity-porn}{David Evans的blog}和\href{https://christinecai.github.io/PublicGoods/applied_micro_methods.pdf}{Christine Cai整理的最新RD文献}。记住：数据中一定要在running变量的某个阈值附近存在明显的“跳跃”，也就是说，结果变量在断点左右（或者上下）存在“跳跃”。但是，从理论上来说，断点回归设计应该可以让我们来分析结果变量在断点附近的变化（Nick Huntington-Klein，2022），这就意味着不仅仅是“跳跃”这种变化。那么，还有什么变化呢？
 	
-	\section{Kink回归设计}
+	想象一下，在断点附近，结果变量并没有显著的差异，也就是，断点附近的结果变量观测值仍然连接在一起，但是我们可以明显观察到断点两边的斜率发生了变化，如图10.6所示。断点处的处理并没有使得结果变量本身发生”跳跃“，而是改变了结果变量和running变量X之前的关系强度，即斜率发生了变化。
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{kink}
+		\caption{弯折（Kink）曲线(模拟数据)}
+		\label{fig:kink}
+	\end{figure}
+	
+		这个变化还可以用断点回归设计来识别吗？首先，这个时候肯定不能使用上述经典断点回归设计了，因为它们不满足数据“跳跃”要求。但是,不要担心，断点肯定还可以使用，只是需要一定的修正。目前，主要存在两种类型的弯折情形：
+		
+	    第一，处理改变了潜在结果与X之间的关系。例如，当我们在用断点回归设计研究“绿水青山就是金山银山”主题时，我们用时间作为running变量，用植树造林量作为结果变量。那么，在2002年中国全面启动退耕还林工程，鼓励更多的植树造林。但是，我们并没有在2002或者2003之后看到树林数量明显的、”跳跃性“的变化，而是看到了树林面积增长速度比2002年之前更快了（也就是，斜率变大了），如图10.6就是这种情形。
+	    
+	    第二，处理本身发生了弯折（Kink）。许多政府政策都具有这种特征。例如，经典的Card et al（2015）所做的经典kink回归。作者研究了奥地利的失业救济政策对失业期长度的影响。奥地利的失业救济分了不同档次，从正常收入的55\%到最高额度。因此，正常收入是running变量，它会影响失业救济金直到一个阈值，在这一点上正常收入对失业保险金的影响变为零。因为当失业保险金大幅提升时，失业的人肯定不太愿意去找新工作，这样失业的持续期就会拉长，因此，我们可以预期正常收入与失业持续期存在一个正向的关系，直到断点处，然后在断点时间后又趋于平缓，如图10.7所示。
+		
+		
+	    % TODO: \usepackage{graphicx} required
+	    \begin{figure}[tbph]
+	    	\centering
+	    	\includegraphics[width=1\linewidth]{kink2}
+	    	\caption{情形2：弯折（Kink）曲线（模拟数据）}
+	    	\label{fig:kink2}
+	    \end{figure}
+	
+	    下面，我们来看看。
+	
+	\subsection{多断点回归设计}
+	
+    在经典RD研究设计中，决定处理与否的断点对于所有组群都是已知的，并且完全相同。例如，当学生的成绩/绩点高于一个阈值时，她就可以获得奖学金，这个绩点的门槛对于所有学生都是已知的，一样的。但是，在实现中，许多情形的断点可能在组群之间是不同的。例如，在多候选人的选举中，得票率是配置变量，选区是组群，处理就是在多数规则下是否赢得选举。\href{https://www.journals.uchicago.edu/doi/pdf/10.1086/686802}{Cattaneo, M. D., Keele, L., Titiunik, R., \& Vazquez-Bare, G. (2016)}将这一类的RD设计称为多断点回归设计。或者只有一个断点，但是，断点随着时间变化。因此，断点可以随着组群、地区或者时间变化而变化。
+    
+    最常用的方法就是中心化数据，并假设无差异。
+    
+    下面，用三个例子来演示多断点回归：选举、人口与教育。案例和数据均来自于\href{https://www.journals.uchicago.edu/doi/pdf/10.1086/686802}{Cattaneo, M. D., Keele, L., Titiunik, R., \& Vazquez-Bare, G. (2016，The Journal of Politics)}
+    
+    \subsubsection{巴西执政党的选举优势}
+    
+    在城市市长选举中，巴西社会民主党是执政党，其在市长选举中是否会获得优势呢？在这场选举中，大约有三分之一的市长竞选中两个最高得票的候选人（党派）联合起来得票率也没有查过70\%。表10.1呈现了巴西社会民主党最强竞争对手不同水平得票率的频率。由于得票率是连续变量，我们将其划分成四个区间：（0,35）,(35,40),（40,45）,(45,50)。对应于每个区间，表10.1中还呈现了政党赢得选举和失败的得票率。如果是一个两党竞选环境，已知一个政党的最强竞争对手的得票份额就等同于知道了该政党是否可以赢得选举。但是，在多党选举环境下，上述等价就不存在了。例如，巴西社会民主党的获得少于64\%的选票，而其最强竞争对手得票率至少为35\%。
+    
+    	\begin{table}[htbp]\centering
+    	\scriptsize
+    	\caption{巴西社会民主党最强竞争对手不同水平得票率的频率}
+    	\label{Mrd}
+    	\begin{center}
+    		\begin{threeparttable}
+    			\begin{tabular}{l*{3}{c}}
+    				\toprule
+    				\multicolumn{1}{l}{\textbf{最强竞争对手得票率(\%)}}&
+    				\multicolumn{1}{c}{\textbf{样本量}}&
+    				\multicolumn{1}{c}{获胜(\%)}&
+    				\multicolumn{1}{c}{失败(\%)} \\
+    				\midrule
+    				0, 35	&1346&	84.91828&	15.08172\\
+    				35, 40&	986&	63.89452	&36.10548\\
+    				40, 45&	1251&	62.27018&	37.72982\\
+    				45, 50&	1490&	61.47651&	38.52349\\
+    				\bottomrule
+    			\end{tabular}
+    			\begin{tablenotes}
+    				\tiny
+    				\item  Counts based on mayoral elections in Brazil in 1996–2012. Source is Klašnja and Titiunik (2016) replication data.
+    			\end{tablenotes}
+    		\end{threeparttable}
+    	\end{center}
+    \end{table}
+    
+	
+	\subsubsection{巴西联邦转移支付对政治腐败的影响}
 	
 	
+	\subsubsection{学校基础设施修缮对教育结果的效应}
+	
+
+	\subsection{排序断点回归（Count RD）设计}
+	
+	类似于Kink的情形，如果结果变量在断点左右确实存在明显差异，但由于观测值在断点附近的差异又不太明显；与Kink不同的是，断点附近的差异不明显是由于结果变量的观测值都堆叠在断点附近而引起。当观测点在断点附近堆叠使得断点左右的差异消失时，在一些条件下，我们可以舍弃堆叠的观测值，仅仅考虑堆叠上下的观测值。想象一下，如果断点的右侧发生观测值排序，但又没有远离断点，那么，我们应该仅关注那些对排序不敏感的观测值。换言之，我们在断点附近挖一个洞，且断点左右对称，那么，我们仅仅比较洞外的结果。因为Alan I. Barreca, Jason M. Lindo, Glen R. Waddell（2016）指出，组群在断点附近堆叠并非随机的，因此，我们在使用经典RD时要特别小心。为此，Alan I. Barreca, Melanie Guldi, Jason M. Lindo, Glen R. Waddell（2011，QJE）提出了一种排序断点回归来解决上述堆叠问题。
+	
+   \href{https://www.aeaweb.org/conference/cont-ed/2020-webcasts}{2020年AEA继续教育课程}中也讲到了这个方法，其它一些概述可以参见\href{https://twitter.com/jasonmlindo/status/1240261010319118336?lang=en}{Jason Lindo的twitter}。
 	
 	
-	\section{RDpackage}
+	\subsection{空间断点回归}
 	
 	
+	尽管空间断点回归与断点回归同根同源，但是在使用它们时，仍要注意它们之间的一些关键性差异，详情参见\href{https://www.semanticscholar.org/paper/Geographic-Boundaries-as-Regression-Discontinuities-Keele-Titiunik/5512e7591e86963e89a39984e770b0656fa2b0e2?p2df}{Keele and Titiunik(2015)}和\href{https://www.cambridge.org/core/elements/abs/practical-introduction-to-regression-discontinuity-designs/F04907129D5C1B823E3DB19C31CAB905}{Matias D. Cattaneo, Nicolás Idrobo and Rocío Titiunik（2020）}。\href{https://blogs.worldbank.org/impactevaluations/spatial-jumps}{Florence Kondylis and John Loeser（2019）}对上述文献做了非常好的概述：
 	
-	\section{空间断点回归}
+	\begin{itemize}
+		\item 影响估计的差异
+		\begin{itemize}
+			\item 多重断点：与经典RDD的单一断点不同，空间RD的经度和纬度都是断点。
+			\item 离散个体：在空间RD中，数据在非常粗糙层面才可用，例如，研究者经常使用中国县级层面的数据来评估政策效应。而经典RDD要求大规模的观测样本，断点附近也有非常多的个体。
+		\end{itemize}
+	    \item 影响效应理解的差异
+	    \begin{itemize}
+	    	\item 配套政策：对于经典RDD来说，通常在断点处只有单一政策变化。但是，在空间RD中，地理边界之间通常有多个政策变化。这个时候，经典文献中常常会仔细地讨论制度、环境等背景知识，或者考察断点一边的某种政策变化时断点左右的变化趋势。
+	    	\item 地理溢出：在经典RDD中，断点附近的个体相对于总体来说数量较少，因此，个体在断点左右移动对断点附近的其它个体的影响非常小。但是在空间RD中，只在某一地区（地理上很很难确定精确的实施边界）实施的政策肯定会有非常重要的溢出效应，这会让估计结果很难解释——然后溢出会改变估计效应的含义，但它并不会改变估计量是政策的一种相对效应（相对于邻里之间的或正或负向溢出）。
+	    	\item 操控：在经典RD中，我们总要时刻注意个体可能会选择他们自己的得分来让自己受到政策的处理，因此，这种操控就会带来偏误，因为这意味着同一个体在处理前后可能非常不同。在空间RD中，虽然地理位置不能移动，但地理上的人或者物等还是可以移动的。因此，也要特别小心。
+	    \end{itemize}
+        \item 影响推断的差异。在空间RD中，结果和处理通常都显示出空间相关。因此，很多学者都用Conley标准误或者近似聚类稳健标准误来矫正空间相关问题，更多信息参见\href{https://blogs.worldbank.org/impactevaluations/when-should-you-cluster-standard-errors-new-wisdom-econometrics-oracle}{David McKenzie的博文“When should you cluster standard errors? New wisdom from the econometrics oracle”}。
+	\end{itemize}
+	
+	
 	
 	discussion of spatial RD designs and the different issues that may arise with them, nor again on power calculations and thinking through what size samples are needed for RD to work.
 	
 	
 	
+	\subsection{DID-Kink}
+	
+	参见\href{https://sites.google.com/site/r4ribas/codes}{Rafael Ribas}的主页，或者看看\href{https://www.stata.com/meeting/chicago16/slides/chicago16_ribas.pdf}{他的Slides}。
+	
+	\href{https://rdpackages.github.io/references/Cattaneo-Titiunik_2021_ARE.pdf}{Matias D. Cattaneo and Rocio Titiunik（2022, Annual Review of Economics）}最近为ARE写了一篇断点回归进展的文献综述，非常值得一看。总之，如果大家对断点回归感兴趣，一点要去关注Cattaneo等家伙的\href{https://rdpackages.github.io/}{RDD主页}——他们简直太“贼”了，知道大家喜欢用RD，就“拼命地”给大家写程序包，然后各种演示例子，大家用了他们的程序包，就会引用他们的文章，简直双赢，哈哈！
 	
 	
 	
@@ -3481,7 +4281,304 @@ even if the instrument arises from a quasi-experiment.
 	
 	其次，Abadie et al. (2015)指出，回归法也可以视为对控制地区作了线性组合，且权重之和也为1；而不同之处在于，合成控制法的权重必须非负，但回归法的权重可能出现负值，即出现过分外推（extrapolation）而离开了样本数据的取值范围（support of the data）。比如，在跨国研究中，将很不相同的国家放在一起进行回归，就可能出现过分外推，而导致 “外推偏差”（extrapolation bias）。由于合成控制法的权重必须非负，故避免了过分外推。
 	
-	\chapter{VARs}
+	\chapter{时间序列的自回归模型}
+	
+	\section{事件研究：反事实预测}
+	
+	在前面的章节，我们已经学习了许多方法来估计“处理”的效应。如果是否处理是由一个事件引发的，那么，这类研究设计就称为“事件研究”。事件研究是一种非常古老的研究设计，广泛地应用于劳动经济学、金融、宏观经济、会计、历史、法律、社会等诸多领域。事件研究背后的思想很简单：在某一时点，发了一件事，导致了一些组群/个体受到了一些“处理”，最终发生了变化。因此，事件前后发生的变化就是处理的效应。前面的内容要么采用截面数据来估计效应，要么使用面板数据来估计效应，本讲个下一讲使用另一种数据类型——时间序列数据——来估计效应。
+	
+	正因为事件研究在许多领域都有广泛地应用，因此，在不同的学科领域，一些术语也有所差异。例如，在卫生健康领域，我们可能经常看见“统计过程控制（statistical process control）”。在经济学领域，一般统称为“事件研究”。
+	
+	在金融领域，事件研究是最流行的方法之一。一个事件是否会影响到公司股票收益率？如何影响？例如，2015年8月10号，全球搜索引擎巨头——Google公司宣布更名为“Alphabet”（其实，谷歌在创立之处也并非名叫谷歌，而是叫“网络爬虫（backrup）”——一个十分耿直的程序猿名字，随着业务规模的扩大，公司创始人注册了谷歌这个域名）。好了，我们回到谷歌更名为“Alphabet”这个事件。这个事件是否会影响到谷歌在纳斯达克的股票收益率呢？
+	
+	下面，我们利用2015年5月到8月底的谷歌股票价格的数据来说明上述问题的答案。此外，数据还包括标普500指数以反应市场状况。数据来源于Nick Huntington-Klein的《The Effect》第17章。首先，我们画出谷歌股票的收益率和标普500的收益率曲线，如图11.1所示。
+	
+	\begin{lstlisting}
+		******************************
+		* 谷歌更名事件
+		******************************
+		use /Users/xuwenli/OneDrive/DSGE建模及软件编程/教学大纲与讲稿/应用计量经济学讲稿/应用计量经济学讲稿与code/data/mixtape/google_stock.dta, replace
+		
+		tsset date
+		twoway (tsline google_return)(tsline sp500_return) ///
+		,	///
+		tline(10aug2015) ///
+		legend(order(1 "谷歌日收益率" 2 "标普500日收益率"))
+		
+	\end{lstlisting}
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{google}
+		\caption{谷歌和标普500的收益率}
+		\label{fig:google}
+	\end{figure}
+	
+	从图中，我们可以看到，谷歌股票的收益与标普500指数的收益率的变动趋势基本一致。这样我们就可以用大盘指数收益率来控制市场因素，从而看到谷歌股票收益超出大盘收益率的部分等异常波动可能就是由于某些特定的时间引起的。我们用谷歌更名事件来说明一下“事件研究”。
+	
+	首先，从样本中挑出估计期和观测期。对于估计来说，从2015年5月到7月。对于观测期，从谷歌宣布更名的前几天开始，即8月6日到24日。然后，用观测期的数据来构建预测模型，并将预测结果用来比较。stata代码如下：
+	
+	\begin{lstlisting}
+		* 得到估计期的平均收益率，然后计算异常收益率（AR，abnormal return）：
+		summ google_return if date <= date("2015-07-31","YMD")
+		
+		gen AR_mean = google_return -r(mean)
+		
+		* 计算谷歌和大盘收益率的差异
+		
+		gen AR_market = google_return - sp500_return
+		
+		* 用大盘收益率来估计模型，预测谷歌股票的收益率
+		
+		reg google_return sp500_return if date <= date("2015-07-31","YMD")
+		
+		* 得到异常收益风险（AR_risk）的预测值
+		predict risk_predict
+		
+		gen AR_risk = google_return - risk_predict
+		
+		* 画出观测期的结果
+		gen obs = date >= date("2015-08-06","YMD") & date <= date("2015-08-24","YMD")
+		
+		format date %td
+		
+		* 画出时间序列数据的图
+		
+		tsset date
+		
+		twoway (tsline AR_risk)(tsline AR_market)(tsline AR_mean) if obs, tline(10aug2015)
+		
+		
+	\end{lstlisting}
+
+    从图11.2可以看出，在2015年8月10号后，谷歌股票价格确实出现了一个交易日的大涨。我们也可以预期到，在有效股票市场上，谷歌更名事件会迅速太高谷歌股票价格，然后日度收益率有逐渐回到正常水平（0附近）。而且，我们也并没有在更名前观察到其它的变动，这说明股票收益率的变化并没有被市场所预期到。但是，我们把时间拉长一些，看看8月20号左右的谷歌股票收益率的均值线发生了一次大跳水，即跌了大概5个百分点，这个时候可能就不是更名事件产生的效应了，因为我们可以从股票市场的收益率也可以看到出现了下跌的情形，也就是说，整个市场可能都出现了下跌。这意味着，我们在使用“事件研究”方法时，可能不能观测太长期的效应，而要使用一个相对较短的事件窗口来得到事件的效应。尤其是对于金融市场这种高频数据来说，一天可能就是非常长期了，更别说几十个交易日的窗口。
+
+	% TODO: \usepackage{graphicx} required
+\begin{figure}[tbph]
+	\centering
+	\includegraphics[width=1\linewidth]{google_AR}
+	\caption{谷歌更名事件对其股票收益率的影响}
+	\label{fig:google_AR}
+\end{figure}
+	
+	除了看图说话之外，我们还可以利用stata程序包来检验这些事件对于股票收益率的影响。常用的stata程序包有Zhang et al.(2013)编写的\textbf{eventstudy}和Kaspereit(2015)编写的\textbf{eventstudy2}命令包。本讲稿中使用的是F. Pacicco, L. Vena, and A. Venegoni（2018，“Event study estimations using Stata”）介绍的\textbf{estudy}命令，这个命令改进了上述两个时间序列的事件研究命令：
+	
+	\begin{itemize}
+		\item 同时计算多个变量的异常收益率等；
+		\item 为不同加总层面、单个公司事件的异常收益率计算、统计检验提供了工具；
+		\item 根据用户需要，自定义输入结果；
+		\item 简化了方法
+	\end{itemize}
+	
+	下面，我们用estudy命令来估计一下google更名事件对股票收益率和股票市场收益率的效应。
+	
+	\begin{lstlisting}
+		* 加载estudy程序包
+		ssc install estudy,replace
+		
+		* 查看estudy语法格式，请help estudy
+		
+		estudy google_return sp500_return, ///
+		datevar(date) evdate(08102015) dateformat(MDY) ///
+		indexlist(sp500_return) lb1(-4) ub1(1)
+		
+	\end{lstlisting}
+	
+	谷歌宣布更名发生在2015年8月10号，因此，在evdate后面声明这个事件的日期，且日期格式dateformat是“月日年”。且正如上文所示，在金融市场中进行事件研究时，我们最好选取一个较短的事件窗口期，因此，我们设定的事件窗口期是2015年8月6日-11日，也就是事件发生日期的前4个交易日（lb(-4)）和后一个交易日(ub(1))。得到如下结果：
+
+% TODO: \usepackage{graphicx} required
+\begin{figure*}[tbph]
+	\centering
+	\includegraphics[width=1\linewidth, height=0.5\textheight]{estudy_result}
+	\caption{}
+	\label{fig:estudy_result}
+\end{figure*}
+
+    我们并没有声明估计窗口，因此，estudy命令默认的估计窗口是从样本期内的第一个交易数据开始到事件日期前30个交易日为止。上述结果给出了事件日期，声明的事件窗口数和实施的诊断检验。表格的第一列是变量的标签信息，第二列是计算得到的异常收益率，上例的结果计算的是累积平均异常收益率（CAAR），并且还标注了统计显著性，例如，google更名事件导致了谷歌股票收益率在事件窗口期提高了5.65\%，且在1\%的置信水平下显著。而谷歌更名事件对于整个标普500指数的收益率则没有显著的影响。此外，在多个股票收益率的情形下，estudy会在结果的最后两行给出资产组合方法和组群异常收益率的结果，它们对于评价事件的平均影响很有帮助。
+
+    那么，事件研究的想法很简单，事件发生了，处理就开始产生作用。然后，我们比较事件前后，得到处理的效应。我们如何确保在事件发生后，唯一变化就是处理本身，而不是其它的因素引起的结果变量发生变化呢？从本讲稿的前面内容可能大家已经有所感觉，我们要想尽办法来预测得到一个反事实的变化。例如，假设如果不发生处理，那么，结果变量也会沿着处理前的趋势发生变化，那么，我们就可以利用事件发生前的信息来预测/构造一个反事实的预测值/对照组，然后比较处理后的实际变化与预测值，它们的差异就是事件的效应。
+	
+	\section{自回归模型}
+	
+    当我们在进行事件研究时，我们实际上有事件发生后的数据，但我们还需要预测出如果没有发生该事件，这段时期的反事实数据，然后将实际数据与反事实数据进行比较。这里有一个前提假设：如果没有事件发生，事件发生前的变化趋势会持续。也就是说，我们可以利用事件前的时间序列来预测事件后的变化。本讲稿前面的内容在估计处理效应是，都是利用截面数据或者面板数据来预测反事实对照组，那么，我们如何利用时间序列数据来预测反事实变化趋势呢？
+    
+    技术上来说，google股票收益率的例子也是时间序列预测的一种形式，它用估计期的收益率来预测事件窗口期的平均收益率，进而用事件窗口期的实际收益率与预测的反事实收益率进行比较，得到异常收益率AR，最终得到更名事件对谷歌股票收益率的效应。但实际上的时间序列预测方法需要更加关注数据的时间维度——观测值的时间相关性。例如，如果在t期发生了一个事件，导致了处理发生作用，那么，这个处理不仅仅在t期产生作用，可能还会随着时间推移持续发生作用。这会给统计估计和预测带来许多挑战，传统的计量方法可能不适用了，我们需要借助于专门的时间序列估计和预测方法。
+	
+	下面，我们从一个时间序列的例子来介绍时间序列方法。今年是美国911飞机劫持事件20周年。飞机劫持事件会造成非常严重的后果，例如，财产损失，人命关天等等。实际上，飞机劫持事件非常多，从\href{https://ourworldindata.org/terrorism}{Our World in Data}上的统计可以看出，在飞机出现的时候，就伴随着飞机劫持等恐怖事件出现了。为了应对飞机劫持事件，美国在1973年引入了金属探测器，随后全球开始采用这一措施来降低飞机劫持事件。我们从\href{https://ourworldindata.org/terrorism}{Our World in Data}网址下载全球20世纪初-2017年的飞机劫持事件数据，20世纪60年代以来的飞机劫持事件数据如图11.4所示。从图中可以看到，1973年后，飞机劫持事件的确大幅下降了。那么，我们感兴趣的问题就来了：\textbf{安装金属探测器的安检措施对飞机劫持事件的效应有多大呢？}这个时候，我们可以会用上述股票收益率的办法来估计安检措施的效应。
+	
+	用$\{y_t\}$表示全球飞机劫持事件的数量。首先，我们计算得到1973年以前的飞机劫持事件数的均值；然后，计算1973年后的飞机劫持事件的均值；再然后，假设没有安装金属探测器时，1973年的飞机劫持事件数量会遵循1973年前的趋势变化，因此，就可以预测得到反事实下的1973年后飞机劫持事件均值与1973年相同；最后，比较反事实预测值与实际值，得到金属探测器的效应。
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth, height=0.5\textheight]{hijacking}
+		\caption{全球飞机劫持事件的年度数量}
+		\label{fig:hijacking}
+	\end{figure}
+	
+	但是，这种方法过于简单了。它忽略了时间序列数据$\{y_t\}$的序列相关问题。因此，我们可以时间专门的时间序列方法来进行事件研究。例如，Enders, Sandler, and Cauley (1990)利用下列时间序列回归模型研究了金属探测器对飞机劫持事件的效应：
+	
+	\begin{equation}
+		y_t = a_0 +a_1 y_{t-1} +c_0 z_t +\epsilon_t, |a_1|<1
+	\end{equation}
+	
+	其中，$z_t$表示处理变量，例如，安装了金属探测器的年份为1，没有安装的年份为0。
+	
+	而且，在方程（11.1）中，上一期的$y_{t-1}$的值会影响到本期$y_t$的值，这被称为\textbf{自回归}。自回归表达的是一个时间序列变量$y_t$的条件均值是其自身滞后值的线性函数。例如，我今天在银行存了100块钱，不仅仅增加了我银行账户当前的存款，还增加了明天的存款，且还有额外的利息，只要我不取出来，就会持续的产生利息，增加我的账户金额。这就是自回归。方程（11.1）是一个一阶自回归AR(1)，括号中的1意味着仅仅只有最近一期y的值对于本期的预测值y来说至关重要。即如果我们想要预期某一年的飞机劫持事件数，那么，我们只需要知道上一年的飞机劫持事件数即可。因此，一阶自回归仅仅只使用$y_t$的一阶滞后值$y_{t-1}$。
+	
+	下面，我们来看看这个模型的性质。注意，对于1973年前，$z_t=0$。因此，$a_0$就是曲线的截距项，而此时我们可以求得飞机劫持事件数的长期均值为$\frac{a_0}{1-a_1}$。从1973年开始，$z_t=1$，此时，截距项变成了$a_0+c_0$，因此，金属探测器的初始效应就是应该是$c_0$。这个效应的统计显著性也可以利用传统的t统计量来进行检验。例如，我们利用样本数据来跑回归：
+	
+	\begin{lstlisting}
+		*加载数据
+		
+		use "/Users/xuwenli/OneDrive/DSGE建模及软件编程/教学大纲与讲稿/应用计量经济学讲稿/应用计量经济学讲稿与code/data/hijacking.dta",repalce
+		
+		* 创建虚拟变量
+		
+		gen z =0 if year>=1966
+		
+		replace z=1 if year>=1973
+		
+		* ols回归
+		
+		reg hji L.hji z,r
+		
+	\end{lstlisting}
+	
+	上述回归结果显示，$\hat{c}_0=-16.6$，而且在10\%的水平下显著。也就是说，安装金属探测器在初始期会降低飞机劫持事件数16.6起。
+	
+	到这里结束了吗？我们想想，当1973年安装金属探测器后，1973年的飞机劫持事件数会下降，而根据自回归模型的性质，1973年的飞机劫持事件数又会影响到1974年的飞机劫持事件数，1974年的飞机劫持事件数又会影响到1975年的飞机劫持事件数，依次递推，1973年后的每一年都会受到影响，这种长期效应应该是新的长期均值$\frac{a_0+c_0}{1-a_1}$减去没有金属探测器时的长期均值$\frac{a_0}{1-a_1}$，即安装金属探测器的长期效应为$\frac{c_0}{1-a_1}$。可能我们更感兴趣地是安装金属探测器对每一年的暂时效应为多大，这个时候我们可以借助于脉冲响应函数（IRF, impulse response function）。下面我们用简单的数学公式来看看什么是脉冲响应。我们迭代方程（11.1），得到
+	
+	\begin{align*}
+		y_t & = a_0 +a_1 y_{t-1} +c_0 z_t +\epsilon_t \\
+		&  = a_0 +a_1 (a_0 +a_1 y_{t-2} +c_0 z_{t-1} +\epsilon_{t-1}) +c_0 z_t +\epsilon_t \\
+		& = a_0(1 +a_1) + a_1^2 y_{t-2} +c_0 (z_t+a_1 z_{t-1})+(\epsilon_t+a_1 \epsilon_{t-1})\\
+		& = ... \\
+		& = \frac{a_0}{1-a_1} +c_0 \sum_{i=0}^{\infty}a_1^i z_{t-i} +\sum_{i=0}^{\infty}a_1^i \epsilon_{t-i}\\
+	\end{align*}
+
+    上述方程就是脉冲响应函数。利用这个函数，我们可以得到$y_t$对一个事件/处理变量$z_t$的外生变动/冲击(在信号学中称为“脉冲”)的响应序列。例如，为了追踪金属探测器对劫机事件的效应，假设t=1973，t+1=1974等等。对于t期，$z_t$对于$y_t$的影响就是$c_0$。据此，我们对$y_{t+1}$求关于$z_t$的偏导数：
+    
+    $$\frac{\partial y_{t+1}}{\partial z_t} = c_0+c_0a_1$$
+
+    $c_0$项表示$z_{t+1}$对$y_{t+1}$的直接效应，而$c_0a_1$项则反应了$z_t$对$y_t$的效应(=$c_0$)乘以$y_t$对$y_{t+1}$的效应(=$a_1$)。按照这种方式，我们可以追踪到整个脉冲响应函数：
+    
+   $$\frac{\partial y_{t+j}}{\partial z_t} = c_0(1+a_1+...+a_1^j)$$
+   
+   随着时间的推移，即j趋向于无穷，我们可以得到长期效应就是$\frac{c_0}{1-a_1}$。如果假设$0<a_1<1$，随着时间的推移，结果变量对干预/处理/政策的响应程度越来越大。如果$-1<a_1<0$，政策对于$y_t$的效应就会震荡衰退。在初始效应为$c_0$后，$y_t$序列的响应会震荡衰退，趋向于长期效应水平$\frac{c_0}{1-a_1}$。
+   
+   需要特别注意的是，现实世界中的政策干预/冲击不仅仅只有图11.5左上角那种“恒久性冲击”——1973年安装了金属探测器，以后每一年都有，或者1973年后政策干预变量从0变为1。除此之外，还有三种冲击类型：（1）如图11.5右上角的“临时性冲击”，政策变量只在1973年从0变为1，其它年份仍然为0，此时，由于自回归的性质，临时性冲击的效应也可能持续很多期；（2）如图11.5下方的“逐渐变化的冲击”，也可能逐渐递增，也可能逐渐递减。
+   
+   % TODO: \usepackage{graphicx} required
+   \begin{figure}[tbph]
+   	\centering
+   	\includegraphics[width=0.8\linewidth]{shock_type}
+   	\caption{冲击类型}
+   	\label{fig:shocktype}
+   \end{figure}
+   
+
+    用时间序列数据来进行预测需要满足平稳性假设，如果平稳性假设不满足，那么，传统的假设检验、置信区间和预测就不可靠了。时间序列数据中经常出现两种类型的非平稳性：趋势和断点。
+    
+    这些问题也需要增加阐述！
+	
+	\section{向量自回归模型}
+	
+	这一节的内容主要来自于Stata Blog关于Stata中的\href{https://blog.stata.com/2016/08/09/vector-autoregressions-in-stata/}{VAR}和\href{https://blog.stata.com/2016/09/20/structural-vector-autoregression-models/}{结构VAR}描述。
+	
+	\subsection{VAR}
+	
+	在上文的单变量自回归中，时间序列$y_t$可以建模成自身滞后值的函数。如果我们想要分析多个时间序列变量时，一个自然的扩展就是向量自回归（VAR，vector autoregression），顾名思义，就是将多变量的向量建模成自身滞后值和向量中其它变量滞后值的函数。例如一个两变量一阶VAR模型为：
+	
+
+		\begin{align*}
+		&	y_t =a_0 +a_1 y_{t-1} +a_2 x_{t-1} +\epsilon_{1,t} \\
+		&   x_t =b_0 +b_1 x_{t-1} +b_2 y_{t-1}+\epsilon_{2,t}\\	
+		\end{align*}
+    
+    应用宏观经济学家用这类模型来描述宏观经济数据，也用它们来执行因果推断和政策分析。下面，我们利用VAR模型来分析一些有趣的宏观经济与政策问题。
+    
+    在利用向量自回归模型之前，我们肯定要收集数据，也就是在VAR模型中包含哪些宏观经济变量。变量选择要依据我们研究的问题和相关的理论来给出指导。此外，我们还要选择滞后期。此时，我们可以尝试一期一期滞后的加进VAR模型中，或者使用stata中提供的一些正式的滞后期选择标准来进行决策。下面，我们用美国1970年一季度-2021年一季度的宏观经济变量——失业率（ur）、通胀率（inflation）和名义利率（ffr）——来说明VAR的应用。我们可以将这个三变量的VAR模型写成：
+    
+    \begin{equation}
+    	\left[
+    	\begin{array}{c}
+    		inflation_t \\
+    		ur_t \\
+    		ffr_t 
+    	\end{array}
+    	\right]
+    	=A_0 +A_1
+    	\left[
+    	\begin{array}{c}
+    	inflation_{t-1} \\
+    	ur_{t-1} \\
+    	ffr_{t-1} 
+    		\end{array}
+    	\right]
+    	+ \cdots+A_k
+    	\left[
+    	\begin{array}{c}
+    	inflation_{t-k} \\
+    	ur_{t-k} \\
+    	ffr_{t-k} 
+    \end{array}
+    	\right]
+    	+
+    	\left[
+    	\begin{array}{c}
+    	\epsilon_{1,t} \\
+    	\epsilon_{2,t} \\
+    	\epsilon_{3,t} 
+    \end{array}
+    	\right]
+    \end{equation}
+    
+    其中，$A_0$是截距项的向量，$A_1,\cdots, A_k$是$3 \times 3$系数矩阵。我们先来看看三个宏观经济变量的变化，如图11.6所示。从图中，我们可以看出：（1）20世纪70年代出现的“滞胀现象”——高通胀与高失业同时并存；（2）2007年美国次贷危机引发的全球金融危机使得美国发生通缩情况，而失业率也高企，此时，美联储开始大幅降息至零利率水平左右；（3）2020年的全球新冠危机又使得美国失业率急剧攀升，通胀率也短期内进入通缩，为了应对新冠疫情，美联储再次大幅降息至零利率水平附近，失业率开始下降，但通胀率又开始抬头。那么，利率政策的变化对宏观经济会产生什么效应呢？
+    
+    % TODO: \usepackage{graphicx} required
+    \begin{figure}[tbph]
+    	\centering
+    	\includegraphics[width=1\linewidth]{var_ts}
+    	\caption{宏观经济变量的变化}
+    	\label{fig:varts}
+    \end{figure}
+    
+    下面，我们用VAR模型来估计一下货币政策的宏观经济效应。如上文所示，我们首先需要选择VAR模型的最后滞后期。我们可以使用stata中的varsoc命令来执行一些正式的滞后期选择标准。
+    
+    \begin{lstlisting}
+    	* 选择最优滞后期
+    	
+    	varsoc in_rate ur ffr,maxlag(8)
+    	
+    \end{lstlisting}
+
+
+ % TODO: \usepackage{graphicx} required
+\begin{figure}[tbph]
+	\centering
+	\includegraphics[width=1\linewidth]{lagsc}
+	\caption{VAR滞后期选择标准}
+	\label{fig:lagsc}
+\end{figure}
+
+	\textbf{varsoc}命令的结果如图11.7所示，显示了许多滞后期选择检验。这些检验的含义可以$help~ varsoc$查看。上图中的极大似然比率(LR)和AIC检验都推荐滞后6期，因此，下面我们也选择滞后6期来运行向量自回归。
+	
+	
+	
+	 % TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{var_irf}
+		\caption{VAR的脉冲响应函数}
+		\label{fig:var_irf}
+	\end{figure}
+	
+	
+	\subsection{SVAR}
+	
+	
 	
 	
 	\chapter{动态随机一般均衡模型}
@@ -3655,23 +4752,343 @@ even if the instrument arises from a quasi-experiment.
 	
 	前面的模型都是静态的，它们确实是宏观经济与政策的最简化的分析框架（Mankiw，2019）。但是，我们生活的这个世界，很显然是一个动态的环境，例如，我们永远不可能踏进同一条河流。同样地，经济也是在不断的运行发展中，所以我们必须将上述模型推广到动态环境。与此同时，这个事件还充满着不确定性和随机性。因此，我们下面就介绍一下具有动态和随机性质的宏观经济学模型——动态随机一般均衡DSGE。D就是动态Dynamic的首字母，而S是Stochastic随机的首字母，那么GE呢？它指的是一般均衡General Equilibrium的首字母。我们回忆一下，在IS-LM模型中，经济只存在产品市场和货币市场，两个市场都实现均衡就是一般均衡状态，同理，IS-LM-PC-FF模型中，就是产品市场、货币市场、劳动市场和金融市场同时实现均衡状态。
 	
+	大部分计量经济学和定量社会科学的老师都不会向学生们介绍动态随机一般均衡（DSGE）模型，这是因为这类模型的解、模拟和估计技术对于非专业人员来说实在很麻烦（我的一位指导老师——西南财大的王文甫教授——曾经跟我说，有的人花了7、8年都没有入门，短的也得花个两三年）。的确，目前，几乎所有的DSGE教材都是高级版本，甚至“变态”专业版本，对于大部分老师来说实在不友好。Mario Solis-Garcia (2018)、Seth Neumuller, Casey Rothschild \& Akila Weerapana (2018)就明确提出，2008年全球金融危机后，是时候给高年级本科生教授动态随机一般均衡模型入门的知识了。社会科学领域的学生和老师对stata都比较熟悉，而从stata 15开始就可以利用DSGE来进宏观经济与政策的定量分析了，因此，在高年级本科生和研究生的计量经济学和stata教学过程中，我们可以来给学生们教授动态随机一般均衡模型的知识了。从我在武汉大学攻读博士学习DSGE以来，我就一直在写论文之余，写各种DGSE的读书笔记和教学讲稿，用高年级本科生或其他入门者能看懂的内容和语言来呈现动态随机一般均衡的分析框架。本讲稿也是这个目的（可以说，我是因为向给本科生教授DSGE，才写了前面的内容）。需要强调的是，我们在讲稿中呈现的NK模型仅仅只是动态随机一般均衡分析框架的一类具体模型而已：它结合了实际经济周期（RBC）和名义与实际粘性来定量分析宏观经济的动态性质（Christiano et al.2018,JEP）。
+	
 	\subsection{动态IS-LM-PC模型：三方程NK}
 	
+	新凯恩斯主义（NK）模型的核心数学形式被称为“三方程NK”模型，该模型的优势之一就是具有坚实的微观基础，即模型经济中刻画了三类市场主体——家庭、企业和政府——的最优行为决策：（1）家庭在预算约束下做出决策，例如消费产出来实现跨期效用最大化；（2）企业设定产品价格，并生产产出来满足家庭的需求；（3）政府根据经济状态调整宏观经济政策（政策政策和货币政策等）实现经济平稳发展。
 	
-	综上所述，三方程NK模型是由动态IS曲线、动态菲利普斯曲线和货币政策规则组成：
+	三方程NK模型是与动态AD-AS模型相对应的一个三方程简化方程组。动态总供给曲线（DAS）由新凯恩斯主义普利普斯曲线（NKPC）表示，NKPC将通胀与产出缺口和预期通胀联系在一起：
+	
+	\begin{equation}
+		\text{NKPC：}\pi_t =\beta E_t \pi_{t+1} + \kappa x_t + u_t
+	\end{equation}
+
+    其中，与静态模型相比，模型的动态特性由于引入了预期，本讲稿中使用的是理性预期形式，在Mankiw（2019）的宏观经济学课本中使用的是适应性预期。预期主要是家庭、企业等市场主体对未来通胀率演化的无偏差预测（平均意义上来说，无偏差），例如，未来一期的通胀$E_t \pi_{t+1}$。$x_t$表示第t期的产出缺口，而$\beta$和$\kappa$表示当期通胀率$\pi_t$对未来通胀率的预期和产出缺口的反应系数，即两想经济状态的变化引起本期通胀率变化的敏感度。$u_t$表示本期的供给冲击，例如，去产能、拉闸限电、疫情导致工厂停产等都会对经济的生产活动产生影响。
+    
+    动态总需求曲线（DAD）由动态IS曲线和货币政策规则组成：
+    	\begin{equation}
+    	\text{动态IS曲线：}x_t = E_t x_{t+1} - \alpha(i_t - E_t\pi_{t+1} )+ g_t
+    \end{equation}
+    
+    \begin{equation}
+    	\text{货币政策规则：} i_t =\phi_\pi \pi_{t} + \phi_x x_t + e_{i,t}
+    \end{equation}
+
+    动态IS曲线将产出缺口$x_t$和对未来经济状态预期$E_t x_{t+1}$、未来通胀率预期$E_t\pi_{t+1} $和利率$i_t$联系起来。从（13.16）可知，市场看好中国未来的经济发展（$E_t x_{t+1}$变大），就会增加我们当期的总支出（$x_t$），因为市场上的家庭和企业等都会觉得未来自己会赚取更多的钱，所以现在可以提前“享受享受”，进而支出更多。如果我们预期未来的通胀率会上升，那么，本期的支出也会提高，这是因为理性的家庭和企业会觉得自己本期持有的100块钱，会由于通胀提高而贬值，那还不如在本期花掉。
+    
+    一方面，央行采取根据（13.17）来设定货币政策利率$i_t$，即央行会根据经济的通胀和产出缺口状态来调整政策利率。假如通胀高于每年初全国两会政府工作报告中提出的全年通胀目标，或者经济过热，那么，货币政策可能会收紧($e_{i,t}$)，即央行提高利率$i_t$。此时，通过动态IS曲线（13.16），由于货币政策收紧，经济的产出缺口可能会缩小，进而通过NKPC（13.15）来抑制通胀率的抬升。通过这个传导途径，最终货币政策实现了《政府工作报告》中的通胀和经济发展目标。
+    
+    另一方面，政府也可以通过其它需求管理政策($g_t$)，例如财政政策，来调节宏观经济状态。
+	
+	下面，我们来分析一下财政政策和货币政策变动对宏观经济的影响及其传导机制。在利用DSGE模型进行宏观经济与政策定量分析之前，我们需要先获得模型参数。目前，获得模型参数的方式有：校准和估计两种。
+	
+	第一，参数校准貌似是最为人们“嫌弃”，但又不得不用的方法。可是，我想说，这种方法在计量经济学会创会时，那些计量经济学的祖师爷们就开始在用了，而且它是所有后续方法的基石。
+	
+	Kydland and Prescott（1982）用了一种方法将他们所分析的DSGE模型转换成了一种经验分析。他们所使用的方法就是校准联系。DeJong and Dave（2007）将这种方法称为矩匹配、极大似然估计和贝叶斯估计的基础。Stata目前可以提供参数校准、极大似然估计和贝叶斯估计（需要stata17版本，后面的代码如没有特别标注需要使用stata 17，则表示使用stata 16）。
+	
+	我们知道，在Lucas（1976）、Sims（1980）的批判下，概率论方法的估计与假设检验对结构模型不适用。因此，校准练习的目标是为了用参数化的结构模型来探讨一些特定的定量问题。Kydland and Prescott（1991，SJE；1996，JEP）追溯了校准联系作为一种经验研究方法的历史起源，大家可以去看看。在Economitrica的创刊语中，Frisch（1933a）指出：
+	
+	\textbf{“……[计量经济学会]要促进那些旨在统一理论定量方法与经验定量方法的经济研究，并鼓励那些具有建设性和严谨的思考……一切旨在进一步促进经济学理论与经验相统一的活动都属于计量经济学会感兴趣的范围。”}
+	
+	而且，Frisch（1933b）还利用微观数据来校准了生产技术参数，并用来研究经济周期冲击的传播机制。我们都承认这种方法存在一些缺陷，尤其是关于模型误设方面。但是，正如Prescott（1986）指出：
+	
+	\textbf{“所有构建在理论框架之上的模型必然是一种高度抽象的东西。因此，它们肯定存在模型误设问题，统计假设检验会拒绝它们。但是，这并不意味者我们不能从这些理论定量分析中学到一些有用的信息。”}
+	
+	总之，校准练习肯定是一种经验工具（DeJong and Dave，2007）。Kydland and Prescott（1996，JEP）指出：“一定要注意，校准并不是为了得到某些参数的大小，即它不是估计。”因此，在校准DSGE参数的时候，通常来源于两个方面：一是长期均值；二是微观证据的经验结果（例如，Cooley and Prescott（1995）就利用了Ghez and Becker（1975）的微观证据来校准参数）。
+	
+	我们先用校准方法来获得模型参数，然后用数据来估计模型参数。
+	
+	
+	三方程NK模型是由动态IS曲线、动态菲利普斯曲线和货币政策规则组成（Clarida, Galí, and Gertler，1999； Woodford，2003；Gali，2015）：
 	
 	\begin{equation}
 		\text{动态IS曲线：}x_t = E_t x_{t+1} - \alpha(i_t - E_t\pi_{t+1} )+ g_t
 	\end{equation}
-
-
-\begin{equation}
-	\text{动态PC：}\pi_t =\beta E_t \pi_{t+1} + \kappa x_t + u_t
-\end{equation}
+	
 	
 	\begin{equation}
-		\text{货币政策规则：} i_t =\rho_i i_{t-1} + (1-\rho_i)(\phi_\pi \pi_{t} + \phi_x x_t) + e_{i,t}
+		\text{动态PC：}\pi_t =\beta E_t \pi_{t+1} + \kappa x_t + u_t
 	\end{equation}
+	
+	\begin{equation}
+		\text{货币政策规则：} i_t =\phi_\pi \pi_{t} + \phi_x x_t+ e_{i,t}
+	\end{equation}
+	
+	其中，变量$x_t$表示产出缺口，其值为t期产出与长期自然产出只差；$i_t$表示名义利率，$\pi_t$表示通胀率。$E_t$表示期望算子。方程（13.18）表明产出缺口与预期未来的产出缺口和预期通胀率正相关，与名义利率负相关。在DSGE模型中，有三类时间标识：t-1表示过去，t表示当前，t+1表示未来。有三类变量：控制变量、状态变量和冲击。在一个给定时期t，状态变量是固定的，外生的；而冲击则是给定时期t实现的一个外生的变动；然后，冲击发生后，模型系统就决定了t+1期的状态变量，进而决定了当期t的控制变量的值。在上述模型中，有三个外生冲击过程（$g_t, u_t, i_{t}$）：
+	
+	\begin{equation}
+		g_t = \rho_g g_{t-1} +e_{g,t}
+	\end{equation}
+
+	\begin{equation}
+	u_t = \rho_u u_{t-1} +e_{u,t}
+\end{equation}
+	
+	其中，$u_t$和$i_t$可以理解成财政政策和货币政策冲击。我们可以用这个模型来回答我们感兴趣的问题，例如，为了应对2008年全球金融危机，中国政府实施了4万亿刺激计划，那么，这种财政政策的宏观经济效应是什么？央行提高利率的宏观经济效应又如何？
+	
+	我们用Jean-Christophe Poutineau,KarolinaSobczak and GauthierVermandel（2015）的参数来校准上述三方程NK模型的参数，如表13.1所示。然后用校准的三方程NK模型来定量分析宏观经济政策的效应。
+
+\begin{table}[htbp]\centering
+	\scriptsize
+	\caption{模型参数校准}
+	\label{param}
+	\begin{center}
+		\begin{threeparttable}
+			\begin{tabular}{l*{2}{c}}
+				\toprule
+				\multicolumn{1}{l}{\textbf{参数}}&
+				\multicolumn{1}{c}{\textbf{校准值}}&
+				\multicolumn{1}{c}{描述} \\
+				\midrule
+				$\beta$ &0.99&贴现率\\
+				$\alpha$              &      1 &相对风险厌恶系数的倒数      \\
+				$\phi_\pi$ &   1.5   &    泰勒规则中的通胀敏感系数   \\
+				$\phi_x$        &     0.5 &泰勒规则中的产出缺口敏感系数      \\
+				$\rho_g$ & 0.9 & 供给冲击的自回归系数  \\
+				$\rho_u$ & 0.9 & 财政政策冲击的持续性  \\
+				$\rho_e$ & 0.9 & 货币政策冲击的持续性  \\
+				$\kappa$ & 0.13 & 通胀对边际成本的敏感系数  \\
+				
+				\\
+				\bottomrule
+			\end{tabular}
+			\begin{tablenotes}
+				\tiny
+				\item 参数来源：Jean-Christophe Poutineau, Karolina Sobczak, Gauthier Vermandel. The analytics of the New Keynesian 3-equation Model. 2015.
+			\end{tablenotes}
+		\end{threeparttable}
+	\end{center}
+\end{table}
+	
+	虽然Stata的dsge命令中的solve选项可以在校准参数下解模型，但是，它仍然需要使用观测数据，只是不使用它们来估计参数。因此，我们需要首先声明时间序列数据，然后声明模型和校准的参数。
+
+\begin{lstlisting}
+	* 加载数据
+	
+	use https://www.stata-press.com/data/r17/rates2, replace
+	
+	* 声明时间序列数据
+	
+	tsset
+	
+	* 描述数据
+	
+	describe
+	
+	* 计算通胀率
+	
+	generate pi = 400*(ln(gdpdef) - ln(L.gdpdef))
+	
+	* 给pi添加标签
+	
+	label variable pi "Inflation rate"
+	
+	* 重命名利率
+	
+	rename r i
+	
+	
+	* 声明DSGE模型
+	
+	dsge (x = E(F.x) - {alpha}*(i - E(F.pi))+ g, unobserved) ///
+	(pi = {beta}*E(F.pi) + {kappa}*x+u)             ///
+	(i = {phipi}*pi+{phix}*x+e)                        ///
+	(F.g = {rhog}*g, state)                     ///
+	(F.e = {rhoe}*e, state)                     ///
+	(F.u = {rhou}*u, state),                    ///
+	from(alpha=1 beta =0.99 phipi=1.5 phix=0.5 rhog=0.9 rhou=0.9 rhoe=0.9 kappa=0.13)   /// 
+	solve  noidencheck
+\end{lstlisting}
+
+第一，需要注意的是，stata中，我们需要先用dsge命令来声明模型，其命令格式为：
+
+\begin{lstlisting}
+	* dsge的命令格式
+	
+	dsge (方程1)(方程2)(...)     
+	
+\end{lstlisting}
+
+（1）DSGE模型中有多少方程，就要在dsge命令后面写多少个方程，且每个方程都要用小括号装起来，例如，动态IS曲线(x = E(F.x) - \{alpha\}*(i - E(F.pi))+ g, unobserved)。且（2）预期变量用E()表示，未来一期用F.表示，例如，未来未来一期的产出缺口预期值为E(F.x)。（3）我们使用的数据是通胀率和利率，并不包含产出缺口的数据，因此，我们也要在动态IS曲线的后门声明产出缺口不可观测，即在方程后加上unobserved。（4）对于状态变量来说，它们都是前定变量，也就是在当期前就已经确定，因此，stata的命令传统就是将状态变量前看一期，例如，财政政策冲击u，虽然模型中是$u_t$，但在stata中，我们要将其写成$F.u$。（5）我们还要声明状态方程，例如，财政政策冲击方程，(F.u = \{rhou\}*u, state)，我们用state来声明这个方程是状态方程。
+
+第二，声明了模型后，校准参数用from()选项来声明，括号中声明所有校准的参数，且每个参数之间要空格。
+
+第三，最后用solve选项来解上述校准模型。此外，由于是校准模型，并不需要对参数进行识别检测，因此用noidencheck选项来跳过参数识别过程。
+
+    现在，DSGE模型解出来了。我们可以利用这个模型来看看宏观政策的效应。通常，我们用脉冲响应图来分析政策的效应：
+    
+    \begin{lstlisting}
+    	* 创建脉冲响应图
+    	
+    	irf set rbcirf
+    	
+    	* 将名字为fiscal的脉冲响应增加到上述图中
+    	
+    	irf create fiscal
+    	
+    	* 用命令irf graph画出宏观经济变量对财政政策冲击的脉冲响应图，选项impulse()和response()分别控制着冲击和响应变量，例如，财政政策冲击u， 响应变量x,pi,i和u
+    	
+    	irf graph irf, irf(fiscal) impulse(u) response(x pi i u) byopts(yrescale)
+
+    \end{lstlisting}
+
+    得到的脉冲响应图如图13.1所示。每个子图上分别为图名称，冲击变量和响应变量。每个子图都表示一种宏观经济变量对一单位财政政策冲击的响应。图13.1左下角子图y轴的“1”表示财政政策发生1单位标准偏离，在上述线性化模型中，这个更具体地表示为财政政策刺激提高1\%，而其它子图则分别表示财政刺激提高1\%时，产生的效应。例如，对于产出缺口来说，财政政策刺激增加1\%，产出缺口立即下降了4\%（如图13.1右下图所示）。看到这个结果，大家可能觉得很奇怪，这好像有点反经济直觉呀。政府的财政刺激计划怎么会让产出下降了呢？其实这也是并不违反经济直觉和理论，因为我们都学过财政刺激政策的“挤出效应”，从图13.1的左上角的利率响应图可以看到，财政刺激加强，总需求可能会暂时性提高，但利率此时也会大幅增加，从而抑制了总需求（例如，投资），从而产出下降。
+    
+    除了上述总需求传导渠道外，我们还可以看到，加强财政刺激也导致了通胀率大幅上升（如图13.1右上图所示），进而从供给渠道传导至产出。
+    
+    除了关注宏观经济变量第一期的响应之外，我们还需要特别关注宏观经济变量在面对财政政策冲击后的动态演化路径。从图13.1左下图结合财政政策冲击方程（13.22）可以看出，财政政策刺激只在第一期提高1\%，也就是说，财政刺激是一个临时性刺激措施，但由于财政政策具有一定的持续性，因此，其刺激效应随着时间的推移逐渐递降，而其他的宏观经济变量也会随着财政刺激递降，效果也会逐渐衰退。并最终回到长期趋势水平。
+    
+    	% TODO: \usepackage{graphicx} required
+    \begin{figure}[tbph]
+    	\centering
+    	\includegraphics[width=1\linewidth]{fiscal}
+    	\caption{财政政策的宏观经济效应}
+    	\label{fig:fiscal}
+    \end{figure}
+	
+	在现实经济中，宏观经济条件总是不断的变化，例如，（1）每年上半年几乎都会因为“二师兄（猪）”的供给不足而导致农副产品的价格上涨，进而推动CPI上涨，这个时候，中国人民银行可能更加关注通胀，这就意味着货币政策对通胀的反应系数可能更大，假设从基准模型的$\phi_\pi= 1.5$上升到$\phi_\pi= 2$；（2）而在某些时候，经济增长会承压，这个时候央行可能又会更加关注产出，因此，货币政策对产出缺口的反应系数更大，假设从基准模型的$\phi_x= 0.5$上升到$\phi_x= 0.8$。下面我们就用stata来看看不同货币政策机制下，财政政策冲击对产出的效应。
+	
+	\begin{lstlisting}
+		* 将参数储存为矩阵
+		
+		matrix b2 = e(b)
+		
+		* 显示参数矩阵
+		
+		matlist e(b)
+		
+		* 二、不同的宏观经济条件，政府(例如，中国人民银行)会更加关注不同的宏观经济目标
+		* （一）首先，在通胀抬头的趋势下，人民银行可能会更加关注通胀率，因此，货币政策对通胀的反应系数更大，例如，从1.5增大到2；
+		
+		matrix b2[1,4] = 2
+		
+		* 用新的参数来运行dsge
+		
+		dsge (x = E(F.x) - {alpha}*(i - E(F.pi))+ g, unobserved) ///
+		(pi = {beta}*E(F.pi) + {kappa}*x+u)             ///
+		(i = {phipi}*pi+{phix}*x+e)                        ///
+		(F.g = {rhog}*g, state)                     ///
+		(F.e = {rhoe}*e, state)                     ///
+		(F.u = {rhou}*u, state),                    ///
+		from(b2)   /// 
+		solve noidencheck
+		
+		* 创建新参数的脉冲响应图，命名为fiscal3
+		
+		irf create fiscal3
+		
+		
+		* （二）首先，在经济增长承压时，人民银行可能会更加关注通产出，因此，货币政策对产出缺口的反应系数更大，例如，从0.5增大到0.8；
+		
+		matrix b2[1,5] = 0.8
+		
+		* 用新的参数来运行dsge
+		
+		dsge (x = E(F.x) - {alpha}*(i - E(F.pi))+ g, unobserved) ///
+		(pi = {beta}*E(F.pi) + {kappa}*x+u)             ///
+		(i = {phipi}*pi+{phix}*x+e)                        ///
+		(F.g = {rhog}*g, state)                     ///
+		(F.e = {rhoe}*e, state)                     ///
+		(F.u = {rhou}*u, state),                    ///
+		from(b2)   /// 
+		solve noidencheck
+		
+		* 创建新参数的脉冲响应图，命名为fiscal4
+		
+		irf create fiscal4
+		
+		* 画出fiscal、fiscal3和fiscal4的脉冲响应图
+		
+		irf ograph (fiscal u x irf) (fiscal3 u x irf)(fiscal4 u x irf),xlabel(0(3)8) yline(0)
+		
+		
+		
+	\end{lstlisting}
+
+    结果如图13.2所示。
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[tbph]
+	\centering
+	\includegraphics[width=1\linewidth]{fiscal4}
+	\caption{不同货币政策机制下，财政政策的产出效应}
+	\label{fig:fiscal4}
+\end{figure}
+	
+	上述操作的3nk\_simul.do可以在\href{https://github.com/wenddymacro/Wenddy-XU}{我的github主页}上下载。
+	
+	下面我们来看看利用现实数据，如何用stata估计模型参数，并进行政策分析。
+	
+	我们收集处理两个指标的数据：通胀水平和利率。首先，我们要声明时间序列数据类型；第二，模型中的序列必须为零均值；第三，时间序列数据必须是弱平稳序列。
+	
+	\begin{lstlisting}
+		* 加载数据
+		
+		use https://www.stata-press.com/data/r17/rates2, replace
+		
+		* 声明时间序列数据
+		
+		tsset
+		
+		* 描述数据
+		
+		describe
+		
+	\end{lstlisting}
+	
+	数据描述结果呈现在图13.2中。从图中我们可以看出，通胀水平用的是GDP平减指数，但上述三方程NK模型中使用的是通胀率。因此，我们首先要将原始数据转换成通胀率。
+	
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{dsge_data}
+		\caption{DSGE数据描述}
+		\label{fig:dsgedata}
+	\end{figure}
+	
+	对于季度数据来说，通胀率应该等于平减指数的对数差分乘以400。下面，我们用pi来表示通胀率：
+	
+	\begin{lstlisting}
+		* 计算通胀率
+		
+		generate pi = 400*(ln(gdpdef) - ln(L.gdpdef))
+		
+		* 给pi添加标签
+		
+		label variable pi "Inflation rate"
+		
+	\end{lstlisting}
+	
+	好了，数据都准备妥当！下面，我们就用stata的命令dsge来估计上述三方程NK模型的参数了。并不是所有模型参数都需要估计，通常DSGE模型的结构参数非常多，如果估计所有的参数，很有可能导致模型参数不能识别，而且一些模型参数具有经济社会含义，与经济社会的深度特征密切相关，并不会在短期内发生明显变化，因此，这些参数我们一般会校准其数值，而不进行估计。声明模型：
+	
+	\begin{lstlisting}
+		* 校准模型参数
+		
+		constraint 1 _b[beta]=0.99
+		constraint 2 _b[alpha]=1
+		constraint 3 _b[kappa]=0.13
+		constraint 4 _b[phipi]=1.5
+		constraint 5 _b[phix]=0.5
+		
+		* 用极大似然（ML）法来估计DSGE模型
+		
+		dsge (x = E(F.x) - {alpha}*(i - E(F.pi))+ g, unobserved) ///
+		(pi = {beta}*E(F.pi) + {kappa}*x+u)             ///
+		(i = {phipi}*pi+{phix}*x+e)                        ///
+		(F.g = {rhog}*g, state)                     ///
+		(F.e = {rhoe}*e, state)                     ///
+		(F.u = {rhou}*u, state),                    ///
+		from(rhog=0.9 rhou=0.9 rhoe=0.9) constraint(1 2 3 4 5)
+		
+	\end{lstlisting}
+	
+	估计得到模型参数后，就可以利用上述脉冲响应来进行政策分析了。
+	
+	贝叶斯估计：TBA
+	
+	
 	
 	
 	\subsection{动态IS-LM-PC-FF模型：四方程宏观金融模型}
@@ -3695,35 +5112,126 @@ even if the instrument arises from a quasi-experiment.
 		\text{货币政策规则：} i_t =\rho_i i_{t-1} + (1-\rho_i)(\phi_\pi \pi_{t} + \phi_x x_t) + e_{i,t}
 	\end{equation}
 	
+		
 	
+	\section{经典论文复制1：Sims, Wu and Zhang(2021, REStat)评估非常规货币政策效应}
 	
+	2008年全球金融危机后，在中高级宏观经济学课本中常见的三方程NK模型已经不太适合讨论许多前沿的宏观经济与政策问题。因为它并不包含金融部门和非常规货币政策。正如上文的四方方程宏观模型所示，没有金融部门的DSGE模型没有办法定量分析金融冲击对宏观经济的影响。而为了应对金融市场运行不畅和零利率下限，全球主要发达经济体的央行都开始执行一些非常规货币政策（Walsh，2017）。现在，全球主要经济体几乎都在频繁使用非常规货币政策，例如，央行在金融市场上直接购买政府债券或者私人债券——量化宽松（QE）。目前，有大量的文献在DSGE中讨论QE的效应（e.g. Gertler and Karadi 2011, 2013; Carlstrom, Fuerst and Paustian 2017; Sims and Wu 2021等），这些研究已经证明了DSGE对于定量分析非常规货币政策非常有帮助，而且也得到了大量重要的观点与机制。为了教学演示的目的，我们选择一些非常简化、又在顶刊上发表的经典论文作为例子来使用Stata进行复制。下面，我们介绍一下Sims, Wu and Zhang（2021, REStats）的QE四方程NK模型。SWZ将复杂的QE-DSGE模型与上述课本型三方程NK模型合并在一起，其中包含金融中介、短期和长期证券、信贷市场冲击以及央行的量化宽松政策。他们的动态IS曲线和NKPC与上述经典三方程NK模型类似。差异在于，信贷冲击和央行QE既出现在IS曲线中，也出现在PC方程中。这种设定与上文的四方程宏观金融模型不一样：大部分的四方程宏观金融模型会临时性的设置一些金融冲击，通常以金融市场利率与无风险利率之间的利差冲击来表达，例如，Smets and Wouters(2007，AER)。
 	
-	\subsection{非常规货币政策：五方程NK模型}
-	
-	2008年全球金融危机后，全球主要经济体几乎都在频繁使用非常规货币政策，例如，央行在金融市场上直接购买政府债券或者私人债券——量化宽松（QE）。下面，我们介绍一下Sims and Wu（2020）的QE五方程NK模型，即在上面的四方程中加入QE政策：
+	SWZ的四方程NK模型结构为：
 	
 		\begin{equation}
-		\text{动态IS曲线：}x_t = E_t x_{t+1} - (r_t - E_t\pi_{t+1} - g_t) - \gamma(E_t qe_{t+1} - qe_t)
+		\text{动态IS曲线：}x_t = E_t x_{t+1} - \nu(r_t^s - E_t\pi_{t+1} - r_t^f) - \gamma[b_1(E_t qe_{t+1} - qe_t)+b_2(E_t \theta_{t+1}-\theta_t)]
 	\end{equation}
 	
 	
 	\begin{equation}
-		\text{动态PC：}\pi_t =\beta E_t \pi_{t+1}  - \mu qe_t + \kappa x_t
+		\text{动态PC：}\pi_t =\beta E_t \pi_{t+1}  - \mu (b_1 qe_t + b_2 \theta_t) + \kappa x_t
 	\end{equation}
 	
 	\begin{equation}
-		\text{金融风险溢价：}r_t =\chi i_{t} + e_t
-	\end{equation}
-	
-	\begin{equation}
-		\text{货币政策规则：} i_t =\rho_i i_{t-1} + (1-\rho_i)(\phi_\pi \pi_{t} + \phi_x x_t) + e_{i,t}
+		\text{泰勒规则：} r_t^s =\rho_r r_{t-1}^s + (1-\rho_r)(\phi_\pi \pi_{t} + \phi_x x_t) + e_{r,t}
 	\end{equation}
 	
 	\begin{equation}
 		\text{QE政策：} qe_t =\rho_q qe_{t-1}  + e_{q,t}
 	\end{equation}
 	
-	\subsection{经济周期与内生增长的互动：五方程凯恩斯主义增长模型}
+	\begin{equation}
+		\text{自然利率冲击：}r_t^f =\rho_f r_{t-1}^f + e_{f,t}
+	\end{equation}
+	
+	\begin{equation}
+		\text{流动性冲击：}\theta_t =\rho_\theta \theta_{t-1} + e_{\theta,t}
+	\end{equation}
+	
+	参数校准，
+	
+	\begin{table}[htbp]\centering
+		\scriptsize
+		\caption{模型参数校准}
+		\label{param}
+		\begin{center}
+			\begin{threeparttable}
+				\begin{tabular}{l*{2}{c}}
+					\toprule
+					\multicolumn{1}{l}{\textbf{参数}}&
+					\multicolumn{1}{c}{\textbf{校准值}}&
+					\multicolumn{1}{c}{描述} \\
+					\midrule
+					$\nu$ &0.67&产出的利率敏感系数\\
+					$\lambda$              &      0.33  &孩子的消费份额     \\
+					$b_1$ &   0.30   &    QE的权重   \\
+					$b_2$        &     0.70 &信贷的权重      \\
+					$\rho_f$ & 0.8 & 自然利率冲击的自回归系数  \\
+					$\rho_\theta$ & 0.8 & 流动性冲击的持续性  \\
+					$\rho_e$ & 0.8 & 货币政策冲击的持续性  \\
+					$\rho_q$ & 0.8 & QE冲击的持续性  \\
+					$\kappa$ & 0.214 & 通胀对产出缺口的敏感系数  \\
+					$\mu$ & 0.042& 通胀对信贷和QE的敏感系数  \\
+					$\phi_\pi$ & 1.5 & 利率对通胀的敏感系数  \\
+					$\phi_x$ & 0 & 利率对产出缺口的敏感系数  \\
+					
+					\\
+					\bottomrule
+				\end{tabular}
+				\begin{tablenotes}
+					\tiny
+					\item 参数来源：Sims, Wu and Zhang (2021): The Four Equation New Keynesian Model. Review of Economics and Statistics, forthcoming.
+				\end{tablenotes}
+			\end{threeparttable}
+		\end{center}
+	\end{table}
+	
+	stata代码：
+	
+	\begin{lstlisting}
+		* swz_4nk.do written by 许文立，2021-10
+		* SWZ(2021)
+		
+		dsge (x = E(F.x)-{nu}*(rs-E(F.pi)-rf)-{lab}*({b1}*(E(F.qe)-qe)+{b2}*(E(F.thet)-thet)),unobserved)   ///
+		(pi={beta}*E(F.pi)-{mu}*({b1}*qe+{b2}*thet)+{kappa}*x)   ///
+		(F.rs={rhor}*rs+(1-{rhor})*({phipi}*F.pi+{phix}*F.x),state) ///
+		(F.qe={rhoq}*qe,state)      ///
+		(F.rf={rhof}*rf,state)      ///
+		(F.thet={rhot}*thet,state),   ///
+		from(nu=0.67 lab=0.33 b1=0.3 b2=0.7 rhof=0.8 rhot=0.8 rhor=0.8 rhoq=0.8 kappa=0.214 mu=0.042 phipi=1.5 phix=0) solve noidencheck		
+		
+		* 创建脉冲响应图
+		
+		irf set rbcirf
+		
+		* 将名字为fiscal的脉冲响应增加到上述图中
+		
+		irf create swz_4nk
+		
+		* 用命令irf graph画出宏观经济变量对财政政策冲击的脉冲响应图，选项impulse()和response()分别控制着冲击和响应变量，例如，货币政策冲击rs， 响应变量x,pi,qe和rs
+		
+		irf graph irf, irf(swz_4nk) impulse(rs) response(x pi qe rs) byopts(yrescale)
+		
+		
+		* 将名字为swz_qe的脉冲响应增加到上述图中
+		
+		irf create swz_qe
+		
+		* 用命令irf graph画出宏观经济变量对财政政策冲击的脉冲响应图，选项impulse()和response()分别控制着冲击和响应变量，例如，QE政策冲击qe， 响应变量x,pi,qe和rs
+		
+		irf graph irf, irf(swz_qe) impulse(qe) response(qe x pi rs) byopts(yrescale)
+		
+	\end{lstlisting}
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{qe}
+		\caption{QE政策的宏观经济效应}
+		\label{fig:qe}
+	\end{figure}
+	
+	
+	
+	
+	\section{经典论文复制2：Benigno and Fornaro(2018， RES)的凯恩斯主义增长模型}
 	
 	最近几年，宏观经济领域出现了一个新的趋势：经济周期与内生增长的融合，也就是宏观经济中的短期波动也会对长期增长产生影响，而增长反过来作用于经济波动，这样就为探讨稳定政策影响长期增长给出了分析框架。这个分析框架被学者们称为“凯恩斯主义增长模型”。
 	
@@ -3750,7 +5258,6 @@ even if the instrument arises from a quasi-experiment.
 	\end{equation}
 	
 	
-	\section{Stata命令}
 	
 	
 	

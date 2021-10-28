@@ -3902,6 +3902,20 @@ Stata命令为：
 	
 	\subsection{空间断点回归}
 	
+	\subsubsection{概述}
+	例子1：大家都知道湖北和湖南是由于分别在洞庭湖北边和南边而得名。我的家乡是湖北省会城市——英雄城市武汉市，2019年人均收入11.55万（2020年人均GDP由于疫情大幅下滑）。如果我从武汉市开车南下，来到温泉圣地——湖北咸宁市，你可能发现人均GDP下降了，例如，下降到湖北2020年人均GDP的7.4万元，如果我继续开车南下，来到洞庭湖边，发现人均收入还在下降。当我跨过洞庭湖进入湖南省，发现收入下降了15\%（湖南2020年年的人均GDP为6.3万元）。但是我仅仅只是打开车门，跑到湖南去买了一杯“茶颜悦色”，年收入少了1.1万元左右。
+	
+	例子2：卢旺达的灌溉系统是依靠自然重力的，水会通过水渠经过灌溉田地。这就意味着（1）田地是否能浇灌到水存在一个断点：水渠下方的田地可以得到浇灌，而地势高于水渠的田地则无法获得水；（2）这要求水渠的海拔高度为近似常数：在灌溉区内，相对海拔不能认为操控，因此，我们可以认为水渠两侧的田地是“随机分布”的。如图9.8所示。
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{irrigation}
+		\caption{卢旺达的灌溉水渠，图片来源于\href{https://blogs.worldbank.org/impactevaluations/spatial-jumps}{FLORENCE KONDYLIS and JOHN LOESER(2019)}}
+		\label{fig:irrigation}
+	\end{figure}
+	
+	上述两个例子都显示了空间断点回归设计。湖南湖北的断点是通过洞庭湖分割，在湖南湖北越靠近省界的区域，湖南话湖北话存在差异，我们可以假设人均收入差异都是由于湖南话和湖北话导致的。而图9.8中，水渠的断点是由于坡度区分了两块：粉色区域和紫色区域。粉色区域高度低于水渠，所以可以得到灌溉，而紫色区域由于在水渠上方，所以不能获得灌溉。实践中，我们关注于水渠两侧较近的距离内（例如，50米以内的灌溉区域）。越接近的灌溉区，其唯一的差异就是是否可以获得灌溉水，因此，我们可以假设农业产出的任何差异都只是由于是否获得灌溉导致的。这就是空间断点回归。
 	
 	尽管空间断点回归与断点回归同根同源，但是在使用它们时，仍要注意它们之间的一些关键性差异，详情参见\href{https://www.semanticscholar.org/paper/Geographic-Boundaries-as-Regression-Discontinuities-Keele-Titiunik/5512e7591e86963e89a39984e770b0656fa2b0e2?p2df}{Keele and Titiunik(2015)}和\href{https://www.cambridge.org/core/elements/abs/practical-introduction-to-regression-discontinuity-designs/F04907129D5C1B823E3DB19C31CAB905}{Matias D. Cattaneo, Nicolás Idrobo and Rocío Titiunik（2020）}。\href{https://blogs.worldbank.org/impactevaluations/spatial-jumps}{Florence Kondylis and John Loeser（2019）}对上述文献做了非常好的概述：
 	
@@ -3920,7 +3934,39 @@ Stata命令为：
         \item 影响推断的差异。在空间RD中，结果和处理通常都显示出空间相关。因此，很多学者都用Conley标准误或者近似聚类稳健标准误来矫正空间相关问题，更多信息参见\href{https://blogs.worldbank.org/impactevaluations/when-should-you-cluster-standard-errors-new-wisdom-econometrics-oracle}{David McKenzie的博文“When should you cluster standard errors? New wisdom from the econometrics oracle”}。
 	\end{itemize}
 	
+	那么，我们实际应用中，可以采用的因果效应识别工具有哪些呢？
 	
+	\begin{itemize}
+		\item 匹配
+		\begin{itemize}
+			\item 将每个观测值与其最近的空间相邻者进行匹配，然后用观测值与邻居之间的结果差异对eligibility差异进行回归。注意，由于eligibility仅仅在断点（阈值）处变化，因此，其差异不同于0只会发生在观测值最近邻居处在边界的另一侧时。
+			\item 匹配法在标准匹配假设下（见下一章匹配法的内容）都是有效的，即边界两边的邻近观测结果是相同的，边界处的eligibilty无差异。
+		\end{itemize}
+	   \item 经典断点回归
+	   \begin{itemize}
+	   	\item 用上述经典断点回归。仅仅只需要让到边界的距离作为配置/驱动变量（有资格的观测个体为正，没有资格的观测者为负），然后用结果变量对资格变量进行回归，控制边界的距离和边界距离与资格变量的交互项；
+	   	\item 直观上来说，这等价于将边界分隔出的每个小块都进行RDD，然后平均这些RDD估计量。因此，在每个分隔区，该方法在标准的RDD假设下都有效。
+	   \end{itemize}
+       \item 混合方法(空间固定效应)
+       \begin{itemize}
+       	\item 对于每一个观测单元，计算平均结果，平均资格，以及最近k个邻近单元的所有控制变量的平均值，或者一些固定距离（k是选择的合理的距离半径）所有观测单元的平均；
+       	\item 然后，用每个观测结果（资格变量和控制变量）减去平均值；这个过程就是“空间固定效应”，从而得到空间去均值结果（资格变量）；
+       	\item 最后，用空间去均值结果变量对空间取均值资格变量进行回归，控制那些空间去均值的边界距离，以及距离与资格变量的交互项；
+       	\item 如果仅仅只选择一个邻近单元，而边界距离没有控制，那么，这种方法就变成了一对一匹配。此外，如果我们选择所有的邻居，这就等价于经典的RDD。因此，空间固定效应方法在匹配或者RDD的识别假设成立时才有效。
+       \end{itemize}
+       \item 需要特别注意的事项
+       \begin{itemize}
+       	\item 栅格数据：当我们在地里边界上有许多观测值时，使用空间断点回归设计就比较合适。
+       	\item 安慰剂检验：对于协变量和结果变量的标准的balance检验（不应该被政策所影响）对于空间断点回归设计的有效性检验非常重要。
+       	\item 熟知政策背景：当许多政策打包一起，或者存在溢出时，空间断点估计量的理解/解释就要格外小心谨慎。
+       \end{itemize}
+	\end{itemize}
+
+   \subsubsection{L J Keele and R Titiumik(2014,PA)的地理边界断点回归}
+   
+   
+   
+   \subsubsection{R M Gonzalez(2021,AEJ:AE)的阿富汗手机使用与选举欺诈}
 	
 	discussion of spatial RD designs and the different issues that may arise with them, nor again on power calculations and thinking through what size samples are needed for RD to work.
 	

@@ -2718,6 +2718,7 @@ The equivalent industry-level representation is useful when identification relie
 	有一种方法可以消除上述问题：我们不去比较处理组和控制组之间产出水平Y的差异，而是去比较两组产出Y变化的差异，和处理前后Y变化的差异。这个估计量是处理组和控制组之间效应变化的差异，或者时间上的差异，因此，这就是我们熟知的\textbf{双重差分（DID）估计量}。这种方法似乎与事件研究设计类似。与事件研究设计不同的是，DID引入了永远不被处理的组群，也就是说，在数据中，我们既有处理组，也有未处理组。这似乎有点反直觉：未处理组可能与处理组存在差异。那么，我们不是引入了组群差异等额外的因素来影响识别结果吗？这样不是让事情变得更坏了吗？尽管可能会有这些问题，但是，DID的关键在于，我们现在有了未处理组，虽然增加了其它因素，我们就可以控制这些因素。
 	
 	\section{DID}
+	\subsection{估计}
 	
 	下面，我们来看看上海对外经贸大学的司继春博士在“知乎”上举的一个例子：（\url{https://www.zhihu.com/question/24322044}）
 	
@@ -2782,7 +2783,121 @@ The equivalent industry-level representation is useful when identification relie
 	\end{itemize}
 
     总而言之，我们想要的$\text{估计量} = (\text{处理后的处理组 - 处理前的处理组}) - (\text{处理后的未处理组 - 处理前的未处理组})$。这隐含意味着，未处理组的变动代表着没有发生处理时，处理组的预期变动。因此，未处理组对于DID非常关键，没有未处理组，就不能做DID。
+    
+    下面，我们用模拟数据来看看DiD策略的估计量。
+    
+    我们首先来看看我的家乡——武汉的高等教育。大家可能有所耳闻，英雄的城市武汉是中国的高等教育重镇，坐拥众多全球知名、全国一流的高等学府，其中全国最美的大学——武汉大学就在珞珈山下，东湖畔，在武大学习可以漫步在樱花大道，欣赏东湖和磨山的风景，聆听古编钟奏响的乐曲，经过张之洞、周恩来、张培刚等伟人和学术巨擎们的生活旧址与铜像前，时刻会想起那声振聋发聩地宣言”为中华之崛起而读书“！
+    
+    21世纪之初，武汉很多高校由于扩招而在武汉郊区假设新校区。假设2004年，武汉大学在江夏区建设了新校区，我们想看看高校新区的经济（旅游）效应如何。这个时候，我们就选择一个与江夏区比较类似的武汉郊区，例如，我的故乡黄陂区（花木兰的故乡）——没有建设高校新区——来进行对照。这个时候就形成了经典的2×2DID：两个时期——建设新校区前（2003年）和后（2004年）、两个组群——江夏区和黄陂区。
+    
+    % TODO: \usepackage{graphicx} required
+    \begin{figure}[tbph]
+    	\centering
+    	\includegraphics[width=0.8\linewidth]{image/wuhan}
+    	\caption{武汉赏花图。注：图片来源于网络，如侵权请联系删除}
+    	\label{fig:wuhan}
+    \end{figure}
+    
+    我们定义两个虚拟变量，是否建设新校区NU（=1，是；=0，否），建设时间前后Period（=1，后；=0，前），这个时候，我们就可以写出经典的双向固定效应（TWFE）模型：
+    
+    \begin{equation}
+    	y_{i t}=\beta_{0}+\beta_{1} P e r i o d_{t}+\beta_{2} N U_{i}+\beta_{4} N U_{i} \times P e r i o d_{t}+\epsilon_{i t}
+    \end{equation}
+    
+    其中，y表示结果变量——经济发展，β表示回归系数。
+    
+    首先，我们用stata生产一套$2\times 2$DID的数据集。也就是数据结构为两期、两个组群的面板数据。
+    
+    \begin{lstlisting}
+    	clear      // 清除stata已存在的数据
+    	local units = 2
+    	local start = 1
+    	local end   = 2
+    	
+    	local time = `end' - `start' + 1
+    	local obsv = `units' * `time'
+    	set obs `obsv'
+    	
+    	egen NU     = seq(), b(`time')  
+    	egen Period      = seq(), f(`start') t(`end')   
+    	
+    	sort NU Period
+    	xtset NU Period    // 声明面板数据类型
+    	
+    	lab var NU "Panel variable"
+    	lab var Period  "Time  variable"
+    \end{lstlisting}
 	
+	第二步，定义处理变量T和结果变量y：
+	
+	\begin{lstlisting}
+		* 创建处理变量T和结果变量y
+		gen T = NU==2 & Period==2    //双等号表示恒等于，即处理发生在第二个id，第二期，这时T=1，其它所有情况T=0
+		
+		gen btrue = cond(T==1, 3, 0)        //cond表示当T==1为真时，btru这个变量才赋值为3，否则赋值为0
+		
+		gen Y = NU + 3*Period + btrue*T    //利用这个函数来生成结果变量y的数据
+	\end{lstlisting}
+
+    从y的数据生成函数中，我们可以很容易的看出，在建新校区后，也就是2004年黄陂区和江夏区的结果Y的差异为4。下面，我们用图形来看看这个数据：
+	
+	\begin{lstlisting}
+	lab de prepost1 1 "前" 2 "后"
+	lab val Period prepost1
+	
+	twoway ///
+	(connected Y Period if NU==1) ///
+	(connected Y Period if NU==2) ///
+	,  ///
+	legend(order(1 "NU=黄陂区" 2 "NU=江夏区")) ///
+	xlabel(1 2, valuelabel) ylabel(4(1)11)
+	
+	\end{lstlisting}
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=0.8\linewidth]{image/22dd}
+		\caption{2*2DID}
+		\label{fig:22dd}
+	\end{figure}
+
+从图8.2我们可以看到，蓝色的线条（黄陂区）和红色的线条（江夏区）在新建校区后的差异为4，而在新校区建设前的差异为1。因此，建设新校区前后的净变化量应该为4-1=3，即新建校区对当地经济的影响效应为3。
+
+下面，我们可以用面板数据回归来看看结果：
+
+	\begin{lstlisting}
+	* 面板数据回归
+	
+	xtreg Y T Period,fe
+	
+\end{lstlisting}
+
+也可以使用另一种双向固定效应命令：
+
+\begin{lstlisting}
+	
+	* 常用的双向固定效应命令reghdfe
+	* 如果没有安装这个程序包，请先安装：
+	* ssc install reghdfe,replace
+	
+	reghdfe Y T, absorb(NU Period)
+	
+\end{lstlisting}
+
+\subsection{推断}
+
+大多数现实的DID应用都是多期数据，即不仅仅是两期-两组，而是多期-两(多)组，因此，我们感兴趣的变量，例如，经济增长不仅仅在江夏区和黄陂区这两个组群层面发生变化，而且也存在序列相关。Bertrand, Duflo, and Mullainathan (2004) 就指出传统标准误通常会严重低估估计量的标准偏差，因此，标准误发生下偏，即“太小”，这会使得过度拒绝原假设，显著性提高。因此，这些作者提出三种解决方案：
+
+\begin{itemize}
+	\item[1] Block bootstrapping标准误。如果block是地区，then you simply sample states with replacement for bootstrapping. Block bootstrap is straightforward and only requires a little programming involving loops and storing the estimates. The mechanics are similar to that of randomization inference。
+	\item[2] 加总。加总法忽略时间维度。我们只需要对组群取平均，即平均为前后两期，然后在平均水平上跑DID。但是，如果处理时间有差异，这种方法就有一些不寻常，因为在进行余值分析前我们需要部分排除地区和时间固定效应。对于多个处理时期（后文还要详细的讲述），我们可以用结果变量对组群和时间固定效应以及协变量进行回归。然后获得处理组的余值。再然后将余值划分成前后两期，这个时候我们就忽略掉对照组。最后用余值对处理虚拟变量进行回归。需要注意的是，这个方法并没有揭示原始的点估计。
+	\item[3] 聚类。学者最常用的方法就是组群聚类标准误。
+\end{itemize}
+
+还有一点需要注意：当聚类数很小时，像聚类标准误这类方法可能还不够。例如，在只有一个处理组的极端情况下，5\%的置信水平上的过度拒绝率可能高达80\%，即使用了bootstrap技术(Cameron, Gelbach, and Miller 2008; MacKinnon and Webb 2017)。在这种情况下，建议使用随机推断方法，参见Buchmueller, DiNardo, and Valletta (2011)。
+
+
 	
 	\section{更多经典DID的例子}
 	
@@ -2821,14 +2936,14 @@ The equivalent industry-level representation is useful when identification relie
 	3、处理组和未处理组的因变量在处理前有相似的变化路径。
 	
 	
-	下面，我们用图1来看看。
+	下面，我们用图8.3来看看。
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[width=1\textwidth]{commontrend.jpg}
 		\caption{DID估计量-平行趋势}\label{fig:digit}
 	\end{figure}
 	
-	由图1可以清晰地看出，DID最关键的假设是common trend，也就是两个组别在不处理的情况下，Y的趋势是一样的。那么你仍会说，铁路穿过的城市可能本身GDP也高，而GDP 高的城市按照理论GDP 增长率可能更高可能更低，所以common trend的假设可能是不对的，那怎么办？如果这个问题存在，我们可以进一步假设在控制了某些外生变量之后，common trend 是对的，比如上个问题，我们可以控制城市在t=0期的GDP level。当我们控制其他变量之后，自然不能直接减两次了，我们需要用上面说的回归式子，即对下列回归方程run OLS:
+	由图8.3可以清晰地看出，DID最关键的假设是common trend，也就是两个组别在不处理的情况下，Y的趋势是一样的。那么你仍会说，铁路穿过的城市可能本身GDP也高，而GDP 高的城市按照理论GDP 增长率可能更高可能更低，所以common trend的假设可能是不对的，那怎么办？如果这个问题存在，我们可以进一步假设在控制了某些外生变量之后，common trend 是对的，比如上个问题，我们可以控制城市在t=0期的GDP level。当我们控制其他变量之后，自然不能直接减两次了，我们需要用上面说的回归式子，即对下列回归方程run OLS:
 	
 	\begin{equation}
 		Y_{it}=\alpha{D}_i+\beta{T}+\gamma{D_i\times{T}}+X^{'}\delta+u_{it}
@@ -2838,13 +2953,16 @@ The equivalent industry-level representation is useful when identification relie
 	
 	既然common trend是DID最关键的假设，那么，我们如何评价非平行趋势呢？也就是，我们可以采取一些方法和方式来检查一下平行趋势假设，看看我们采用的DID识别是否可信。但是，需要特别提醒的是，这些方法和方式并不是检验平行趋势是否成立。即使”通过“了这些检验，我们也不能说平行趋势就一定成立。实际上，没有检验可以证实或者证伪平行趋势假设，因为它是反事实的，我们观测不到。这些检验方法更多是建议性的证据。如果没通过这些检验，那么，平行趋势假设可行度就很低。
 	
-	此外，下面我们来看看检验平行趋势假设在实际操作中最常用的两种方法（必做）：
+	此外，下面我们来看看检验平行趋势假设在实际操作中最常用的两种方法（依情况，必做）：
 	
-	\textbf{方法一、画时间趋势图}
+	\textbf{方法一：画时间趋势图}
 	
 	如果在政策干预前有多期数据，则可分别画处理组与控制组的时间趋势图（类似于上图），并直观判断这两组的时间趋势是否平行（比如，考察是否存在Ashenfelter's dip）。如果二者大致平行，则可增强对平行趋势假定的信心。然而，即使在政策干预前两组的时间趋势相同，也无法保证二者在干预后的时间趋势也相同（后者本质上不可观测，因为时间效应已与处理效应混合在一起）。另外，如果只有两期数据，则无法使用此法。
 	
-	\textbf{方法二、安慰剂检验}
+	\textbf{方法二：事件研究图}
+		
+	
+	\textbf{方法三、安慰剂检验}
 	
 	在DID的安慰剂检验中，例如，2008年武汉修建了高铁站，那么，我们仅仅只用2008年以前的数据样本，忽略掉所有的2008年（处理后）的数据。然后，用2008年前的数据样本，我们挑选一些不同的时期，假设高铁站修建在这些时间。再然后，我们用假设的处理时点来估计DID。如果我们仍然发现了在假设的高铁站修建时点有显著的DID效应，那么，这就意味着可能还有一些其它的因素干扰了平行趋势假设。
 	
@@ -2852,17 +2970,17 @@ The equivalent industry-level representation is useful when identification relie
 	
 	陈强老师于2016-10-25在微信公众号“计量经济学及stata应用”上给出更多的可操作方法：
 	
-	\textbf{方法三、加入更多的控制变量}
+	\textbf{方法四、加入更多的控制变量}
 	
 	从上文的讨论可知，非平行趋势可能由于遗漏变量所导致，故在回归方程中加入更多控制变量，或可缓解内生性。但此法在实践中不易实施。
 	
-	\textbf{方法四、假设线性时间趋势}
+	\textbf{方法五、假设线性时间趋势}
 	
 	如果假设时间趋势为线性函数，则可加入每位个体的时间趋势项：
 	
 	在具体回归时，加入个体虚拟变量与时间趋势项 t = 1, 2, ... , T 的交互项即可。然而，线性时间趋势毕竟是较强的假定，不一定能成立。故此法也不完全解决问题，但可作为稳健性检验。
 	
-	\textbf{方法五、三重差分法}
+	\textbf{方法六、三重差分法}
 	
 	在一定条件下，可通过引入两个控制组，进行三次差分，称为“三重差分法”（difference-in-differences-in-differences，简记DDD），这样可以更好地控制时间趋势的差异，使得平行趋势假定更易成立。有关DDD的进一步介绍，参见陈强（2014，第343页）。
 	
@@ -3563,7 +3681,30 @@ Stata命令为：
 
     总之，Wooldridge(2021)的方法非常类似于插值法，但是，其更加的灵活、容易实施，而且比CS(2020)的DID估计量更有效率。实践中，我们要正确地声明我们的回归模型，如果模型具有高度的非线性性，这个方法可能仍然得不到无偏的ATT估计量。
 
+  \section{连续型DID的偏误}
+  
+  \subsection{连续型DID的偏误概述}
+  上述DID内容都是二值型处理变量，即处理变量为虚拟变量情形下的DID设计。\href{https://arxiv.org/abs/2107.02637}{Brantly Callaway, Andrew Goodman-Bacon, Pedro H.C. Sant'Anna的一篇工作论文“Difference in Differences with a Continuous Treatment”}的最新研究表明，在处理变量为多值变量或者连续变量时的DID设计中，即连续型DID设计中，传统估计量也可能存在“选择偏误”。那么，连续DID可能存在什么问题呢？在CGBS（2021）这篇工作论文中，作者们尝试回答：
+  
+  （1）强度DID中，我们对什么参数感兴趣？
+  
+  （2）为了识别这些参数，研究者需要做什么假设？
+  
+  （3）双向固定效应（TWFE）回归适用吗？
+  
+  （4）有没有其它更好的估计量？
+  
+  在作者的文章中，“连续”可能更多是指的“足够连续”，即研究者可能在他们的模型中包含单一的自变量，而不是一系列虚拟变量。因此，除了真正的连续型吹变量，他们的结果也适用于“教育年限”这类处理变量，这类变量有许多离散值，而不是真正的连续处理变量。
+  
+  \subsubsection{两期的例子}
+  首先从最简单的两期DID开始，在第一期，没有组群受到处理；在第二期有一些组群受到处理，且处理强度是连续变化的，例如，最低工资的调整额，此外，还有一些组群没有受到处理。
+  
 
+  
+  \subsection{应用：丁守海、夏璋煦和许文立(2021)的最低工资的消费效应}
+  
+  
+  
 
 
 	\chapter{断点回归设计（RDD）}
@@ -4113,6 +4254,7 @@ Stata命令为：
 	
 	
 	\section{合成控制法}
+	\subsection{合成控制法概述}
 	在上面的讲解中，我们反复多次强调，随机实验中的“随机性”最为关键，因为它可以很好地识别出我们所要进行比较的“处理组”和“控制组”。一旦“处理组”和“控制组”的outcomes被我们观测到，我们就可以利用处理组的结果减去控制组的结果得到我们感兴趣的处理效应，例如产业政策效应。
 	
 	但困难之处在于，实践中，我们往往只能观测到“处理组”的结果，而观测不到“如果处理组没有接受处理”的结果。这个时候，我们就需要去选择或“假象”一个或多个“控制组”（注：这里的假象，也是有理有据地假象。我们还有一个专业术语叫做“构造”）。
@@ -4125,15 +4267,22 @@ Stata命令为：
 	
 	合成控制法是由Abadie and Gardeazabal (2003)提出来研究西班牙巴斯克地区（Basque country）恐怖活动的经济成本。\textbf{其基本思想为：虽然无法找到巴斯克地区的最佳控制地区，但通常可对西班牙的若干大城市进行适当的线性组合，以构造一个更为贴切的“合成控制地区”（synthetic control region），并将“真实的巴斯克地区”与“合成的巴斯克地区”进行对比，故名“合成控制法”。合成控制法的一大优势是，可以根据数据（data-driven）来选择线性组合的最优权重，避免了研究者主观选择控制组的随意性。}
 	
-	Abadie et al.(2010)用合成控制法研究了美国加州香烟控制99法案对加州香烟消费的影响。为了限制香烟消费，1988年11月，加州政府通过了99法案，主要内容是将香烟消费税每包提高25美分，该法案1989年1月正式生效，作者主要考察这一政策对香烟消费的抑制作用到底有多大。由此，我们知道，香烟消费税在加州地区改变（提高）了，而在美国其他州并没有变化。因此，加州是“处理地区”，美国其他州是可能的“控制地区”。
+	合成控制法可以看做是DID的一类变种，因为它们有相同的基本设定：政策/干预在某一时点发生，但是只针对单个/少量个体。我们可以用政策实施前的观测数据来调整处理组和控制组之间的差异，然后来比较政策实施后，处理组和控制组如何演变。经过处理前数据调整过的处理组和控制组在政策实施后的差异就是政策的效应。但是，合成控制法与DID又存在一些差异：
+	
+	\begin{itemize}
+		\item 与DID不同，处理组和控制组在政策实施前的差异调整并不是用回归方法来调整，而是用匹配法，但是又与PSM-DID不同，合成控制的匹配是为了消除政策实施前的差异，而不是解释处理的倾向性；
+		\item  合成控制法依赖于较长的干预前时期；
+		\item 匹配后，处理组合控制组应该基本已经消除了干预前的差异。通常，我们也需要包含结果变量来作为匹配变量；
+		\item 统计显著性并不是由估计方法的抽样分布图来决定的，而是一种“随机推断”方式决定的——用安慰剂检验来估计一个原分布。
+	\end{itemize}
+	
+	下面，我们用Abadie et al.(2010)的研究作为例子，来看看合成控制法的原理。作者们用合成控制法研究了美国加州香烟控制99法案对加州香烟消费的影响。为了限制香烟消费，1988年11月，加州政府通过了99法案，主要内容是将香烟消费税每包提高25美分，该法案1989年1月正式生效，作者主要考察这一政策对香烟消费的抑制作用到底有多大。由此，我们知道，香烟消费税在加州地区改变（提高）了，而在美国其他州并没有变化。因此，加州是“处理地区”，美国其他州是可能的“控制地区”。
 	
 	此时，可能我们立马就能想起来，可以使用PSM呀。我们找出各个州的典型特征作为协变量，然后计算匹配得分，进行对比处理地区和匹配地区的香烟消费，得到香烟消费税提高的控烟效应。如果大家还记得上一节最后我们给出的PSM方法\textbf{局限性——要求大样本}。大家可能就会意识到：哎呀，PSM用在加州控烟税上可能有问题，因为这个样本中就只有加州和其他40多个州多年数据，这个样本似乎也不大。这种情况也是我们在写论文或者进行政策评估时经常会遇到的情况，所以用什么方法已经要深思熟虑。
 	
 	我们接着来看加州控烟税的例子。为了避免其他州类似的政策对控制组产生影响，Abadie等剔除了研究期内出台相似控烟政策的州，最后潜在控制组里剩下38个州。也就是说样本包括美国39各州，1970-2000年的面板数据，变量包括：州年度人均香烟消费量、香烟平均零售价格、州人均收入对数、州人口结构（15-24岁比例）、州人均啤酒消费量等等。
 	
-	记$Y_{it}$为地区i在t期实际观测到的结果变量，即香烟消费量。
-	
-	记$Y_{it}^I$的上标I表示地区i接受政策干预，即这个变量表示加州在提高香烟消费税后的香烟消费量。同理，$Y_{it}^N$的上标N表示没有受到政策干预。根据上文将的处理效应，我们实际上感兴趣的是：
+	记$Y_{it}$为地区i在t期实际观测到的结果变量，即香烟消费量。记$Y_{it}^I$的上标I表示地区i接受政策干预，即这个变量表示加州在提高香烟消费税后的香烟消费量。同理，$Y_{it}^N$的上标N表示没有受到政策干预。根据上文将的处理效应，我们实际上感兴趣的是：
 	\begin{center}
 		$ATE=Y_{it}^I-Y_{it}^N$
 	\end{center}
@@ -4147,7 +4296,7 @@ Stata命令为：
 	
 	我们咋一看，这不就是面板回归吗？但是请注意，第三项“交互固定效应”是不可观测的变量。这一点很重要。
 	
-	我们回忆一下合成控制法的\textbf{基本思想：虽然无法找到加州地区的最佳控制地区，但通常可对美国其他的若干州进行适当的线性组合，以构造一个更为贴切的“合成控制地区”（synthetic control region），并将“真实的加州地区”与“合成的加州地区”进行对比。}也就是说，我们要利用其他州的线性组合来拟合出加州的$Y_{it}^N$，线性组合就是每个州的Y前面乘以一个权重W之和，假设每个州的权重用$w_j$表示，那么，我们将线性组合表示为
+	第一步，构造一个“合成的加州”——它是美国其它州的加权平均，选择权重来使得“合成加州”与真实加州在控烟前几乎完全一样。虽然无法找到加州地区的最佳控制地区，但通常可对美国其他的若干州进行适当的线性组合，以构造一个更为贴切的“合成控制地区”（synthetic control region），并将“真实的加州地区”与“合成的加州地区”进行对比。}也就是说，我们要利用其他州的线性组合来拟合出加州的$Y_{it}^N$，线性组合就是每个州的Y前面乘以一个权重W之和，假设每个州的权重用$w_j$表示，那么，我们将线性组合表示为
 	\begin{equation}
 		\sum_{j=1}^{j=N}w_jY_{jt}=\delta_t+\theta_t\sum_{j=1}^{j=N}w_jZ_j+\lambda_t\sum_{j=1}^{j=N}w_j\mu_j+\sum_{j=1}^{j=N}w_j\epsilon_{jt}
 	\end{equation}
@@ -4170,8 +4319,11 @@ Stata命令为：
 	
 	\textbf{小贴士：合成控制法对样本数据的要求为政策干预以前需要很多期数据，有人认为至少需要15年的数据，而政策干预后需要有5年以上的数据。同时地区最好超过10 个，但是又不会太多。最为重要的是，接受政策干预的地区个数极少。}
 	
-	\
-	section{例子及stata操作}
+	第二步，计算反事实结果。用反事实结果变量与真实结果变量进行差分，这就是控烟的效应。
+	
+	第三步，评价统计显著性。
+	
+	\subsection{例子及stata操作}
 	
 	我们来继续看看加州控烟税政策的效果。
 	
@@ -4302,6 +4454,10 @@ Stata命令为：
 	
 	5、如果政策冲击的效应需要一段时间才会显现（滞后效应），则也要求干预后的期数足够大。
 	
+	\subsection{合成DID}
+	
+	
+	
 	\section{克服计量方法选择困难症}
 	\textbf{DID与PSM}
 	
@@ -4327,11 +4483,584 @@ Stata命令为：
 	
 	其次，Abadie et al. (2015)指出，回归法也可以视为对控制地区作了线性组合，且权重之和也为1；而不同之处在于，合成控制法的权重必须非负，但回归法的权重可能出现负值，即出现过分外推（extrapolation）而离开了样本数据的取值范围（support of the data）。比如，在跨国研究中，将很不相同的国家放在一起进行回归，就可能出现过分外推，而导致 “外推偏差”（extrapolation bias）。由于合成控制法的权重必须非负，故避免了过分外推。
 	
-	\chapter{时间序列的自回归模型}
+	\chapter{事件研究}
 	
-	\section{事件研究：反事实预测}
+	在前面的章节，我们已经学习了许多方法来估计“处理”的效应。如果是否处理是由一个事件引发的，那么，这类研究设计就称为“事件研究”。事件研究是一种非常古老的研究设计，广泛地应用于劳动经济学、金融、宏观经济、会计、历史、法律、社会等诸多领域。事件研究背后的思想很简单：在某一时点，发了一件事，导致了一些组群/个体受到了一些“处理”，最终发生了变化。因此，事件前后发生的变化就是处理的效应。
 	
-	在前面的章节，我们已经学习了许多方法来估计“处理”的效应。如果是否处理是由一个事件引发的，那么，这类研究设计就称为“事件研究”。事件研究是一种非常古老的研究设计，广泛地应用于劳动经济学、金融、宏观经济、会计、历史、法律、社会等诸多领域。事件研究背后的思想很简单：在某一时点，发了一件事，导致了一些组群/个体受到了一些“处理”，最终发生了变化。因此，事件前后发生的变化就是处理的效应。前面的内容要么采用截面数据来估计效应，要么使用面板数据来估计效应，本讲个下一讲使用另一种数据类型——时间序列数据——来估计效应。
+	严格来说，事件研究设计并不是一种独立的研究方法。实际上，我们是在重新组织、排列数据，然后使用固定效应模型，且在模型中包含处理前时期的虚拟变量（Leads）和处理后时期的虚拟变量（Lags）。
+	
+	\section{面板事件研究}
+	
+	回忆一下，在面板数据结构中，每个观测值都要归类于个体$i$和时期$t$。其中，$t$表示自然/日历时间：年月日。当不同的个体在不同时间接受处理时，$D_{i,t}$会在不同的日历时点$t$从0变为1。
+	
+	事件研究的本质是重新定义数据中的“时间”。在事件研究中，一般不会使用日历时间，而是重新定义一个“事件时间”——相对事件/处理时间。即是说，处理前的时期用负数来表示：-1表示处理前一期，-2表示处理前第二期，以此类推。一般会将处理发生的时期标注为事件时间0，而用正数来表示处理后的时期：+1表示处理时点后一期（或者处理后第二期），+2表示处理时点后第二期（或处理后第三期），以此类推。注意：有时候，事件发生在两个观测时点之间，有一些研究者将事件发生后的第一期标注为事件时间0，+1则表示第二期等等。还有一些研究者会直接省略事件时间0，-1之后直接跟着1，但是，这种定义会导致事件时间的跳跃。
+	
+	考擦一个简单的例子：所有的个体在不同的时点接受处理。为处理组定义事件时间非常简单，但是如何为控制组定义事件时间呢？这种情形下，事件研究估计量描述的是结果变量处理前趋势的变化与处理后趋势的变化。如果在处理前，我们并没有观察到任何变化，或者与处理前所有时期的趋势相同，那么，我们可以将处理前变化视作一个好的反事实：在没有处理时，结果变量以类似的趋势变化。但是，如果我们观察到显著地处理前变化，那么，就会出现问题：结果以差异化的方式发生变化，因此，有一些个体会自我选择进入处理组。因此，即使没有发生处理，它们的结果也可能发生不同的变化。这个时候，处理前的变化就不是一个好的反事实。
+	
+	为了估计处理的效应，我们可以以一阶差分或固定效应的形式来声明一个面板数据回归。下面，声明一个一阶差分的事件研究回归方程，且没有混淆变量：
+	
+		\begin{equation}
+	y_{i,t} = \alpha +\sum_0^{s_{max}} \beta_s D_{i,s} +\sum_{s_{min}}^{1} \gamma_s D_{i,-s}+\epsilon_{i,t}
+	\end{equation}
+	
+	其中，$D_{i,t}$表示每一个事件时间s的二值型变量，也就是说，如果个体$i$处在事件时间1，那么，$D_{i1}=1$。我们也可以在上式的右边加上其它的变量。$\beta_0$表示初次处理时点的平均变化，$\beta_1$表示处理后一期的平均变化等等，而$\beta_{s_{max}}$表示处理后最远时期的平均变化。$\gamma_1$表示处理前一期的平均变化，。$\gamma_{s_{min}}$表示处理前最远时期的平均变化。$s_{max}$、$s_{min}$表示处理后和处理前的最大时期，由研究者选择（目前，实践中，选择时期数稍微有些随意，但F et al（2021）给出了一些统计检验的方法和建议）。$\alpha$表示超过$s_{max}$、$s_{min}$的其它所有时期平均变化。研究者也可以选择包含所有的事件时间虚拟变量D，这时就不应该包含截距项$\alpha$，或者研究者可以删除一期作为基期。
+	
+	关于事件研究中基期的选择问题，\href{https://bcallaway11.github.io/posts/event-study-universal-v-varying-base-period}{Callaway(2021)}给出了一些讨论：
+	
+	事件研究中有两种类型的基期：统一基期（universal base period）和可变基期（varying base period）。\textbf{统一基期}意味着所有差异都是相对于一个特定的时期。实践中，最常见的是将处理前一期作为基期。在处理前时期，\textbf{可变基期}则是紧接着的一期，例如，如果第4期是处理前时期，那么，这一期的基期就是第3期。
+	
+	如果处理前时期的平行趋势不满足，那么，对事件研究中处理前时期估计效应的解释会根据选择的基期类型不同而不同：
+	
+	\begin{itemize}
+		\item 选择可变基期，估计的效应就是伪ATTs（pseudo-ATTs）。它们是假设处理在那一期发生（而不是实际发生）是所估计的参与处理的效应。
+		\item 选择统一基期，处理前时期的事件研究估计量本身并不是处理期效应，它们只是显示了结果如何随时间变化的证据/信息。
+		
+		其它需要注意的事项：
+		
+		\item 对于处理后时期，无论是统一基期还是可变基期，基期都是处理前的一期。因此，统一基期和可变基期主要针对处理前时期很重要。
+		\ietm 对于处理前时期，统一基期和可变基期都是彼此的线性组合，因此，它们仅仅只是方便我们呈现同一因果信息的不同方式。也就是说，选择可变还是统一基期与如何呈现结果更加相关，因此，对基期类型的选择应该不会改变平行趋势是否成立的结论，等等。		
+	\end{itemize}	
+
+    那么，如何选择两类基期呢？
+    
+    \begin{itemize}
+         \item  \textbf{可变基期}更好：（1）研究者主要关注理效应预期；（2）处理前的时期数相对较少。
+         \item  \textbf{统一基期}更好：（1）研究者认为组群之间存在长期差异；（2）处理前的时期数相对较多。
+		\end{itemize}
+	
+	    考察一下环境认证（例如ISO14001）对化工企业的有害气体排放的影响。在这个例子中，企业自己会选择是否、什么时候申请环境认证，因此，接受处理是内生的。假设我们有一套平衡面板数据（例如，2009-2018年），包括企业的排放量。在2009年初，没有一家企业接受认证，但在样本期内企业都在不同时点申请并获得认证。我们将企业获得认证的年份定义为事件时间0，获得认证前定义为负数，认证后定义为正数。假设所有的企业在2012-2016年间获得认证。如果认证发生在2016年，那么处理前有7年，如果认证发生在2012年，那么处理后有6年。
+	    
+	    假设我们要估计环境认证前一年、认证当年、认证后一年和两年的企业污染排放量的变化。此时，我们声明的事件研究方程有两个虚拟变量：事件时间0-2有三个，事件时间-1有一个：
+	    
+	    \begin{equation}
+	    y_{i,t} = \alpha + \beta_0 D_{i0} + \beta_1 D_{i1} + \beta_2 D_{i2} + \gamma_1 D_{i,-1}+\epsilon_{i,t}
+	    \end{equation}
+	
+	    在这个例子中，$\alpha$显示了趋势：超过处理前1期和处理后三期的所有事件时间的结果平均变化。$\beta_0$显示了企业获得环境认证那一年的污染排放量变化；$\beta_1$表示认证后一年的平均变化，$\beta_2$表示认证后两年的平均变化，而$\gamma_{-1}$表示认证前一年的污染排放变化。注意：这些平均变化均剔除了平均变化趋势$\alpha$。其实，从回归的角度来说，我们用日历事件来声明回归方程也可以得到相同的结果。那两者的区别是什么？什么时候使用？为什么还要用事件研究呢？第一，事件研究中的相对事件时间更加的直观，即-1表示的处理前一期，1表示处理后一期等等。如果使用日历事件，在交叠处理情形下，处理前后就无法明确地区分。第二，虽然事件时间对于那些从未接受处理的个体来说并不好定义，但是为从未处理的个体定义事件时间可以让我们明确的考察“好的”控制组。第三，事件研究的事件时间转换有时候很麻烦，例如，包含一些与日历时间相关的变量——总趋势的时间虚拟变量。
+	    
+	    \subsection*{例子：英超足球俱乐部教练下课的效应}
+	    
+	    下面，我们来看一个更具体的数据例子。数据来源于Bekes and Kezdi(2021)的教材“Data Analysis for Business, Economics and Policy”第24章。
+	    
+	    足球是全球第一大运动，我从小学开始踢足球。我和我爱人都喜欢梅西。最近（2022年3月）“冯巩”之争也在娱乐圈、媒体圈和足球圈引起了巨大的争议。我们作为一支球队的fans，球队表现实在太差，那么，肯定有人要“背锅”。在英超赛场，球队成绩不好，教练、俱乐部经理都可能被球迷大喊“下课”。那么，俱乐部更换教练对球队成绩有什么影响呢？
+	    
+	    假如一个赛季的前六场比赛，有一些球队的成绩不理想。这些球队中可能有一般的教练要下课，新教练会走马上任。我们再观察这些球队接下来的战绩，例如接下来12场比赛的战绩。那么，平均处理结果就是球队换教练后的平均战绩。而平均未处理结果就是那些没有换教练的球队的平均成绩。两类平均结果之间的差异就是换教练的效应。
+	    
+	    需要注意的是，（1）球队并不是随机的，换教练的球队是一段时期内战绩较差的球队，也就是更换教练只是由于成绩差，而不是其它原因；（2）新教练在没有找到工作的教练中选择，这样可选择的教练相对有限，可能换教练的效应也受到限制；（3）更换教练是在赛季之中，而不是在休赛期，这就让换教练变得更加特别。在休赛期换教练，赛场内外的其它事件也在发生变化，例如，球员本身（引进/卖出），因此，关注于赛季中换教练可以将处理从其它潜在变化中分离出来。
+	    
+	    从直觉上判断，更换教练可能会带来球队成绩的提升，也可能带来球队成绩的下降或者没有起色。一方面，换教练给球队低迷的士气带来提振，可能会给球队带来好的成绩；另一方面，换教练可能让球员们军心涣散不利于比赛，而且即使长期来看有效果，短期内成绩可能也没什么改善。此外，还有一种情况就是数学上的均值回归现象：球员有低谷，球队可能也会在一段赛程内遇到低谷，因此，成绩不如预期，走出低谷后，无论换不换教练，可能成绩都会有所提升。需要注意的是，上述三种情况可能同时发生。尤其是，走出低谷和长期改善效应可能同时存在。
+	    
+	    Bekes and Kezdi(2021)收集了英超联赛（EPL）11个赛季（08/09-18/19赛季）的所有比赛，以及每支球队每场比赛的教练信息。数据包含8360个观测值，每个赛季760个，一个赛季20支球队，每支球队38场比赛球队换教练并不是随机的。我们关心的变量可能有球队和赛季的变量，球队的比赛数量，教练的信息，球队的积分（输得0分，平得1分，赢得3分）。因此，最重要的问题就是处理变量（换教练）变动的来源：为什么有一些球队要在赛季中换教练，而其他球队不更换？这些原因是内生的，还是外生的？
+	    
+	    球队表现不佳是换教练的重要原因。但它也是内生的，因为过去的成绩可能会与未来的成绩相关。另外一个因素可能就是如果要换教练，市场上是否有合适的教练可用，这可能是一个外生的因素。此外，教练和管理团队其它成员的矛盾可能也是影响换教练的重要因素，而且它是内生的因素。因此，在处理变量变动的来源因素里，可能大部分都是内生的。
+	    
+	    创建一个二值变量来表示在赛季中换教练。样本数据中有94次换教练的事件。为了分析球队成绩在干预前的变化和干预后的变化，需要让新教练有足够的场次来证明其能力。因此，样本数据选择了换教练前后各12场比赛。因此，选取的换教练事件仅仅发生在第13场-26场比赛之间。最后，94个换教练的事件中剩余33次，这33次换教练就是样本中定义的二值型处理变量。下面我们来看相关数据图。stata代码如下：
+	    
+	    	\begin{lstlisting}
+	    	********************************************************************
+	    	* Prepared for Gabor's Data Analysis
+	    	*
+	    	* Data Analysis for Business, Economics, and Policy
+	    	* by Gabor Bekes and  Gabor Kezdi
+	    	* Cambridge University Press 2021
+	    	*
+	    	* gabors-data-analysis.com 
+	    	*
+	    	* License: Free to share, modify and use for educational purposes. 
+	    	* 	Not to be used for commercial purposes.
+	    	*
+	    	* Chapter 24
+	    	* CH24B Estimating the impact of replacing football managers
+	    	* using the football dataset
+	    	* version 0.91 2020-12-09
+	    	********************************************************************
+	    	
+	    	
+	    	* SETTING UP DIRECTORIES
+	    	
+	    	* STEP 1: set working directory for da_case_studies.
+	    	* for example:
+	    	* cd "C:/Users/xy/Dropbox/gabors_data_analysis/da_case_studies"
+	    	
+	    	
+	    	* STEP 2: * Directory for data
+	    	* Option 1: run directory-setting do file
+	    	* do set-data-directory.do 
+	    	/* this is a one-line do file that should sit in 
+	    	the working directory you have just set up
+	    	this do file has a global definition of your working directory
+	    	more details: gabors-data-analysis.com/howto-stata/   */
+	    	
+	    	* Option 2: set directory directly here
+	    	* for example:
+	    	global data_dir "/Users/xuwenli/Library/CloudStorage/OneDrive-个人/DSGE建模及软件编程/教学大纲与讲稿/应用计量经济学讲稿/应用计量经济学讲稿与code"
+	    	
+	    	
+	    	global data_in  "$data_dir/data/football_data/clean"
+	    	global work  	"$data_dir/data/football-manager-replace"
+	    	
+	    	cap mkdir 		"$work/output"
+	    	global output 	"$work/output"
+	    	
+	    	
+	    	
+	    	
+	    	use "$data_in/football_managers_workfile",clear
+	    	
+	    	* describe data
+	    	tab season
+	    	codebook gameno
+	    	codebook team
+	    	*tab team if gameno==1
+	    	tab points
+	    	sum points
+	    	*dis 1*0.25 + 1.5*0.75
+	    	
+	    	
+	    	
+	    	* create manager change variable
+	    	gen managchange=0
+	    	sort team date
+	    	replace managchange= 1 if team==team[_n-1] & season==season[_n-1]   & manager_id !=manager_id[_n-1] 
+	    	tab managchange, mis
+	    	
+	    	* some teams have multiple management changes in the season
+	    	egen countmanagchange = sum(managchange), by(team season)
+	    	tab countmanagchange if gameno==1 /* gameno = 1 so each team-season counted once */
+	    	* result: 0, 1, 2, or 3 manager change 
+	    	
+	    	* create variables for number of games since season start or last manager change
+	    	gen temp1 = gameno if managchange==1
+	    	egen managch_1_gameno = min(temp1), by(team season)
+	    	gen temp2 = temp1
+	    	replace temp2 = . if managch_1_gameno == gameno
+	    	egen managch_2_gameno = min(temp2), by(team season)
+	    	gen temp3 = temp2
+	    	replace temp3 = . if managch_2_gameno == gameno
+	    	egen managch_3_gameno = min(temp3), by(team season)
+	    	*lis gameno team manager_id managch* if countmanagchange==3 & season==2017, noob
+	    	*lis gameno team manager_id managch* if countmanagchange==2 & season==2017, noob
+	    	
+	    	gen gamesbefore = gameno-1 if managchange==1
+	    	replace gamesbefore = managch_2_gameno - managch_1_gameno if gameno == managch_2_gameno
+	    	replace gamesbefore = managch_3_gameno - managch_2_gameno if gameno == managch_3_gameno
+	    	gen gamesafter = 38-gameno if managchange==1
+	    	replace gamesafter = managch_2_gameno - managch_1_gameno if gameno == managch_1_gameno & managch_2_gameno!=.
+	    	replace gamesafter = managch_3_gameno - managch_2_gameno if gameno == managch_2_gameno & managch_3_gameno!=.
+	    	*lis gameno team manager_id managch* games* if countmanagchange==3 & season==2017, noob
+	    	
+	    	
+	    	* define intervention as management change 
+	    	*  at least 12 games before (since season started or previous management changed)
+	    	*  at least 12 games after (till season ends or next management change)
+	    	gen intervention = managchange 
+	    	replace intervention = 0 if gamesbefore<12 | gamesafter<12
+	    	tab intervention managchange  
+	    	egen countinterv = sum(intervention), by(team season)
+	    	tab countinterv  if gameno==1 /* gameno = 1 so each team-season counted once */
+	    	
+	    	
+	    	
+	    	tabstat points_lastseason, by(season) s(min max n)
+	    	
+	    	* figure: average number interventions by game number
+	    	* bar chart
+	    	preserve
+	    	collapse (sum) intervention, by(season gameno)
+	    	graph bar (sum) intervention , ///
+	    	over(gameno, label(alternate)) ///
+	    	bar(1, col(navy*0.8)) ///
+	    	ytitle("换教练的数量") 
+	    	
+	    \end{lstlisting}
+	    
+	    
+
+% TODO: \usepackage{graphicx} required
+\begin{figure}[tbph]
+	\centering
+	\includegraphics[width=0.7\linewidth]{footballmanage}
+	\caption{赛季中换教练的数次}
+	\label{fig:footballmanage}
+\end{figure}
+	    
+	下面，我们来定义事件时间：换了新主帅后的场次为+1，+2，……，+12，换主帅之前的场次为-1，-2，……，-12。由于主帅实在两场比赛之间更换的，因此，没有0这个事件时间。下面来看看更换主帅前后12场比赛的球队得分。
+	
+	
+	
+	
+	\begin{lstlisting}
+		* EVENT TIME
+		cap drop temp*
+		gen temp1 = gameno if interv==1
+		egen temp2 = min(temp1), by(team season )
+		gen t_event = gameno-temp2
+		replace t_event = t_event+1 if t_event>=0 & t_event<=38
+		lab var t_event "Intervention event study time (to -1 before, from +1 after)"
+		cap drop temp*
+		
+		* for Stata to define xt panel: team-season
+		cap drop teamseason
+		egen teamseason = group(season team )
+		codebook teamseason
+		
+		xtset teamseason gameno
+		xtdes
+		
+		order teamseason team season gameno date* ///
+		t_event interv count* points* home*
+		qui compress
+		// save "$work/ch24-football-manager.dta",replace
+		
+		
+		*********************************************************************-
+		* EVENT STUDY GRAPH, INTERVENTIONS ONLY, BALANCED PANEL ONLY
+		*********************************************************************-
+		
+		// use "$work/ch24-football-manager.dta",replace
+		
+		* keep only interventions and +-12 games
+		keep if countinterv==1 & t_event>=-12 & t_event<=12
+		*tab t_event, sum(points)
+		tab points if t_event==-1
+		
+		* average points for graph
+		collapse points, by(t_event)
+		egen t_event_6 = cut(t_event), at(-12,-6,1,7,13)
+		
+		* check if we indeed created 4x6-long periods
+		tabstat t_event, by(t_event_6) s(min max n)
+		
+		egen points6avg = mean(points), by(t_event_6)
+		gen p6a_1 = points6avg if t_event>=-12 & t_event<=-7
+		gen p6a_2 = points6avg if t_event>=-6 & t_event<=-1
+		gen p6a_3 = points6avg if t_event>=1 & t_event<=6
+		gen p6a_4 = points6avg if t_event>=7 & t_event<=12
+		sum p6*
+		scatter points t_event, mcol(navy*0.8) connect(.) lc(green) lw(thin) ///
+		|| line p6a_1 p6a_2 p6a_3 p6a_4 t_event, ///
+		lc(navy*0.8 navy*0.8 navy*0.8 navy*0.8) lw(vthick vthick vthick vthick) legend(off) ///
+		graphregion(fcolor(white) ifcolor(none)) ///
+		xlab(-12 -6 -1 1 6 12, grid) xline(0, lw(thick) lp(dash)) ///
+		ylab(0.0(0.2)1.6, grid) ///
+		ytitle("平均得分") xtitle("事件时间: 距离换教练的时期数")
+		
+	\end{lstlisting}
+
+    从图11.2中可以看出，更换教练前后各12场比赛的平均成绩。-12到-7，-6到-1，1-6，7-12增加了每个赛段的平均分线条，-1和1之间的竖线表示换教练的事件-时间，即左边为换教练前，右边表示换教练后。我们可以从图11.2中看出：（1）在开赛的前六场比赛（-12--7），更换教练的球队平均成绩要低于样本球队的平均成绩；（2）这些球队在-6--1比赛中，成绩会继续下滑；（3）这意味着球队成绩一再下滑会使得管理层考虑更换教练，即成绩越差，越容易发生换教练事件。这个信息对于我们用事件研究来估计效应非常重要。
+    
+    更换教练后，球队成绩开始回升到英超的平均水平。我们看到了更换教练前球队成绩发生了较大变化，说明了哪支球队会换教练，什么时候换都是内生的，也就是说，球队进入处理组是自我选择的。这也说明，我们仅仅分析处理组球队的得分变化并不能很好地识别出换教练的效应。
+
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=0.7\linewidth]{football_points}
+		\caption{球队的平均得分}
+		\label{fig:footballpionts}
+	\end{figure}
+
+
+       \section{如何挑选面板事件研究中的控制组}
+
+       我曾经看过一篇文章说，事件研究本质上可以近似为去除了（从未接受处理的）控制组的动态双重差分法（大概是这个意思，希望没有理解错）。但是，我想提醒各位注意的是，这种说法是不准确的，甚至容易误导初学者，让大家以为事件研究设计不能包含从未处理的控制组。上一小节的内容中，事件研究也不包含从未处理的控制组，这是因为在事件研究的最大特征就是重新定义\textbf{相对事件时间}，如果包含了从未处理的控制组，那么，控制组的相对事件时间就不好定义，因为它们从未被处理。
+       
+       其实，我们很容易解决这个难题：只需要将处理组的初次处理的日历时间当做从未处理的控制组的潜在处理时间即可。如果处理时间交错发生，这可能又是一个问题。实际上，研究者们都是为从未处理的控制组定义一个\textbf{虚拟/假设的处理}：从未处理的控制组的潜在结果y的变化趋势与处理组的实际处理前变化趋势类似的那些时点。
+       
+       我们再来看看环境认证对污染物排放的影响。我们可能观察到，那些获得认证的企业通常来讲规模比较大，而且在获得环境认证前，可能会减少更多的污染排放，例如，在获得认证的前一年污染排放量大大减少。那么，我们在选择合适的（从未处理）控制组时，就要选择类似的处理前排放趋势——处理前排放量比平均水平要更低，处理前一年的排放量大大下降，类似规模等等。
+	    
+	   一旦我们有了合适的控制组，我们就可以分别对处理组和控制组进行事件研究。此时，我们可借助处理个体虚拟变量与处理前后时期的虚拟变量交互项来声明事件研究：
+	   
+	    \begin{equation}
+	    	 y_{i,t} = \alpha + \beta_0 D_{i0} + \beta_1 D_{i1} + \beta_2 D_{i2} + \gamma_1 D_{i,-1}+\eta treated_i+\sum_0^{s_{max}}\delta_s treated_i \times D_{is}_+\sum_{s_{min}}^1 \phi_s treated_i \times D_{i,-s}+\epsilon_{i,t}
+	    \end{equation}
+	    
+	    其中，$ \alpha $表示未处理个体的平均趋势；$\beta$表示未处理个体的处理后平均变化，$\gamma$表示未处理个体处理前的变化与趋势之间的差异。$\eta$表示处理组和控制组之间趋势的差异。如果控制组选择恰当，处理前的趋势在处理组和控制组之间相同。此外，如果处理后虚拟变量包含了所有的异质性变化时期，那么，总的趋势在保留的事件时间中也是相似的，因此，$\eta$应该接近0。$\delta$使我们所关注的因果效应，即处理组和控制组之间的处理后的差异，对应于初次处理时点的效应为$\delta_0$，处理后第一期的效应为$\delta_1$等等。$\phi$表示处理组的处理前结果变化。如果控制组选择恰当，这个系数也应该为0，因为它在处理前应该与控制组有相似的变化趋势。
+	    
+	    \subsection*{有控制组的例子：英超足球俱乐部教练下课的效应}
+	    
+	    从图11.2可以看出，球队更换教练后，战绩确实有很大的提升。但是我们也需要注意，在更换教练前，这些球队的成绩就发生了很大的变化（成绩越来越差）。我们需要特别注意，成绩提升可能并不是更换教练带来的作用，也许是前面的比赛不再状态，后面状态有恢复了（即均值回归过程）。如果我们想要更精确地知道更换教练的效应，可能就要找到一个合适的控制组来构造好的反事实：如果球队没有更换教练，它们的成绩会怎样变化？
+	    
+	    这个时候，控制组球队需要具有一些特征：（1）赛季中没有更换教练；（2）在虚拟的更换教练时点前，控制组球队的成绩平均变化趋势与处理组球队处理前趋势类似——-12--7的比赛成绩低于所有球队的平均成绩，-6--1比赛成绩进一步下滑，换教练时点的前一场比赛输了。
+	    
+	    满足这些标准的控制组有67个。注意，在做这些选择的时候，研究者多多少少还是有一些主观、随意，例如，为什么要选择处理前后各12场比赛，而不是13场？但是，切记，在实践中，我们无论多么的主观随意，都要保持这些选择的透明性，就是让读者知道我们是怎么做的。此外，我们还应该尽可能将其它的一些选择作为稳健性检验，例如，选择前后各13场比赛作为稳健性检验。
+	    
+	    我们从图11.3中确实可以看出，选择的控制组与处理组球队在处理前的战绩平均来说比较相似。那么，没有更换教练的这些球队可以用来构造更换教练球队的反事实：即如果没有更换教练，这些球队的成绩可能会是怎样的？从图11.3的处理后，球队成绩来看，控制组和处理组的成绩也差不多，尤其是在处理后的前六场比赛，平均成绩几乎相同。那么，由图的结果可以得出结论：平均来看，更换教练并不能提高球队的战绩。
+	    
+	    % TODO: \usepackage{graphicx} required
+	    \begin{figure}[tbph]
+	    	\centering
+	    	\includegraphics[width=0.7\linewidth]{football_contol}
+	    	\caption{处理组和控制组球队更换教练前后的平均得分}
+	    	\label{fig:footballcontrol}
+	    \end{figure}
+	    
+	    那么，更换教练没有什么用？下面，我们用上述样本来进行回归。回归方程设定为：
+	    
+	    \begin{equation}
+	    	y_{i,t}=\beta_0+\beta_1post_{1-6}+\beta_2post_{7-12}+\beta_3 treat_i +\beta_4 treat_i \times post_{1-6}+\beta_5 tread_i \times post_{7-12}+\epsilon_{i,t}
+	    \end{equation}
+	    
+	    其中，$\beta_4、\beta_5$就是更换教练的效应。它们分别表示处理组和控制组球队在更换教练后1-6、7-12场次比赛平均成绩的差异。上述回归的stata代码为：
+	    
+	    \begin{lstlisting}
+	    	* REGRESSION with 6-game averages
+	    	egen t6_event = cut(t_event), at(-12 -6 1 7 13)
+	    	tabstat t_event, by(t6_event) s(min max n)
+	    	
+	    	gen treated = countinterv==1
+	    	collapse (mean) treated (mean) points6avg = points, by(teamseason t6_event)
+	    	egen t=group(t6_event)
+	    	xtset teamseason t
+	    	
+	    	gen Dp6avg = points6avg - L.points6avg 
+	    	
+	    	gen before_7_12 = t6_event==-12
+	    	gen before_1_6 = t6_event==-6
+	    	gen after_1_6 = t6_event==1
+	    	gen after_7_12 = t6_event==7
+	    	
+	    	gen treatedXbefore_7_12 = treated*before_7_12
+	    	gen treatedXbefore_1_6 = treated*before_1_6
+	    	gen treatedXafter_1_6 = treated*after_1_6
+	    	gen treatedXafter_7_12 = treated*after_7_12
+	    	
+	    	sum Dp6avg before_7_12 after_1_6 after_7_12 treated treatedXbefore_7_12 treatedXafter_1_6 treatedXafter_7_12 
+	    	
+	    	* FD REGRESSIONS
+	    	lab var after_1_6 "$ post_{1-6} $"
+	    	lab var after_7_12 "$ post_{7-12} $"
+	    	lab var treated "$ treated $"
+	    	lab var treatedXafter_1_6 "$ treated \times post_{1-6} $"
+	    	lab var treatedXafter_7_12 "$ treated \times post_{7-12} $"
+	    	
+	    	reg Dp6avg after_1_6 after_7_12 if treated==1 , cluster(teamseason)
+	    	// outreg2 using "$output/ch24-table-1-football-manager-reg-Stata.tex", tex(fragment) nonotes se dec(2) 2aster label ctitle("treatment") replace
+	    	reg Dp6avg after_1_6 after_7_12 if treated==0 , cluster(teamseason)
+	    	// outreg2 using "$output/ch24-table-1-football-manager-reg-Stata.tex", tex(fragment) nonotes se dec(2) 2aster label ctitle("control") append
+	    	reg Dp6avg after_1_6 after_7_12 ///
+	    	treated treatedXafter_1_6 treatedXafter_7_12 , cluster(teamseason)
+	    	// outreg2 using "$output/ch24-table-1-football-manager-reg-Stata.tex", tex(fragment) nonotes se dec(2) 2aster label ctitle("treatment+control") append
+	    	
+	    	
+	    	* FE REGRESSIONS
+	    	
+	    	xtreg points6avg before_7_12 after_1_6 after_7_12 if treated==1 ///
+	    	, fe cluster(teamseason)
+	    	xtreg points6avg before_7_12 after_1_6 after_7_12 if treated==0 ///
+	    	, fe cluster(teamseason)
+	    	xtreg points6avg before_7_12 after_1_6 after_7_12 treatedXbefore_7_12  treatedXafter_1_6 treatedXafter_7_12 , fe cluster(teamseason)
+	    \end{lstlisting}
+	    
+	    从表11.1可以清晰地看到，更换教练的事件发生后，更换教练的球队与未更换教练的球队在战绩上并没有表现出显著的差异。也就是说，更换教练对球队的成绩提升并没有显著的作用。
+	    
+	    	\begin{table}[htbp]\centering
+	    	\scriptsize
+	    	\caption{更换教练的效应}
+	    	\label{eventstudy}
+	    	\begin{center}
+	    		\begin{threeparttable}
+	    			\begin{tabular}{lccc}
+	    				\toprule
+	    			\textbf{变量}&\textbf{处理组}&\textbf{控制组}&\textbf{全样本}\\
+	    				\midrule
+	    				$post_{1-6}$               &      1.11***&1.06***&   1.06***   \\
+	    				                                     &    (0.19)   &(0.09)   &     (0.09)         \\
+	    				$post_{7-12}$ &   0.37**  &    0.34*** &0.34  \\
+	    				                        &    (0.16)     &(0.09)      &(0.09)         \\
+	    				$treated$       &    &  &-0.002   \\
+	    				                      &    &  &(0.10)\\
+	    				$treated \times post_{1-6}$  &&&0.04 \\
+	    				                      &    &  & (0.20)\\
+	    				$treated \times post_{7-12}$  &    &  &0.04\\
+	    					&    &  &(0.18)\\
+	    				常数项     & -0.45***  &-0.45***&-0.45*** \\
+	    				               &    (0.10)     &(0.03)      &(0.03)         \\
+	    				样本量   & 99 &201&300 \\
+	    					$R^2$    &0.33&0.42&0.39
+	    				\\
+	    				\bottomrule
+	    			\end{tabular}
+	    			\begin{tablenotes}
+	    				\tiny
+	    				\item 括号里为标准误，* p$<$0.10, ** p$<$0.05, *** p$<$0.01
+	    			\end{tablenotes}
+	    		\end{threeparttable}
+	    	\end{center}
+	    \end{table}
+	    
+	    
+	    \section{事件研究图}
+	    
+	    在当前的经验研究中，研究者们最常用的面板事件研究设计是标准的双向固定效应（TWFE）模型的扩展。我们考察一个事件在t时点，发生在s地区，且不同地区的发生时点可以不同，也可以相同。那么，传统的双向固定效应模型可以表示为：
+	    
+	    \begin{equation}
+	    	y_{st}=\alpha+\beta PostEvent_{st}+\mu_s +\lambda_t +X_{st}^{'} \Gamma +\epsilon{st}
+	    \end{equation}
+	    
+	    其中，$y_{st}$表示结果变量，$PostEvent_{st}=1[t\ge Event_s]$表示地区s发生事件的时点$Event_s$之后的所有时期为1。$\mu_s 、\lambda_t$分别表示个体固定效应和时间固定效应，$X_{st}^{'} $表示可观测的时变协变量。
+	    
+	    根据上节内容可知，面板事件研究重新定义了相对事件时间，并可以将上述静态TWFE模型扩展为如下形式：
+	    
+	     \begin{equation}
+	    	y_{st}=\alpha+\sum_{j=2}^J \gamma_j Lead_{st}^j +\sum_{k=0}^K \beta_k Lag_{st}^k +\mu_s +\lambda_t +X_{st}^{'} \Gamma +\epsilon{st}
+	    \end{equation}
+	    
+	    其中，我们感兴趣的相对事件时间定义如下：
+	    
+	    
+	    	$$Lead_{st}^j=1[t=Event_s-j], j \in \{1,\cdots,J-1\} $$
+	    $$	Lead_{st}^J=1[t\le Event_s-J]$$
+	    		$$Lag_{st}^k=1[t=Event_s+k], k \in \{0,\cdots,K-1\} $$
+	    	$$	Lag_{st}^K=1[t\ge Event_s+K]$$
+	    	
+	  其它变量与公式（11.5）相同。Leads和Lags变量是二值型虚拟变量，指的是各自对应的地区发生事件前后的时期数。J和K则分别表示事件前后的终点——超过事件前J期和事件后K期的所有时期。需要注意的是，（1）这种面板事件研究的模型声明方式称为捆绑终点时期的面板事件研究（panel event study binned）；（2）在实践研究中，我们可以非常灵活的选择终期J和K，即可以包括所有的事件前时期和时间后时期；（3）在方程（11.6）中，省略掉了$Lead_1$，这是为了避免出现多重共线问题，也就是省略了事件发生前一期，这一期也被称为基准期。
+	  
+	  事件前后各时期虚拟变量的系数$\gamma$和$\beta$分别刻画了处理组和控制组的差异，而这种差异主要是相对于基期来说的。例如，忽略的基期效应为0，所以，事件发生后第一期的系数$\beta_1$意味着事件发生后一期的效应比事件发生前一期（基期）要高$\beta_1$。正如使用传统的TWFE模型一样，许多学者的传统做法（至少2018年以前是这样）认为事件研究的无偏估计只（最主要）依赖于\textbf{“平行趋势假设”}。
+	  
+	  因此，相较于静态TWFE模型（11.5），面板事件研究方程（11.6）可以提供两个方面的关键信息：（1）所有的事件前时期系数可以为处理前平行趋势提供一些证据（注意，这并不意味着假设没有事件发生时，处理组和控制组在事件发生后也会以相同的趋势变化）：如果处理组和控制组在事件发生前不满足平行趋势，那么，在事件发生后，更不可能以相同的趋势变化；（2）事件发生后Lags的系数刻画了处理效应的动态特征，例如，处理效应如何随时间变化，效应是暂时还是恒久性的。
+	  
+	  在实践中，研究中通常以事件研究图的形式来呈现事件研究结果。在stata中，有很多命令包可以作出事件研究图，我个人特别喜欢两个包：\textbf{eventdd和xtevent}。在stata中安装这两个包：
+	  
+	  \begin{lstlisting}
+	  	* 安装eventdd
+	  	
+	  	ssc install eventdd, replace
+	  	
+	  	* 安装xtevent
+	  	
+	  	ssc install xtevent, replace
+	  	
+	  \end{lstlisting}
+	  
+	  接下来，我们用两个例子来展示事件研究的过程。第一个例子就是上文的“更换教练的效应”，第二个例子是Stevenson and Wolfers (2006，QJE)的无过错离婚法案对女性自杀率的影响，数据来源于\href{http://www.damianclarke.net/stata/bacon_example.dta}{Clarke and Schythe(2020)}。
+	  
+	  
+	  \subsection*{例子1：更换教练的效应}
+	  
+	  为了估计更换教练对球队成绩的影响，使用Gabor Bekes and  Gabor Kezdi（2021）第24章的数据。该数据由2008-2018赛季英超联赛在赛季中更换教练的球队和未更换教练的球队构成。其中，截面个体由球队赛季组成，例如，2008/09赛季的曼联是一个截面个体，而每个赛季的球队又由38场比赛构成。因此，该面板数据由220个球队赛季（teamseason）和38是个时期（gameno）组成。其中，更换教练的个体一共有33个，且在赛季中不同比赛更换。
+	  
+	  首先，我们声明一个基准的静态双向固定效应模型TWFE（或者双重差分模型DID）来识别更换教练对球队得分（points）的影响：
+	  
+	  \begin{equation}
+	  	piont_{it}=\gamma_i + \lambda_t +\tau D_{it}+epsilon_{it}
+	  \end{equation}
+	  
+	  其中，$D{it}$表示更换教练的二值型处理变量，即球队在某场比赛后更换教练则为1，否则为0，而且在当赛季更换教练后的比赛一直为1，即没有退出的情形。$\gamma_i $表示球队赛季（teamseason）的个体固定效应，$ \lambda_t $表示时间固定效应。
+	  
+	  在stata中运行上述TWFE回归：
+	  
+	  \begin{lstlisting}
+	  	* panel event study using eventdd
+	  	* scc install eventdd,replace
+	  	
+	  	* create treatment variable  
+	  	
+	  	cap drop D
+	  	gen D=0
+	  	replace D=1 if t_event>0 & t_event!=.
+	  	
+	  	* TWFE
+	  	* ssc install reghdfe,repalce
+	  	
+	  	reghdfe points D,absorb(i.teamseason i.gameno) vce(cluster teamseason)
+	  	
+	  \end{lstlisting}
+  
+	  回归结果如图11.4所示。从TWFE估计量可知，更换教练可以给球队带来0.23分的提升，且在99\%置信水平上显著。注意，这个结果应该理解成更换教练的球队相较于未更换教练的球队来说，在更换教练后的剩余比赛中平均得分会提高0.23分。
+	  
+	  % TODO: \usepackage{graphicx} required
+	  \begin{figure}[tbph]
+	  	\centering
+	  	\includegraphics[width=0.7\linewidth]{football_reghdfe}
+	  	\caption{更换教练的效应：TWFE估计量}
+	  	\label{fig:footballreghdfe}
+	  \end{figure}
+	  
+	  我们回顾一下上一节的结论是，更换教练对球队的成绩没有显著的影响。两个结论的差异可能有几个原因造成：（1）上一节的回归用的六场比赛平均值来进行的回归，而此处的TWFE回归用的全部样本；（2）TWFE方程（11.7）的回归结果还要依赖于“平行趋势假设”，所以我们还要做更多的检验。下面，就用事件研究设计来检验一下：（1）处理前的趋势；（2）处理后的动态效应。
+	  
+	  为了用事件研究设计来检验更换教练的效应，首先，我们需要重新定义相对事件时间——更换教练的相对事件变量（$t_event$）:
+	  
+	  \begin{lstlisting}
+	  	
+	  	* EVENT TIME
+	  	
+	  	cap drop temp* t_event1                        // 删除已经存在的变量名
+	  	
+	  	gen temp1 = gameno if D==1                  // 创建一个变量temp1等于所有处理后D==1的场次
+	  	
+	  	egen temp2 = min(temp1), by(team season )     // 创建一个变量temp2等于temp1的最小场次，并按球队-赛季排序，这也是识别出更换教练的第一场比赛
+	  	
+	  	gen t_event1 = gameno-temp2       //   创建相对事件时间，即-1表示更换教练前一场比赛，1表示更换教练后一场比赛等等
+	  	
+	  	lab var t_event1 "Intervention event study time (to -1 before, from +1 after)"    // 给相对事件时间加标签
+	  	
+	  \end{lstlisting}
+	  
+	  需要注意的是，数据中相对事件时间变量也包含许多缺失值，它们表示赛季中并为更换教练，即从未处理的控制组。
+	  
+	  接下来，我们估计面板事件研究方程：
+	  
+	   \begin{equation}
+	  	points_{it}=\alpha+\sum_{j=2}^J \gamma_j Lead_{it}^j +\sum_{k=0}^K \beta_k Lag_{it}^k +\mu_s +\lambda_t  +\epsilon{it}
+	  \end{equation}
+	  
+	  根据上一节对样本球队的选择，更换教练前后至少要有12场比赛，即从最早更换教练教练的球队来看，其更换教练后最长有25场比赛要打，而从最晚更换教练的球队来看，其在更换教练前已经打了25场比赛，因此，更换教练前后的终点比赛场次分别可以设定为J=K=25。而基期为更换教练前一场比赛。
+	  
+	  事件研究的stata命令为：
+	  
+	  \begin{lstlisting}
+	  	
+	  	* event study plot
+	  	
+	  	eventdd points, hdfe absorb(i.teamseason i.gameno) timevar(t_event1) ///
+	  	ci(rcap) cluster(teamseason) graph_op(ytitle("事件研究估计量") xlabel(-25(5)25))
+	  	
+	  \end{lstlisting}
+	  
+	  由此得到的更换教练对球队战绩效应的事件研究图为：
+	  
+	  % TODO: \usepackage{graphicx} required
+	  \begin{figure}[tbph]
+	  	\centering
+	  	\includegraphics[width=0.7\linewidth]{football_event_alltime}
+	  	\caption{更换教练的效应：事件研究图}
+	  	\label{fig:footballeventalltime}
+	  \end{figure}
+	  
+	  从上述事件研究图11.5可以清晰地看出，（1）基期（更换教练前一期）的效应为0；（2）在更换教练后，每一场比赛的得分变化均为正，且在95\%的置信水平下显著；（3）但在更换教练前，几乎每一场比赛的得分变化也在95\%的置信水平下显著为正，这说明更换教练前处理组和控制组的变化趋势就存在显著差异，因此，不满足平行趋势假设，那么，我们也可以认为在更换教练后处理组和控制组的变化趋势也不可能相似。也就是说，上面得到的结论“更换教练可以显著提高球队成绩”由于不满足平行趋势假设而不可信。
+	  
+	   \subsection*{例子2：无过错离婚法案对女性自杀率的影响}
+	  
+	  
+	    
+	    \section{面板事件研究的最新进展}
+	    
+	    在经济学领域，最近十年增长最快的基于设计的研究方法就是“事件研究（event study）”，在NBER和Top-5期刊上的论文占比均超过6\%。随着时间的推移，事件研究与双重差分联系越来越紧密，因为在应用经济学研究中，双重差分法基于总是与事件研究法结合在一起来识别因果效应（Currie et al.，2020） 。
+	    
+	    从第八章“双重差分”关于双重差分的最新理论计量文献来看，在某些情形下，基于传统的双向固定效应（TWFE）模型得到的估计量可能存在较为严重的偏误（de Chaisemartin and D’Haultfoeuille，2020；Goodman-Bacon，2021； Callaway and Sant’Anna，2021）。为了解决这些偏误问题，一些学者在提出用DID事件研究法（DID Event Study）来避免这个偏误（Goodman-Bacon，2021；黄炜等，2022）。正如Goodman-Bacon（2019，SO YOU’VE BEEN TOLD TO DO MY DIFFERENCE-IN-DIFFERENCES THING: A GUIDE ）给出的建议：我们可以换一种方式来呈现结果——事件研究。在回答“我应该做事件研究吗？”问题时，他也给出“是的，在许多情形下，事件研究是对的，且你能相信扁平的处理前效应以及清晰地处理后变化。当你有大量的未处理组个体时，事件研究尤其可信，因为这时给予‘有问题’$2 \times 2$ DIDs——用已处理的个体作为控制组——的权重较小。”
+	    
+	    但是，事件研究法真的可以解决传统静态TWFE估计量的偏误吗？如果是，那么，我们可以估计动态回归来避免这些问题，即上述面板事件研究。但是，Callaway and Sant’Anna（2021，JoE）指出，即使处理组群/类之间的动态处理效应是同质的，有些动态TWFE估计量仍然会存在严重偏误。且Sun and Abraham（2020，JoE）的研究显示，在异质性处理效应的动态模型设定中，处理前和后指标的系数也会存在偏误。而Simon Freyaldenhoven, Christian Hansen, Jorge Pérez Pérez, and Jesse M. Shapiro（2021）则更加详细地考察了面板事件研究的识别假设，尤其是对不可观测的混淆因子的讨论。下面，我们就来看看这些关于面板事件研究的识别假设，及假设不满足带来的估计量偏误，以及一些实践中的建议。
+	    
+	    在“宏观研学会”微信公众号中，我已经给出了几篇关于事件研究的推文，例如，\href{https://mp.weixin.qq.com/s/Vlag2pudOub-IuMEk_snKA}{【应用计量系列41】从DID到事件研究（一）：三幕剧构成一台戏}、\href{https://mp.weixin.qq.com/s/NBgrdJuPSI7Q9Tqq1bAo0g}{【应用计量系列42】从DID到事件研究（二）：模拟数据的应用}。也可以在我的工作论文《事件研究的秘密：从DID到面板事件研究导读》中看到更加详细的阐述，包括更多的稳健事件研究图和一些已经发表的论文案例应用等。
+	    
+	    面板固定效应估计量非常有趣，因为它可以消除某些不可观测异质性偏误（混合OLS模型中存在）。当这些不可观测的异质性丢入不可观测的误差项——由结构误差项和异质性本身构成，它就会导致处理变量变成内生的。即使异质性与处理变量相关，只要是时间不变的，固定效应就可以消除它。即只要误差项与因变量不存在系统相关，固定效应估计量就是一致的，因此，被称为”严格外生性“。
+	    
+	    在DID设计中，我们通常根据一个政策是否是内生地采用/实施的来考察严格外生性。可能由于不可观测的不平等趋势，一个地区才通过最低工资政策。那么，在这种情形下，我们该如何考察可能存在违反严格外生性这个问题呢？我的想法是转换到潜在结果，并从另一个角度来思考这个问题——严格外生性可能是描述平行趋势的另一种方式？也就是说，长期以来，我都认为”严格外生性意味着平行趋势“，因此，我们在做研究项目时，要花大量的笔墨去更好地理解我们给出的平行趋势的证据。
+	    
+	    但是，现在，我知道了严格外生性是一个更有意义的假设，它的含义比平行趋势更宽广。即严格外生性也排除了当处理效应异质性和政策交叠采用时可能出现的一些问题（参见\href{https://mp.weixin.qq.com/s?__biz=MzAwODY5MDA3NA==&mid=2455734924&idx=1&sn=5990e3522a6a5288134d9205c1fe163b&chksm=8cc02a79bbb7a36f2f86680b85f4fb336c7469e7b187e2c1f8bb9165729a7097164488e729a5&scene=21#wechat_redirect}{【应用计量系列35】工作论文：交叠的秘密：经济学研究领域的交叠DID导读}）。我现在知道了异质性也会打破严格外生性，并不是因为它违反了”平行趋势“，而是因为其它一些原因。学习这些会让人更安心，因为这些问题没有在TWFE中出现，这些问题总是困扰着我，我对交叠采用的不完全理解也与严格外生性相关。
+	    
+	    下面，用John Gardner（2021，2-stage  DID）文章里的概念来讨论违反严格外生性的问题。考虑下列模型：
+	    
+	    
+	   
+	
+	
+	\section{时间序列事件研究}
+	
+		\subsection{事件研究：反事实预测}
+	
+	前面的内容要么采用截面数据来估计效应，要么使用面板数据来估计效应，本讲个下一讲使用另一种数据类型——时间序列数据——来估计效应。
 	
 	正因为事件研究在许多领域都有广泛地应用，因此，在不同的学科领域，一些术语也有所差异。例如，在卫生健康领域，我们可能经常看见“统计过程控制（statistical process control）”。在经济学领域，一般统称为“事件研究”。
 	
@@ -4397,16 +5126,16 @@ Stata命令为：
 		
 		
 	\end{lstlisting}
-
-    从图11.2可以看出，在2015年8月10号后，谷歌股票价格确实出现了一个交易日的大涨。我们也可以预期到，在有效股票市场上，谷歌更名事件会迅速太高谷歌股票价格，然后日度收益率有逐渐回到正常水平（0附近）。而且，我们也并没有在更名前观察到其它的变动，这说明股票收益率的变化并没有被市场所预期到。但是，我们把时间拉长一些，看看8月20号左右的谷歌股票收益率的均值线发生了一次大跳水，即跌了大概5个百分点，这个时候可能就不是更名事件产生的效应了，因为我们可以从股票市场的收益率也可以看到出现了下跌的情形，也就是说，整个市场可能都出现了下跌。这意味着，我们在使用“事件研究”方法时，可能不能观测太长期的效应，而要使用一个相对较短的事件窗口来得到事件的效应。尤其是对于金融市场这种高频数据来说，一天可能就是非常长期了，更别说几十个交易日的窗口。
-
+	
+	从图11.2可以看出，在2015年8月10号后，谷歌股票价格确实出现了一个交易日的大涨。我们也可以预期到，在有效股票市场上，谷歌更名事件会迅速太高谷歌股票价格，然后日度收益率有逐渐回到正常水平（0附近）。而且，我们也并没有在更名前观察到其它的变动，这说明股票收益率的变化并没有被市场所预期到。但是，我们把时间拉长一些，看看8月20号左右的谷歌股票收益率的均值线发生了一次大跳水，即跌了大概5个百分点，这个时候可能就不是更名事件产生的效应了，因为我们可以从股票市场的收益率也可以看到出现了下跌的情形，也就是说，整个市场可能都出现了下跌。这意味着，我们在使用“事件研究”方法时，可能不能观测太长期的效应，而要使用一个相对较短的事件窗口来得到事件的效应。尤其是对于金融市场这种高频数据来说，一天可能就是非常长期了，更别说几十个交易日的窗口。
+	
 	% TODO: \usepackage{graphicx} required
-\begin{figure}[tbph]
-	\centering
-	\includegraphics[width=1\linewidth]{google_AR}
-	\caption{谷歌更名事件对其股票收益率的影响}
-	\label{fig:google_AR}
-\end{figure}
+	\begin{figure}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth]{google_AR}
+		\caption{谷歌更名事件对其股票收益率的影响}
+		\label{fig:google_AR}
+	\end{figure}
 	
 	除了看图说话之外，我们还可以利用stata程序包来检验这些事件对于股票收益率的影响。常用的stata程序包有Zhang et al.(2013)编写的\textbf{eventstudy}和Kaspereit(2015)编写的\textbf{eventstudy2}命令包。本讲稿中使用的是F. Pacicco, L. Vena, and A. Venegoni（2018，“Event study estimations using Stata”）介绍的\textbf{estudy}命令，这个命令改进了上述两个时间序列的事件研究命令：
 	
@@ -4432,18 +5161,22 @@ Stata命令为：
 	\end{lstlisting}
 	
 	谷歌宣布更名发生在2015年8月10号，因此，在evdate后面声明这个事件的日期，且日期格式dateformat是“月日年”。且正如上文所示，在金融市场中进行事件研究时，我们最好选取一个较短的事件窗口期，因此，我们设定的事件窗口期是2015年8月6日-11日，也就是事件发生日期的前4个交易日（lb(-4)）和后一个交易日(ub(1))。得到如下结果：
-
-% TODO: \usepackage{graphicx} required
-\begin{figure*}[tbph]
-	\centering
-	\includegraphics[width=1\linewidth, height=0.5\textheight]{estudy_result}
-	\caption{}
-	\label{fig:estudy_result}
-\end{figure*}
-
-    我们并没有声明估计窗口，因此，estudy命令默认的估计窗口是从样本期内的第一个交易数据开始到事件日期前30个交易日为止。上述结果给出了事件日期，声明的事件窗口数和实施的诊断检验。表格的第一列是变量的标签信息，第二列是计算得到的异常收益率，上例的结果计算的是累积平均异常收益率（CAAR），并且还标注了统计显著性，例如，google更名事件导致了谷歌股票收益率在事件窗口期提高了5.65\%，且在1\%的置信水平下显著。而谷歌更名事件对于整个标普500指数的收益率则没有显著的影响。此外，在多个股票收益率的情形下，estudy会在结果的最后两行给出资产组合方法和组群异常收益率的结果，它们对于评价事件的平均影响很有帮助。
-
-    那么，事件研究的想法很简单，事件发生了，处理就开始产生作用。然后，我们比较事件前后，得到处理的效应。我们如何确保在事件发生后，唯一变化就是处理本身，而不是其它的因素引起的结果变量发生变化呢？从本讲稿的前面内容可能大家已经有所感觉，我们要想尽办法来预测得到一个反事实的变化。例如，假设如果不发生处理，那么，结果变量也会沿着处理前的趋势发生变化，那么，我们就可以利用事件发生前的信息来预测/构造一个反事实的预测值/对照组，然后比较处理后的实际变化与预测值，它们的差异就是事件的效应。
+	
+	% TODO: \usepackage{graphicx} required
+	\begin{figure*}[tbph]
+		\centering
+		\includegraphics[width=1\linewidth, height=0.5\textheight]{estudy_result}
+		\caption{}
+		\label{fig:estudy_result}
+	\end{figure*}
+	
+	我们并没有声明估计窗口，因此，estudy命令默认的估计窗口是从样本期内的第一个交易数据开始到事件日期前30个交易日为止。上述结果给出了事件日期，声明的事件窗口数和实施的诊断检验。表格的第一列是变量的标签信息，第二列是计算得到的异常收益率，上例的结果计算的是累积平均异常收益率（CAAR），并且还标注了统计显著性，例如，google更名事件导致了谷歌股票收益率在事件窗口期提高了5.65\%，且在1\%的置信水平下显著。而谷歌更名事件对于整个标普500指数的收益率则没有显著的影响。此外，在多个股票收益率的情形下，estudy会在结果的最后两行给出资产组合方法和组群异常收益率的结果，它们对于评价事件的平均影响很有帮助。
+	
+	那么，事件研究的想法很简单，事件发生了，处理就开始产生作用。然后，我们比较事件前后，得到处理的效应。我们如何确保在事件发生后，唯一变化就是处理本身，而不是其它的因素引起的结果变量发生变化呢？从本讲稿的前面内容可能大家已经有所感觉，我们要想尽办法来预测得到一个反事实的变化。例如，假设如果不发生处理，那么，结果变量也会沿着处理前的趋势发生变化，那么，我们就可以利用事件发生前的信息来预测/构造一个反事实的预测值/对照组，然后比较处理后的实际变化与预测值，它们的差异就是事件的效应。
+	
+	
+	
+	\chapter{时间序列的自回归模型}
 	
 	\section{自回归模型}
 	

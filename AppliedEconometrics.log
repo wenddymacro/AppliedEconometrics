@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  26 OCT 2021 10:56
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.9)  25 MAR 2022 16:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2426,11 +2426,11 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 ]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 8.0pt on input line 139.
- [3] [4] [5])
+ [3] [4] [5] [6])
 \tf@toc=\write8
 \openout8 = `AppliedEconometrics.toc'.
 
- [6]
+ [7]
 第 1{} 章 1.
 LaTeX Font Info:    Trying to load font information for T1+ntxsups on input lin
 e 70.
@@ -2706,27 +2706,33 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 [87
 
 ]
-Overfull \hbox (117.12553pt too wide) in paragraph at lines 2784--2785
+Overfull \hbox (117.12553pt too wide) in paragraph at lines 2785--2786
 []\TU/SongtiSCLight(0)/m/n/12 总 而 言 之，|  我 们 想 要 的 $[] \U/ntxmia/m/it/12 = \LMS
 /ntxsy/m/n/12 ¹[]º ^^@ ¹[]º$\TU/SongtiSCLight(0)/m/n/12 。|
  []
 
 [88]
+File: image/wuhan.png Graphic file (type bmp)
+<image/wuhan.png>
+Missing character: There is no β ("3B2) in font ntx-Regular-tlf-t1!
+ [89]
+File: image/22dd.png Graphic file (type bmp)
+<image/22dd.png>
+ [90] [91] [92]
 File: commontrend.jpg Graphic file (type bmp)
 <commontrend.jpg>
- [89] [90] [91]
+ [93] [94] [95]
 File: var.jpg Graphic file (type bmp)
 <var.jpg>
 File: DIDresults.jpg Graphic file (type bmp)
 <DIDresults.jpg>
- [92] [93]
 File: DIDcov.jpg Graphic file (type bmp)
 <DIDcov.jpg>
- [94]
+ [96] [97] [98]
 File: dynamicDID.png Graphic file (type bmp)
 <dynamicDID.png>
- [95]
-Overfull \hbox (13.4402pt too wide) in paragraph at lines 2977--2978
+ [99]
+Overfull \hbox (13.4402pt too wide) in paragraph at lines 3095--3096
 []\TU/SongtiSCLight(0)/m/n/12 我 们 在 展 示 动 态 处 理 效 应 图 时，|  其 核 心 就 是 画 出 $\LMS/
 ntxsy/m/n/12 f\OML/ntxmi/m/it/12 k; []\LMS/ntxsy/m/n/12 g[]$ \TU/SongtiSCLight(
 0)/m/n/12 的 散 点 图。| \T1/ntxtlf/m/n/12 Si-mon Freyalden-
@@ -2734,61 +2740,61 @@ ntxsy/m/n/12 f\OML/ntxmi/m/it/12 k; []\LMS/ntxsy/m/n/12 g[]$ \TU/SongtiSCLight(
 
 File: sug1.png Graphic file (type bmp)
 <sug1.png>
-[96]
+[100]
 File: sug2.png Graphic file (type bmp)
 <sug2.png>
 File: sug3.png Graphic file (type bmp)
 <sug3.png>
- [97]
+ [101]
 File: sug4.png Graphic file (type bmp)
 <sug4.png>
- [98]
+ [102]
 Missing character: There is no   ("2000) in font ntx-Bold-tlf-t1!
 File: sug6.png Graphic file (type bmp)
 <sug6.png>
- [99]
+ [103]
 File: sug7.png Graphic file (type bmp)
 <sug7.png>
- [100]
-Overfull \hbox (30.35109pt too wide) in alignment at lines 3119--3142
+ [104]
+Overfull \hbox (30.35109pt too wide) in alignment at lines 3237--3260
  [] [] [] 
  []
 
 
-LaTeX Warning: Float too large for page by 25.29233pt on input line 3143.
+LaTeX Warning: Float too large for page by 25.29233pt on input line 3261.
 
-[101]
+[105]
 
-LaTeX Warning: Float too large for page by 26.09232pt on input line 3172.
+LaTeX Warning: Float too large for page by 26.09232pt on input line 3290.
 
 File: GB_decom.png Graphic file (type bmp)
 <GB_decom.png>
-[102] [103] [104]
+[106] [107] [108]
 File: GB_decomp_example.png Graphic file (type bmp)
 <GB_decomp_example.png>
- [105] [106] [107] [108] [109]
+ [109] [110] [111] [112] [113]
 File: event_study_plot.png Graphic file (type bmp)
 <event_study_plot.png>
- [110]
+ [114]
 File: cdl_bacon_decomp.png Graphic file (type bmp)
 <cdl_bacon_decomp.png>
- [111] [112] [113]
+ [115] [116] [117]
 File: project_manager.png Graphic file (type bmp)
 <project_manager.png>
 
-[114] [115]
+[118] [119]
 File: jwdid.png Graphic file (type bmp)
 <jwdid.png>
- [116]
+ [120] [121]
 第 9{} 章 9.
 File: rdgraph.png Graphic file (type bmp)
 <rdgraph.png>
-[117
+[122
 
-] [118] [119] [120] [121]
+] [123] [124] [125] [126]
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
 Missing character: There is no ⋯ ("22EF) in font ntx-Regular-tlf-t1!
- [122] [123]
+ [127] [128]
 File: findit.jpg Graphic file (type bmp)
 <findit.jpg>
 File: rdgraph.png Graphic file (type bmp)
@@ -2797,18 +2803,18 @@ File: rdbw.jpg Graphic file (type bmp)
 <rdbw.jpg>
 File: rdresults.jpg Graphic file (type bmp)
 <rdresults.jpg>
- [124] [125] [126] [127]
+ [129] [130] [131] [132]
 File: kink.png Graphic file (type bmp)
 <kink.png>
 File: kink2.png Graphic file (type bmp)
 <kink2.png>
- [128]
-[129]
+ [133]
+[134]
 Missing character: There is no š ("161) in font ntx-Regular-tlf-t1!
- [130]
+ [135]
 File: irrigation.png Graphic file (type bmp)
 <irrigation.png>
- [131]
+ [136]
 Missing character: There is no 1 ("31) in font nullfont!
 Missing character: There is no 2 ("32) in font nullfont!
 Missing character: There is no 1 ("31) in font nullfont!
@@ -2819,7 +2825,7 @@ Missing character: There is no 1 ("31) in font nullfont!
 Missing character: There is no 2 ("32) in font nullfont!
 Missing character: There is no 1 ("31) in font nullfont!
 Missing character: There is no 2 ("32) in font nullfont!
- [132]
+ [137]
 Missing character: There is no 1 ("31) in font nullfont!
 Missing character: There is no 2 ("32) in font nullfont!
 Missing character: There is no 1 ("31) in font nullfont!
@@ -2842,20 +2848,29 @@ Missing character: There is no 1 ("31) in font nullfont!
 Missing character: There is no 2 ("32) in font nullfont!
 Missing character: There is no 1 ("31) in font nullfont!
 Missing character: There is no 2 ("32) in font nullfont!
- [133] [134]
+ [138] [139]
 第 10{} 章 10.
-[135
+[140
 
-] [136]
+] [141]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 4098.
+(hyperref)                than one, level fixed on input line 4239.
 
-[137]
+[142]
 File: teffects.jpg Graphic file (type bmp)
 <teffects.jpg>
- [138] [139] [140]
-Overfull \hbox (40.5166pt too wide) in paragraph at lines 4187--4188
+ [143] [144]
+! Too many }'s.
+<recently read> }
+                 
+l.4299 ...trol region），并将“真实的加州地区”与“合成的加州地区”进行对比。}
+                                                  也就是说，我们要利用其他州的线性组合来拟合出加州的$...
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+[145]
+Overfull \hbox (40.5166pt too wide) in paragraph at lines 4339--4340
 []$\OML/ntxmi/m/it/12 synth [] []y [] []x\OT1/ntxtlf/m/n/12 1 [] []\OML/ntxmi/m
 /it/12 x\OT1/ntxtlf/m/n/12 2 [] []\OML/ntxmi/m/it/12 x\OT1/ntxtlf/m/n/12 3\OML/
 ntxmi/m/it/12 ;  [] []trunit\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 #\LMS/ntxsy/m
@@ -2866,8 +2881,8 @@ ntxmi/m/it/12 ;  [] []trunit\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 #\LMS/ntxsy/m
 peperiod\LMS/ntxsy/m/n/12 ¹º [] []\OML/ntxmi/m/it/12 figure [] [][] 
  []
 
-
-Overfull \hbox (22.83528pt too wide) in paragraph at lines 4214--4215
+[146]
+Overfull \hbox (22.83528pt too wide) in paragraph at lines 4366--4367
 []$\OML/ntxmi/m/it/12 synth [] []cigsale [] []retprice [] []lnincome [] []age\O
 T1/ntxtlf/m/n/12 15\OML/ntxmi/m/it/12 to\OT1/ntxtlf/m/n/12 24 [] []\OML/ntxmi/m
 /it/12 beer [] []cigsale\LMS/ntxsy/m/n/12 ¹\OT1/ntxtlf/m/n/12 1975\LMS/ntxsy/m/
@@ -2879,86 +2894,130 @@ tlf/m/n/12 1988\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 ; []
 File: weight.jpg Graphic file (type bmp)
 <weight.jpg>
 
-LaTeX Warning: Float too large for page by 135.5605pt on input line 4222.
+LaTeX Warning: Float too large for page by 135.5605pt on input line 4374.
 
 File: sys.jpg Graphic file (type bmp)
 <sys.jpg>
 File: synth.png Graphic file (type bmp)
 <synth.png>
-[141] [142] [143]
 File: line2.png Graphic file (type bmp)
 <line2.png>
- [144] [145] [146]
+[147] [148] [149] [150] [151]
 第 11{} 章 11.
+[152
+
+]
+! Undefined control sequence.
+l.4521 ^^I^^I\ietm
+                   对于处理前时期，统一基期和可变基期都是彼此的线性组合，因此，它们仅仅只是方便我们呈现同一因果信息的不同方式。也就是...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[153] [154] [155] [156] [157]
+File: footballmanage.png Graphic file (type bmp)
+<footballmanage.png>
+ [158] [159]
+File: football_points.png Graphic file (type bmp)
+<football_points.png>
+ [160]
+! Double subscript.
+l.4775 ..._{max}}\delta_s treated_i \times D_{is}_
+                                                  +\sum_{s_{min}}^1 \phi_s t...
+I treat `x_1_2' essentially like `x_1{}_2'.
+
+[161]
+File: football_contol.png Graphic file (type bmp)
+<football_contol.png>
+Missing character: There is no 、 ("3001) in font ntx-Regular-tlf-ot1!
+ [162] [163]
+Overfull \hbox (9.08313pt too wide) in paragraph at lines 4895--4896
+[]\TU/SongtiSCLight(0)/m/n/12 在 当 前 的 经 验 研 究 中，|  研 究 者 们 最 常 用 的 面 板 事 件 研 究 
+设 计 是 标 准 的 双 向 固 定 效 应  |（\T1/ntxtlf/m/n/12 TWFE\TU/SongtiSCLight(0)/m/n/12 ）|
+
+ []
+
+[164]
+Missing character: There is no 、 ("3001) in font ntx-Regular-tlf-ot1!
+ [165] [166]
+File: football_reghdfe.png Graphic file (type bmp)
+<football_reghdfe.png>
+ [167] [168]
+File: football_event_alltime.png Graphic file (type bmp)
+<football_event_alltime.png>
+ [169] [170]
 File: google.png Graphic file (type bmp)
 <google.png>
-[147
-
-] [148] [149]
+ [171] [172]
 File: google_AR.png Graphic file (type bmp)
 <google_AR.png>
- [150]
+ [173] [174]
 File: estudy_result.png Graphic file (type bmp)
 <estudy_result.png>
- [151] [152]
+ [175]
+[176]
+第 12{} 章 12.
 File: hijacking.png Graphic file (type bmp)
 <hijacking.png>
- [153] [154]
+[177
+
+] [178] [179]
 File: shock_type.png Graphic file (type bmp)
 <shock_type.png>
- [155]
+ [180] [181]
 File: var_ts.png Graphic file (type bmp)
 <var_ts.png>
- [156] [157]
+ [182]
 File: lagsc.png Graphic file (type bmp)
 <lagsc.png>
 File: var_irf.png Graphic file (type bmp)
 <var_irf.png>
- [158]
-[159]
-第 12{} 章 12.
-[160
+ [183] [184]
+第 13{} 章 13.
+[185
 
-] [161] [162] [163]
-Overfull \hbox (2.45912pt too wide) in paragraph at lines 4799--4800
+] [186] [187] [188]
+Overfull \hbox (2.45912pt too wide) in paragraph at lines 5534--5535
 []\TU/SongtiSCLight(0)/m/n/12 前 面 的 模 型 都 是 静 态 的，|  它 们 确 实 是 宏 观 经 济 与 政 策 的 
 最 简 化 的 分 析 框 架  |（\T1/ntxtlf/m/n/12 Mankiw\TU/SongtiSCLight(0)/m/n/12 ，| \T1/n
 txtlf/m/n/12 2019\TU/SongtiSCLight(0)/m/n/12 ） 。|
  []
 
 
-Overfull \hbox (1.63113pt too wide) in paragraph at lines 4801--4802
+Overfull \hbox (1.63113pt too wide) in paragraph at lines 5536--5537
 []\TU/SongtiSCLight(0)/m/n/12 大 部 分 计 量 经 济 学 和 定 量 社 会 科 学 的 老 师 都 不 会 向 学 生 们
  介 绍 动 态 随 机 一 般 均 衡  |（\T1/ntxtlf/m/n/12 DSGE\TU/SongtiSCLight(0)/m/n/12 ）|
  []
 
-[164] [165] [166] [167] [168] [169]
+[189] [190] [191] [192] [193] [194]
 File: fiscal.png Graphic file (type bmp)
 <fiscal.png>
- [170] [171]
+ [195] [196]
 File: fiscal4.png Graphic file (type bmp)
 <fiscal4.png>
- [172]
+ [197]
 File: dsge_data.png Graphic file (type bmp)
 <dsge_data.png>
- [173] [174] [175]
-[176]
+ [198] [199] [200]
+[201]
 File: qe.png Graphic file (type bmp)
 <qe.png>
- [177] [178]
-第 13{} 章 13.
-[179
-
-] [180] [181] [182] [183] [184]
+ [202] [203]
 第 14{} 章 14.
+[204
 
-LaTeX Warning: Empty bibliography on input line 5584.
+] [205] [206] [207] [208] [209]
+第 15{} 章 15.
 
-[185
+LaTeX Warning: Empty bibliography on input line 6319.
+
+[210
 
 ]
 附录 A.
-[186
+[211
 
 ] (./AppliedEconometrics.aux)
 
@@ -2968,7 +3027,7 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `AppliedEconometrics.out' has not changed.
-(rerunfilecheck)             Checksum: 2A38EE4EC7947D61F9F673737A279C68;25271.
+(rerunfilecheck)             Checksum: F23957C1BAA3B4C377D4B7BDF1EA39B9;27641.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                AppliedEconometrics
@@ -2979,12 +3038,12 @@ Package logreq Info: Writing requests to 'AppliedEconometrics.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 52465 strings out of 476476
- 1101001 string characters out of 5814302
- 2251870 words of memory out of 5000000
- 71977 multiletter control sequences out of 15000+600000
+ 53595 strings out of 476476
+ 1119817 string characters out of 5814302
+ 2254793 words of memory out of 5000000
+ 73096 multiletter control sequences out of 15000+600000
  505103 words of font info for 203 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  107i,13n,136p,1635b,2299s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on AppliedEconometrics.pdf (193 pages).
+Output written on AppliedEconometrics.pdf (219 pages).
